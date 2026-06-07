@@ -2,6 +2,11 @@ import {defaultOptions, mergeAndClone} from "./options";
 import calculateSpacers from "./calculate-spacers";
 import styleManager from "./style-manager";
 import {
+  fetchSefariaDaf,
+  formatSefariaDaf,
+  getSefariaDaf
+} from "./sefaria";
+import {
   calculateSpacersBreaks,
   onlyOneCommentary
 } from "./calculate-spacers-breaks";
@@ -22,7 +27,7 @@ function span(parent) {
 }
 
 
-export default function (el, options = defaultOptions) {
+function dafRenderer(el, options = defaultOptions) {
   const root = (typeof el === "string") ? document.querySelector(el) : el;
   if (!(root && root instanceof Element && root.tagName.toUpperCase() === "DIV")) {
     throw "Argument must be a div element or its selector"
@@ -185,6 +190,25 @@ export default function (el, options = defaultOptions) {
       if (renderCallback)
         renderCallback();
     },
+    async renderSefaria(tractate, daf, amud = "a", sefariaOptions = {}, renderOptions = {}) {
+      const sefariaDaf = await getSefariaDaf(tractate, daf, amud, sefariaOptions);
+      this.render(
+        sefariaDaf.main,
+        sefariaDaf.inner,
+        sefariaDaf.outer,
+        sefariaDaf.amud,
+        renderOptions.linebreak,
+        renderOptions.renderCallback,
+        renderOptions.resizeCallback
+      );
+      return sefariaDaf;
+    },
   }
 }
+
+dafRenderer.fetchSefariaDaf = fetchSefariaDaf;
+dafRenderer.formatSefariaDaf = formatSefariaDaf;
+dafRenderer.getSefariaDaf = getSefariaDaf;
+
+export default dafRenderer;
 

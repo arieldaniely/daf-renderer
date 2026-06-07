@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daf Renderer Sefaria Example</title>
+    <style>
+        @font-face {
+            font-family: Vilna;
+            src: url(fonts/Mekorot-Vilna.ttf);
+        }
+        @font-face {
+            font-family: Rashi;
+            src: url(fonts/Mekorot-Rashi.ttf);
+        }
+
+        body {
+            margin: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="daf"></div>
+
+    <script src="../dist/daf-renderer.umd.js"></script>
+    <script>
+        document.fonts.ready.then(async () => {
+            const renderer = dafRenderer("#daf");
+            try {
+                await renderer.renderSefaria("Berakhot", 42, "b");
+            } catch (error) {
+                document.querySelector("#daf").textContent = error.message;
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>

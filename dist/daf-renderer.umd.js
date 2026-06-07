@@ -328,7 +328,7 @@
     }
   }
 
-  var css_248z = "/*Keep this as the first rule in the file*/\n.styles_dafRoot__1QUlM {\n  --contentWidth: 0px;\n  --padding-horizontal: 0px;\n  --padding-vertical: 0px;\n  --halfway: 50%;\n\n  --fontFamily-inner: \"Rashi\";\n  --fontFamily-outer: \"Tosafot\";\n  --fontFamily-main: \"Vilna\";\n  --direction: \"rtl\";\n\n  --fontSize-main: 0px;\n  --fontSize-side: 0px;\n\n  --lineHeight-main: 0px;\n  --lineHeight-side: 0px;\n\n  --mainWidth: 0%;\n  --mainMargin-start: var(--mainWidth);\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\n  --remainderPercent: calc(100% - var(--sidePercent));\n\n  --innerFloat: left;\n  --outerFloat: right;\n\n  --spacerHeights-start: 0px;\n  --spacerHeights-outer: 0px;\n  --spacerHeights-inner: 0px;\n  --spacerHeights-end: 0px;\n\n  /*Edge Cases*/\n  --hasInnerStartGap: 0;\n  --hasOuterStartGap: 0;\n  --innerStartWidth: 50%;\n  --innerPadding: 0px;\n  --outerStartWidth: 50%;\n  --outerPadding: 0px;\n}\n\n/*Containers*/\n.styles_dafRoot__1QUlM,\n.styles_outer__abXQX,\n.styles_inner__x-amJ,\n.styles_main__BHTRd {\n  width: var(--contentWidth);\n  pointer-events: none;\n  box-sizing: content-box;\n}\n\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\n  position: absolute;\n}\n\n/*Float changes with amud*/\n.styles_inner__x-amJ .styles_spacer__2T7TS,\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\n  float: var(--innerFloat);\n}\n\n.styles_outer__abXQX .styles_spacer__2T7TS,\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\n  float: var(--outerFloat);\n}\n\n/*Spacer widths determined by options*/\n.styles_inner__x-amJ .styles_spacer__2T7TS,\n.styles_outer__abXQX .styles_spacer__2T7TS {\n  width: var(--halfway);\n}\n.styles_spacer__2T7TS.styles_mid__dcgUr {\n  width: var(--remainderPercent);\n}\n\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\n  width: var(--contentWidth);\n}\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\n  width: var(--sidePercent);\n}\n\n/*Spacer heights determined by algorithm*/\n.styles_spacer__2T7TS.styles_start__AwkfY {\n  height: var(--spacerHeights-start);\n}\n\n.styles_spacer__2T7TS.styles_end__2wr6A {\n  height: var(--spacerHeights-end);\n}\n\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\n  height: var(--spacerHeights-inner);\n}\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\n  height: var(--spacerHeights-outer);\n}\n\n/*Settings to handle edge Cases*/\n\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\n  width: var(--innerStartWidth);\n  margin-left: var(--innerPadding);\n  margin-right: var(--innerPadding);\n}\n\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\n  width: var(--outerStartWidth);\n  margin-left: var(--outerPadding);\n  margin-right: var(--outerPadding);\n}\n\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\n}\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\n}\n\n.styles_spacer__2T7TS.styles_mid__dcgUr {\n  clear: both;\n}\n\n/*Margins!*/\n.styles_spacer__2T7TS.styles_start__AwkfY,\n.styles_spacer__2T7TS.styles_end__2wr6A,\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\n  margin-left: calc(0.5 * var(--padding-horizontal));\n  margin-right: calc(0.5 * var(--padding-horizontal));\n}\n\n.styles_spacer__2T7TS.styles_mid__dcgUr,\n.styles_main__BHTRd .styles_text__1_7-z {\n  margin-top: var(--padding-vertical);\n}\n\n.styles_spacer__2T7TS.styles_mid__dcgUr,\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\n  margin-bottom: var(--padding-vertical);\n}\n\n/*Text*/\n.styles_text__1_7-z {\n  direction: var(--direction);\n  text-align: justify;\n  text-align-last: center;\n}\n\n.styles_text__1_7-z span {\n  pointer-events: auto;\n}\n\n.styles_main__BHTRd .styles_text__1_7-z {\n  font-family: var(--fontFamily-main);\n  font-size: var(--fontSize-main);\n  line-height: var(--lineHeight-main);\n}\n\n.styles_inner__x-amJ .styles_text__1_7-z,\n.styles_outer__abXQX .styles_text__1_7-z {\n  font-size: var(--fontSize-side);\n  line-height: var(--lineHeight-side);\n}\n\n.styles_inner__x-amJ .styles_text__1_7-z {\n  font-family: var(--fontFamily-inner);\n}\n\n.styles_outer__abXQX .styles_text__1_7-z {\n  font-family: var(--fontFamily-outer);\n}\n";
+  var css_248z = "/*Keep this as the first rule in the file*/\r\n.styles_dafRoot__1QUlM {\r\n  --contentWidth: 0px;\r\n  --padding-horizontal: 0px;\r\n  --padding-vertical: 0px;\r\n  --halfway: 50%;\r\n\r\n  --fontFamily-inner: \"Rashi\";\r\n  --fontFamily-outer: \"Tosafot\";\r\n  --fontFamily-main: \"Vilna\";\r\n  --direction: \"rtl\";\r\n\r\n  --fontSize-main: 0px;\r\n  --fontSize-side: 0px;\r\n\r\n  --lineHeight-main: 0px;\r\n  --lineHeight-side: 0px;\r\n\r\n  --mainWidth: 0%;\r\n  --mainMargin-start: var(--mainWidth);\r\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\r\n  --remainderPercent: calc(100% - var(--sidePercent));\r\n\r\n  --innerFloat: left;\r\n  --outerFloat: right;\r\n\r\n  --spacerHeights-start: 0px;\r\n  --spacerHeights-outer: 0px;\r\n  --spacerHeights-inner: 0px;\r\n  --spacerHeights-end: 0px;\r\n\r\n  /*Edge Cases*/\r\n  --hasInnerStartGap: 0;\r\n  --hasOuterStartGap: 0;\r\n  --innerStartWidth: 50%;\r\n  --innerPadding: 0px;\r\n  --outerStartWidth: 50%;\r\n  --outerPadding: 0px;\r\n}\r\n\r\n/*Containers*/\r\n.styles_dafRoot__1QUlM,\r\n.styles_outer__abXQX,\r\n.styles_inner__x-amJ,\r\n.styles_main__BHTRd {\r\n  width: var(--contentWidth);\r\n  pointer-events: none;\r\n  box-sizing: content-box;\r\n}\r\n\r\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\r\n  position: absolute;\r\n}\r\n\r\n/*Float changes with amud*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  float: var(--innerFloat);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  float: var(--outerFloat);\r\n}\r\n\r\n/*Spacer widths determined by options*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_outer__abXQX .styles_spacer__2T7TS {\r\n  width: var(--halfway);\r\n}\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  width: var(--remainderPercent);\r\n}\r\n\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--contentWidth);\r\n}\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  width: var(--sidePercent);\r\n}\r\n\r\n/*Spacer heights determined by algorithm*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY {\r\n  height: var(--spacerHeights-start);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_end__2wr6A {\r\n  height: var(--spacerHeights-end);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  height: var(--spacerHeights-inner);\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  height: var(--spacerHeights-outer);\r\n}\r\n\r\n/*Settings to handle edge Cases*/\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--innerStartWidth);\r\n  margin-left: var(--innerPadding);\r\n  margin-right: var(--innerPadding);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--outerStartWidth);\r\n  margin-left: var(--outerPadding);\r\n  margin-right: var(--outerPadding);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  clear: both;\r\n}\r\n\r\n/*Margins!*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY,\r\n.styles_spacer__2T7TS.styles_end__2wr6A,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-left: calc(0.5 * var(--padding-horizontal));\r\n  margin-right: calc(0.5 * var(--padding-horizontal));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  margin-top: var(--padding-vertical);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-bottom: var(--padding-vertical);\r\n}\r\n\r\n/*Text*/\r\n.styles_text__1_7-z {\r\n  direction: var(--direction);\r\n  text-align: justify;\r\n  text-align-last: center;\r\n}\r\n\r\n.styles_text__1_7-z span {\r\n  pointer-events: auto;\r\n}\r\n\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-main);\r\n  font-size: var(--fontSize-main);\r\n  line-height: var(--lineHeight-main);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z,\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-size: var(--fontSize-side);\r\n  line-height: var(--lineHeight-side);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n}\r\n\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-outer);\r\n}\r\n";
   var classes = {"dafRoot":"styles_dafRoot__1QUlM","outer":"styles_outer__abXQX","inner":"styles_inner__x-amJ","main":"styles_main__BHTRd","spacer":"styles_spacer__2T7TS","outerMid":"styles_outerMid__2WtcY","innerMid":"styles_innerMid__27MCi","mid":"styles_mid__dcgUr","start":"styles_start__AwkfY","end":"styles_end__2wr6A","text":"styles_text__1_7-z"};
   styleInject(css_248z);
 
@@ -449,6 +449,172 @@
       }
     }
   };
+
+  const DEFAULT_SEFARIA_OPTIONS = {
+    baseUrl: "https://www.sefaria.org",
+    language: "hebrew",
+    mainVersion: undefined,
+    commentaryVersion: undefined,
+    returnFormat: "default",
+    maxCommentarySegments: 100,
+    innerCommentary: undefined,
+    outerCommentary: "Tosafot"
+  };
+
+  function normalizeFetch(fetcher) {
+    if (fetcher) return fetcher;
+    if (typeof fetch === "function") return fetch.bind(typeof window !== "undefined" ? window : globalThis);
+    throw new Error("No fetch implementation found. Pass { fetcher } when calling fetchSefariaDaf.");
+  }
+
+  function buildTextUrl(ref, options) {
+    const url = new URL(`/api/v3/texts/${encodeURIComponent(ref)}`, options.baseUrl);
+    const version = options.version || options.language;
+    if (version) url.searchParams.append("version", version);
+    if (options.returnFormat) url.searchParams.set("return_format", options.returnFormat);
+    return url.toString();
+  }
+
+  async function getText(ref, options) {
+    const response = await normalizeFetch(options.fetcher)(buildTextUrl(ref, options));
+    if (!response.ok) {
+      throw new Error(`Sefaria request failed for ${ref}: ${response.status} ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  function getVersionText(response) {
+    return response && response.versions && response.versions[0] ? response.versions[0].text : [];
+  }
+
+  function flattenText(text) {
+    if (!Array.isArray(text)) return text ? [text] : [];
+    return text.reduce((flattened, value) => flattened.concat(flattenText(value)), []);
+  }
+
+  function escapeAttribute(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function wrapWords(html, prefix, startAt = 0, sentenceId) {
+    let index = startAt;
+    return String(html)
+      .split(/(<[^>]+>)/g)
+      .map(part => {
+        if (!part || /^<[^>]+>$/.test(part)) return part;
+        return part
+          .split(/(\s+)/)
+          .map(word => {
+            if (!word || /^\s+$/.test(word)) return word;
+            const sentence = sentenceId ? ` data-sentence="${escapeAttribute(sentenceId)}"` : "";
+            return `<span class="word" id="${prefix}-${index++}"${sentence}>${word}</span>`;
+          })
+          .join("");
+      })
+      .join("");
+  }
+
+  function formatMain(text) {
+    let wordIndex = 0;
+    return flattenText(text)
+      .filter(Boolean)
+      .map((segment, index) => {
+        const sentenceId = `sentence-main-${index}`;
+        const words = wrapWords(
+          String(segment)
+            .replace(/:,/g, ": ")
+            .replace(/<strong>/g, "")
+            .replace(/<\/strong>/g, ""),
+          "word-main",
+          wordIndex,
+          sentenceId
+        );
+        wordIndex += (words.match(/class="word"/g) || []).length;
+        return `<span class="sentence" id="${sentenceId}">${words}</span>`;
+      })
+      .join(" ");
+  }
+
+  function formatCommentary(text, prefix, headerClass) {
+    const html = flattenText(text)
+      .filter(Boolean)
+      .map(segment => String(segment).replace(/([^\u2013:]+)\s+[\u2013-]\s+([^:]+:)/, `<b class="${headerClass}">$1. </b>$2 `))
+      .join(" ")
+      .replace(/,,/g, "")
+      .replace(/,:/g, ": ")
+      .replace(/:,/g, ": ");
+
+    return wrapWords(html, prefix);
+  }
+
+  function getInnerCommentary(tractate, daf, configuredCommentary) {
+    if (configuredCommentary) return configuredCommentary;
+    return tractate === "Bava Batra" && Number(daf) >= 30 ? "Rashbam" : "Rashi";
+  }
+
+  function dafRef(tractate, daf, amud) {
+    return `${tractate}.${daf}${amud}`;
+  }
+
+  function commentaryRef(commentary, tractate, daf, amud, maxSegments) {
+    return `${commentary}_on_${tractate}.${daf}${amud}.1-${maxSegments}`;
+  }
+
+  async function fetchSefariaDaf(tractate, daf, amud = "a", options = {}) {
+    const mergedOptions = Object.assign({}, DEFAULT_SEFARIA_OPTIONS, options);
+    const innerCommentary = getInnerCommentary(tractate, daf, mergedOptions.innerCommentary);
+    const mainRef = dafRef(tractate, daf, amud);
+    const innerRef = commentaryRef(innerCommentary, tractate, daf, amud, mergedOptions.maxCommentarySegments);
+    const outerRef = commentaryRef(mergedOptions.outerCommentary, tractate, daf, amud, mergedOptions.maxCommentarySegments);
+
+    const [main, inner, outer] = await Promise.all([
+      getText(mainRef, Object.assign({}, mergedOptions, { version: mergedOptions.mainVersion || mergedOptions.language })),
+      getText(innerRef, Object.assign({}, mergedOptions, { version: mergedOptions.commentaryVersion || mergedOptions.language })),
+      getText(outerRef, Object.assign({}, mergedOptions, { version: mergedOptions.commentaryVersion || mergedOptions.language }))
+    ]);
+
+    return {
+      amud,
+      refs: {
+        main: main.ref || mainRef,
+        inner: inner.ref || innerRef,
+        outer: outer.ref || outerRef,
+        next: main.next,
+        prev: main.prev
+      },
+      titles: {
+        main: main.heRef || main.ref,
+        inner: inner.heRef || inner.ref,
+        outer: outer.heRef || outer.ref
+      },
+      raw: { main, inner, outer },
+      texts: {
+        main: getVersionText(main),
+        inner: getVersionText(inner),
+        outer: getVersionText(outer)
+      }
+    };
+  }
+
+  function formatSefariaDaf(daf) {
+    return {
+      amud: daf.amud,
+      refs: daf.refs,
+      titles: daf.titles,
+      main: formatMain(daf.texts.main),
+      inner: formatCommentary(daf.texts.inner, "word-rashi", "rashi-header"),
+      outer: formatCommentary(daf.texts.outer, "word-tosafot", "tosafot-header")
+    };
+  }
+
+  async function getSefariaDaf(tractate, daf, amud = "a", options = {}) {
+    return formatSefariaDaf(await fetchSefariaDaf(tractate, daf, amud, options));
+  }
 
   function getLineInfo(text, font, fontSize, lineHeight, dummy) {
     dummy.innerHTML = "";
@@ -687,7 +853,7 @@
   }
 
 
-  function renderer (el, options = defaultOptions) {
+  function dafRenderer(el, options = defaultOptions) {
     const root = (typeof el === "string") ? document.querySelector(el) : el;
     if (!(root && root instanceof Element && root.tagName.toUpperCase() === "DIV")) {
       throw "Argument must be a div element or its selector"
@@ -850,9 +1016,26 @@
         if (renderCallback)
           renderCallback();
       },
+      async renderSefaria(tractate, daf, amud = "a", sefariaOptions = {}, renderOptions = {}) {
+        const sefariaDaf = await getSefariaDaf(tractate, daf, amud, sefariaOptions);
+        this.render(
+          sefariaDaf.main,
+          sefariaDaf.inner,
+          sefariaDaf.outer,
+          sefariaDaf.amud,
+          renderOptions.linebreak,
+          renderOptions.renderCallback,
+          renderOptions.resizeCallback
+        );
+        return sefariaDaf;
+      },
     }
   }
 
-  return renderer;
+  dafRenderer.fetchSefariaDaf = fetchSefariaDaf;
+  dafRenderer.formatSefariaDaf = formatSefariaDaf;
+  dafRenderer.getSefariaDaf = getSefariaDaf;
+
+  return dafRenderer;
 
 })));

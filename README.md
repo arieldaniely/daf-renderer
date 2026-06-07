@@ -69,7 +69,39 @@ There are seven options you can change:
 ### Data Sources
 
 #### Sefaria
-*Coming Soonish...*
+You can fetch and render a daf directly from Sefaria's v3 Texts API.
+
+```javascript
+const renderer = dafRenderer("#daf");
+await renderer.renderSefaria("Berakhot", 42, "b");
+```
+
+If you want to fetch the formatted HTML without rendering it:
+
+```javascript
+const daf = await dafRenderer.getSefariaDaf("Berakhot", 42, "b");
+renderer.render(daf.main, daf.inner, daf.outer, daf.amud);
+```
+
+The Sefaria helper returns the Gemara as `main`, Rashi/Rashbam as `inner`, and Tosafot as `outer`. It automatically uses Rashbam instead of Rashi for Bava Batra from daf 30 onward. You can override the defaults:
+
+```javascript
+await renderer.renderSefaria("Bava Batra", 30, "a", {
+  innerCommentary: "Rashbam",
+  outerCommentary: "Tosafot",
+  language: "hebrew",
+  returnFormat: "default"
+});
+```
+
+The lower-level helpers are also available on the main export:
+
+```javascript
+import dafRenderer from "daf-renderer";
+
+const raw = await dafRenderer.fetchSefariaDaf("Berakhot", 42, "b");
+const formatted = dafRenderer.formatSefariaDaf(raw);
+```
 
 #### Talmud.dev API
 *Coming Soonish...*
