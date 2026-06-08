@@ -21,7 +21,11 @@ const defaultOptions = {
   lineHeight: {
     main: "17px",
     side: "14px",
-  }
+  },
+  sideAdditionsWidth: "90px",
+  sideAdditionsGap: "8px",
+  sideAdditionsFontSize: "9.2px",
+  sideAdditionsLineHeight: "12.8px"
 }
 
 function mergeAndClone (modified, definitional = defaultOptions) {

@@ -27,7 +27,11 @@
     lineHeight: {
       main: "17px",
       side: "14px",
-    }
+    },
+    sideAdditionsWidth: "90px",
+    sideAdditionsGap: "8px",
+    sideAdditionsFontSize: "9.2px",
+    sideAdditionsLineHeight: "12.8px"
   };
 
   function mergeAndClone (modified, definitional = defaultOptions) {
@@ -328,8 +332,8 @@
     }
   }
 
-  var css_248z = "/*Keep this as the first rule in the file*/\r\n.styles_dafRoot__1QUlM {\r\n  --contentWidth: 0px;\r\n  --padding-horizontal: 0px;\r\n  --padding-vertical: 0px;\r\n  --halfway: 50%;\r\n\r\n  --fontFamily-inner: \"Rashi\";\r\n  --fontFamily-outer: \"Tosafot\";\r\n  --fontFamily-main: \"Vilna\";\r\n  --direction: \"rtl\";\r\n\r\n  --fontSize-main: 0px;\r\n  --fontSize-side: 0px;\r\n\r\n  --lineHeight-main: 0px;\r\n  --lineHeight-side: 0px;\r\n\r\n  --mainWidth: 0%;\r\n  --mainMargin-start: var(--mainWidth);\r\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\r\n  --remainderPercent: calc(100% - var(--sidePercent));\r\n\r\n  --innerFloat: left;\r\n  --outerFloat: right;\r\n\r\n  --spacerHeights-start: 0px;\r\n  --spacerHeights-outer: 0px;\r\n  --spacerHeights-inner: 0px;\r\n  --spacerHeights-end: 0px;\r\n\r\n  /*Edge Cases*/\r\n  --hasInnerStartGap: 0;\r\n  --hasOuterStartGap: 0;\n  --innerStartWidth: 50%;\n  --innerPadding: 0px;\n  --outerStartWidth: 50%;\n  --outerPadding: 0px;\n\n  --newBookFrameImage: url(\"assets/new-book-frame.png\");\n}\n\r\n/*Containers*/\r\n.styles_dafRoot__1QUlM,\n.styles_outer__abXQX,\n.styles_inner__x-amJ,\n.styles_main__BHTRd {\n  width: var(--contentWidth);\n  pointer-events: none;\n  box-sizing: content-box;\n}\n\n.styles_dafRoot__1QUlM {\n  position: relative;\n}\n\r\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\r\n  position: absolute;\r\n}\r\n\r\n/*Float changes with amud*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  float: var(--innerFloat);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  float: var(--outerFloat);\r\n}\r\n\r\n/*Spacer widths determined by options*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_outer__abXQX .styles_spacer__2T7TS {\r\n  width: var(--halfway);\r\n}\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  width: var(--remainderPercent);\r\n}\r\n\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--contentWidth);\r\n}\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  width: var(--sidePercent);\r\n}\r\n\r\n/*Spacer heights determined by algorithm*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY {\r\n  height: var(--spacerHeights-start);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_end__2wr6A {\r\n  height: var(--spacerHeights-end);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  height: var(--spacerHeights-inner);\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  height: var(--spacerHeights-outer);\r\n}\r\n\r\n/*Settings to handle edge Cases*/\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--innerStartWidth);\r\n  margin-left: var(--innerPadding);\r\n  margin-right: var(--innerPadding);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--outerStartWidth);\r\n  margin-left: var(--outerPadding);\r\n  margin-right: var(--outerPadding);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  clear: both;\r\n}\r\n\r\n/*Margins!*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY,\r\n.styles_spacer__2T7TS.styles_end__2wr6A,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-left: calc(0.5 * var(--padding-horizontal));\r\n  margin-right: calc(0.5 * var(--padding-horizontal));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  margin-top: var(--padding-vertical);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-bottom: var(--padding-vertical);\r\n}\r\n\r\n/*Text*/\r\n.styles_text__1_7-z {\n  direction: var(--direction);\n  text-align: justify;\n  text-align-last: justify;\n  text-justify: inter-word;\n  word-break: normal;\n  overflow-wrap: normal;\n  hyphens: none;\n  font-kerning: normal;\n}\n\r\n.styles_text__1_7-z span {\n  pointer-events: auto;\n}\n\n.styles_text__1_7-z > span {\n  display: block;\n  text-align: inherit;\n  text-align-last: inherit;\n}\n\n.styles_balanceBreak__1CAJZ {\n  content: \"\";\n}\n\n.styles_continuationCatchword__xHvSp {\n  display: block;\n  width: max-content;\n  max-width: 100%;\n  margin-top: calc(-0.25 * var(--lineHeight-side));\n  text-align: start;\n  text-align-last: auto;\n  white-space: nowrap;\n  unicode-bidi: isolate;\n}\n\r\n.styles_main__BHTRd .styles_continuationCatchword__xHvSp {\r\n  margin-top: calc(-0.2 * var(--lineHeight-main));\r\n}\r\n\r\n.styles_main__BHTRd .styles_text__1_7-z {\n  font-family: var(--fontFamily-main);\n  font-size: var(--fontSize-main);\n  line-height: var(--lineHeight-main);\n}\n\n.daf-hadran {\n  display: block;\n  margin: 0.85em 0;\n  font-size: 1.22em;\n  line-height: 1.25;\n  text-align: center;\n  text-align-last: center;\n}\n\n.daf-before-hadran {\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_text__1_7-z > .daf-before-hadran {\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_main__BHTRd .daf-chapter-start-word {\n  float: right;\n  margin: -0.08em 0 0 0.18em;\n  font-size: 1.58em;\n  line-height: 0.78;\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_main__BHTRd .daf-inline-tosafot {\n  display: block;\n  float: left;\n  width: 12.8em;\n  max-width: calc(100% - 8px);\n  margin: 0 0 0.25em 0.65em;\n  font-family: var(--fontFamily-outer);\n  font-size: var(--fontSize-side);\n  line-height: var(--lineHeight-side);\n  text-align: justify;\n  text-align-last: justify;\n}\n\n.styles_main__BHTRd .daf-inline-tosafot .word {\n  pointer-events: auto;\n}\n\n.styles_newBookWord__3auqa {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: calc(var(--mainWidth) - var(--padding-horizontal) - var(--padding-horizontal));\n  min-height: 3.1em;\n  max-width: 100%;\n  margin: 0 auto 0.08em;\n  padding: 0.52em 1.12em 0.45em;\n  box-sizing: border-box;\n  background-image: var(--newBookFrameImage);\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: contain;\n  font-size: 2.9em;\n  line-height: 1;\n  text-align: center;\n  text-align-last: center;\n  vertical-align: middle;\n  white-space: nowrap;\n}\n\n.styles_newBookBreak__1mIe7 {\n  display: block;\n}\n\n.styles_inner__x-amJ .styles_text__1_7-z,\n.styles_outer__abXQX .styles_text__1_7-z {\n  font-size: var(--fontSize-side);\n  line-height: var(--lineHeight-side);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n}\r\n\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-outer);\r\n}\r\n";
-  var classes = {"dafRoot":"styles_dafRoot__1QUlM","outer":"styles_outer__abXQX","inner":"styles_inner__x-amJ","main":"styles_main__BHTRd","spacer":"styles_spacer__2T7TS","outerMid":"styles_outerMid__2WtcY","innerMid":"styles_innerMid__27MCi","mid":"styles_mid__dcgUr","start":"styles_start__AwkfY","end":"styles_end__2wr6A","text":"styles_text__1_7-z","balanceBreak":"styles_balanceBreak__1CAJZ","continuationCatchword":"styles_continuationCatchword__xHvSp","newBookWord":"styles_newBookWord__3auqa","newBookBreak":"styles_newBookBreak__1mIe7"};
+  var css_248z = "/*Keep this as the first rule in the file*/\r\n.styles_dafRoot__1QUlM {\r\n  --contentWidth: 0px;\r\n  --padding-horizontal: 0px;\r\n  --padding-vertical: 0px;\r\n  --halfway: 50%;\r\n\r\n  --fontFamily-inner: \"Rashi\";\r\n  --fontFamily-outer: \"Tosafot\";\r\n  --fontFamily-main: \"Vilna\";\r\n  --direction: \"rtl\";\r\n\r\n  --fontSize-main: 0px;\r\n  --fontSize-side: 0px;\r\n\r\n  --lineHeight-main: 0px;\r\n  --lineHeight-side: 0px;\r\n\r\n  --mainWidth: 0%;\r\n  --mainMargin-start: var(--mainWidth);\r\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\r\n  --remainderPercent: calc(100% - var(--sidePercent));\r\n\r\n  --innerFloat: left;\r\n  --outerFloat: right;\r\n  --sideAdditionsGap: 8px;\r\n  --sideAdditionsWidth: 90px;\r\n  --sideAdditionsFontSize: 9.2px;\r\n  --sideAdditionsLineHeight: 12.8px;\r\n  --sideAdditionsSlot: calc(var(--sideAdditionsWidth) + var(--sideAdditionsGap));\r\n  --innerAdditionsLeft: 0;\r\n  --innerAdditionsRight: auto;\r\n  --outerAdditionsLeft: auto;\r\n  --outerAdditionsRight: auto;\r\n\r\n  --spacerHeights-start: 0px;\r\n  --spacerHeights-outer: 0px;\r\n  --spacerHeights-inner: 0px;\r\n  --spacerHeights-end: 0px;\r\n\r\n  /*Edge Cases*/\r\n  --hasInnerStartGap: 0;\r\n  --hasOuterStartGap: 0;\r\n  --innerStartWidth: 50%;\r\n  --innerPadding: 0px;\r\n  --outerStartWidth: 50%;\r\n  --outerPadding: 0px;\r\n\r\n  --newBookFrameImage: url(\"assets/new-book-frame.png\");\r\n}\r\n\r\n/*Containers*/\r\n.styles_dafRoot__1QUlM,\r\n.styles_outer__abXQX,\r\n.styles_inner__x-amJ,\r\n.styles_main__BHTRd {\r\n  pointer-events: none;\r\n  box-sizing: content-box;\r\n}\r\n\r\n.styles_dafRoot__1QUlM {\r\n  position: relative;\r\n  width: calc(var(--contentWidth) + var(--sideAdditionsSlot) + var(--sideAdditionsSlot));\r\n}\r\n\r\n.styles_outer__abXQX,\r\n.styles_inner__x-amJ,\r\n.styles_main__BHTRd {\r\n  left: var(--sideAdditionsSlot);\r\n  width: var(--contentWidth);\r\n}\r\n\r\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\r\n  position: absolute;\r\n}\r\n\r\n.styles_sideAdditions__3mxbs {\r\n  position: absolute;\r\n  top: 0;\r\n  width: var(--sideAdditionsWidth);\r\n  box-sizing: border-box;\r\n  pointer-events: none;\r\n  color: #000;\r\n}\r\n\r\n.styles_innerAdditions__oYnaG {\r\n  left: var(--innerAdditionsLeft);\r\n  right: var(--innerAdditionsRight);\r\n}\r\n\r\n.styles_outerAdditions__2Ol5M {\r\n  left: var(--outerAdditionsLeft);\r\n  right: var(--outerAdditionsRight);\r\n}\r\n\r\n/*Float changes with amud*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  float: var(--innerFloat);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  float: var(--outerFloat);\r\n}\r\n\r\n/*Spacer widths determined by options*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_outer__abXQX .styles_spacer__2T7TS {\r\n  width: var(--halfway);\r\n}\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  width: var(--remainderPercent);\r\n}\r\n\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--contentWidth);\r\n}\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  width: var(--sidePercent);\r\n}\r\n\r\n/*Spacer heights determined by algorithm*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY {\r\n  height: var(--spacerHeights-start);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_end__2wr6A {\r\n  height: var(--spacerHeights-end);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  height: var(--spacerHeights-inner);\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  height: var(--spacerHeights-outer);\r\n}\r\n\r\n/*Settings to handle edge Cases*/\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--innerStartWidth);\r\n  margin-left: var(--innerPadding);\r\n  margin-right: var(--innerPadding);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--outerStartWidth);\r\n  margin-left: var(--outerPadding);\r\n  margin-right: var(--outerPadding);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  clear: both;\r\n}\r\n\r\n/*Margins!*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY,\r\n.styles_spacer__2T7TS.styles_end__2wr6A,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-left: calc(0.5 * var(--padding-horizontal));\r\n  margin-right: calc(0.5 * var(--padding-horizontal));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  margin-top: var(--padding-vertical);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-bottom: var(--padding-vertical);\r\n}\r\n\r\n/*Text*/\r\n.styles_text__1_7-z {\r\n  direction: var(--direction);\r\n  text-align: justify;\r\n  text-align-last: justify;\r\n  text-justify: inter-word;\r\n  word-break: normal;\r\n  overflow-wrap: normal;\r\n  hyphens: none;\r\n  font-kerning: normal;\r\n}\r\n\r\n.styles_text__1_7-z span {\r\n  pointer-events: auto;\r\n}\r\n\r\n.styles_text__1_7-z > span {\r\n  display: block;\r\n  text-align: inherit;\r\n  text-align-last: inherit;\r\n}\r\n\r\n.styles_balanceBreak__1CAJZ {\r\n  content: \"\";\r\n}\r\n\r\n.styles_continuationCatchword__xHvSp {\r\n  display: block;\r\n  width: max-content;\r\n  max-width: 100%;\r\n  margin-top: calc(-0.25 * var(--lineHeight-side));\r\n  text-align: start;\r\n  text-align-last: auto;\r\n  white-space: nowrap;\r\n  unicode-bidi: isolate;\r\n}\r\n\r\n.styles_main__BHTRd .styles_continuationCatchword__xHvSp {\r\n  margin-top: calc(-0.2 * var(--lineHeight-main));\r\n}\r\n\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-main);\r\n  font-size: var(--fontSize-main);\r\n  line-height: var(--lineHeight-main);\r\n}\r\n\r\n.daf-hadran {\r\n  display: block;\r\n  margin: 0.85em 0;\r\n  font-size: 1.22em;\r\n  line-height: 1.25;\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.daf-before-hadran {\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.styles_text__1_7-z > .daf-before-hadran {\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.styles_main__BHTRd .daf-chapter-start-word {\r\n  float: right;\r\n  margin: -0.08em 0 0 0.18em;\r\n  font-size: 1.58em;\r\n  line-height: 0.78;\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.styles_main__BHTRd .daf-inline-tosafot {\r\n  display: block;\r\n  float: left;\r\n  width: 12.8em;\r\n  max-width: calc(100% - 8px);\r\n  margin: 0 0 0.25em 0.65em;\r\n  font-family: var(--fontFamily-outer);\r\n  font-size: var(--fontSize-side);\r\n  line-height: var(--lineHeight-side);\r\n  text-align: justify;\r\n  text-align-last: justify;\r\n}\r\n\r\n.styles_main__BHTRd .daf-inline-tosafot .word {\r\n  pointer-events: auto;\r\n}\r\n\r\n.daf-ein-marker,\r\n.daf-torah-marker {\r\n  font-family: var(--fontFamily-main);\r\n  color: #000;\r\n  font-size: 0.62em;\r\n  line-height: 0;\r\n  vertical-align: super;\r\n  text-align: start;\r\n  text-align-last: auto;\r\n  white-space: nowrap;\r\n}\r\n\r\n.daf-ein-marker {\r\n  margin-inline-start: 0.06em;\r\n}\r\n\r\n.daf-torah-marker {\r\n  margin-inline-start: 0.04em;\r\n}\r\n\r\n.daf-side-section {\r\n  display: block;\r\n  margin-top: 0;\r\n  margin-bottom: 0.55em;\r\n  font-family: var(--fontFamily-inner);\r\n  text-align: justify;\r\n  text-align-last: justify;\r\n}\r\n\r\n.daf-side-title {\r\n  display: block;\r\n  margin-bottom: 0.24em;\r\n  font-family: var(--fontFamily-main);\r\n  font-size: 1.50em;\r\n  line-height: 1.12;\r\n  color: #000;\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.daf-ein-section .daf-side-title {\r\n  color: #000;\r\n}\r\n\r\n.daf-side-entry {\r\n  display: block;\r\n  margin-bottom: 0.22em;\r\n}\r\n\r\n.daf-side-entry-marker {\r\n  font-family: var(--fontFamily-main);\r\n  font-weight: 700;\r\n}\r\n\r\n.daf-side-entry small {\r\n  font-size: 0.86em;\r\n}\r\n\r\n.daf-gilyon-section {\r\n  margin-top: 1.45em;\r\n  padding-top: 2.05em;\r\n  background-image: url(\"assets/gilyon-divider.png\");\r\n  background-position: top center;\r\n  background-repeat: no-repeat;\r\n  background-size: 68% auto;\r\n}\r\n\r\n.styles_newBookWord__3auqa {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: calc(var(--mainWidth) - var(--padding-horizontal) - var(--padding-horizontal));\r\n  min-height: 3.1em;\r\n  max-width: 100%;\r\n  margin: 0 auto 0.08em;\r\n  padding: 0.52em 1.12em 0.45em;\r\n  box-sizing: border-box;\r\n  background-image: var(--newBookFrameImage);\r\n  background-position: center;\r\n  background-repeat: no-repeat;\r\n  background-size: contain;\r\n  font-size: 2.9em;\r\n  line-height: 1;\r\n  text-align: center;\r\n  text-align-last: center;\r\n  vertical-align: middle;\r\n  white-space: nowrap;\r\n}\r\n\r\n.styles_newBookBreak__1mIe7 {\r\n  display: block;\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z,\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-size: var(--fontSize-side);\r\n  line-height: var(--lineHeight-side);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n}\r\n\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-outer);\r\n}\r\n\r\n.styles_sideAdditions__3mxbs .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n  font-size: var(--sideAdditionsFontSize);\r\n  line-height: var(--sideAdditionsLineHeight);\r\n}\r\n";
+  var classes = {"dafRoot":"styles_dafRoot__1QUlM","outer":"styles_outer__abXQX","inner":"styles_inner__x-amJ","main":"styles_main__BHTRd","sideAdditions":"styles_sideAdditions__3mxbs","innerAdditions":"styles_innerAdditions__oYnaG","outerAdditions":"styles_outerAdditions__2Ol5M","spacer":"styles_spacer__2T7TS","outerMid":"styles_outerMid__2WtcY","innerMid":"styles_innerMid__27MCi","mid":"styles_mid__dcgUr","start":"styles_start__AwkfY","end":"styles_end__2wr6A","text":"styles_text__1_7-z","balanceBreak":"styles_balanceBreak__1CAJZ","continuationCatchword":"styles_continuationCatchword__xHvSp","newBookWord":"styles_newBookWord__3auqa","newBookBreak":"styles_newBookBreak__1mIe7"};
   styleInject(css_248z);
 
   const sideSpacersClasses = {
@@ -357,6 +361,14 @@
         inner: [classes.spacer, classes.innerMid],
         outer: [classes.spacer, classes.outerMid]
       },
+      text: classes.text
+    },
+    innerAdditions: {
+      el: [classes.sideAdditions, classes.innerAdditions],
+      text: classes.text
+    },
+    outerAdditions: {
+      el: [classes.sideAdditions, classes.outerAdditions],
       text: classes.text
     }
   };
@@ -413,7 +425,11 @@
     updateIsAmudB(amudB) {
       setVars({
         innerFloat: amudB ? "right" : "left",
-        outerFloat: amudB ? "left" : "right"
+        outerFloat: amudB ? "left" : "right",
+        innerAdditionsLeft: amudB ? "auto" : "0",
+        innerAdditionsRight: amudB ? "0" : "auto",
+        outerAdditionsLeft: amudB ? "0" : "auto",
+        outerAdditionsRight: amudB ? "auto" : "0"
       });
     },
     manageExceptions(spacerHeights) {
@@ -459,7 +475,11 @@
     maxCommentarySegments: 100,
     minOuterWordsForSideLayout: 32,
     innerCommentary: undefined,
-    outerCommentary: "Tosafot"
+    outerCommentary: "Tosafot",
+    wikisourceBaseUrl: "https://he.wikisource.org",
+    includeWikisourceAdditions: true,
+    includeGilyonHashas: true,
+    wikisourceUserAgent: "daf-renderer"
   };
 
   function normalizeFetch(fetcher) {
@@ -481,6 +501,18 @@
     if (!response.ok) {
       throw new Error(`Sefaria request failed for ${ref}: ${response.status} ${response.statusText}`);
     }
+    return response.json();
+  }
+
+  async function getJsonUrl(url, options) {
+    const headers = {};
+    const canSetUserAgent = typeof window === "undefined";
+    if (canSetUserAgent && options.userAgent) headers["User-Agent"] = options.userAgent;
+    if (canSetUserAgent && options.wikimediaUserAgent) headers["User-Agent"] = options.wikimediaUserAgent;
+    if (canSetUserAgent && options.wikisourceUserAgent) headers["User-Agent"] = options.wikisourceUserAgent;
+    const response = await normalizeFetch(options.fetcher)(url, { headers });
+    if (response.status === 404) return null;
+    if (!response.ok) return null;
     return response.json();
   }
 
@@ -509,6 +541,300 @@
 
   function getVersionText(response) {
     return response && response.versions && response.versions[0] ? response.versions[0].text : [];
+  }
+
+  const HEBREW_BOOKS = {
+    "בראשית": "Genesis",
+    "שמות": "Exodus",
+    "ויקרא": "Leviticus",
+    "במדבר": "Numbers",
+    "דברים": "Deuteronomy",
+    "יהושע": "Joshua",
+    "שופטים": "Judges",
+    "שמואל א": "I Samuel",
+    "שמואל ב": "II Samuel",
+    "מלכים א": "I Kings",
+    "מלכים ב": "II Kings",
+    "ישעיה": "Isaiah",
+    "ישעיהו": "Isaiah",
+    "ירמיה": "Jeremiah",
+    "ירמיהו": "Jeremiah",
+    "יחזקאל": "Ezekiel",
+    "הושע": "Hosea",
+    "יואל": "Joel",
+    "עמוס": "Amos",
+    "עובדיה": "Obadiah",
+    "יונה": "Jonah",
+    "מיכה": "Micah",
+    "נחום": "Nahum",
+    "חבקוק": "Habakkuk",
+    "צפניה": "Zephaniah",
+    "חגי": "Haggai",
+    "זכריה": "Zechariah",
+    "מלאכי": "Malachi",
+    "תהלים": "Psalms",
+    "משלי": "Proverbs",
+    "איוב": "Job",
+    "שיר השירים": "Song of Songs",
+    "רות": "Ruth",
+    "איכה": "Lamentations",
+    "קהלת": "Ecclesiastes",
+    "אסתר": "Esther",
+    "דניאל": "Daniel",
+    "עזרא": "Ezra",
+    "נחמיה": "Nehemiah",
+    "דברי הימים א": "I Chronicles",
+    "דברי הימים ב": "II Chronicles"
+  };
+
+  const HEBREW_NUMERAL_VALUES = {
+    א: 1, ב: 2, ג: 3, ד: 4, ה: 5, ו: 6, ז: 7, ח: 8, ט: 9,
+    י: 10, כ: 20, ל: 30, מ: 40, נ: 50, ס: 60, ע: 70, פ: 80, צ: 90,
+    ק: 100, ר: 200, ש: 300, ת: 400
+  };
+
+  function numberFromHebrew(value) {
+    const cleaned = String(value || "")
+      .replace(/[׳״'"]/g, "")
+      .replace(/[ךםןףץ]/g, letter => ({ך: "כ", ם: "מ", ן: "נ", ף: "פ", ץ: "צ"}[letter]))
+      .trim();
+    if (/^\d+$/.test(cleaned)) return Number(cleaned);
+    return Array.from(cleaned).reduce((sum, letter) => sum + (HEBREW_NUMERAL_VALUES[letter] || 0), 0);
+  }
+
+  function hebrewNumeral(number, withMarks = true) {
+    const value = Number(number);
+    if (!value) return "";
+    const ones = ["", "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט"];
+    const tens = ["", "י", "כ", "ל", "מ", "נ", "ס", "ע", "פ", "צ"];
+    const hundreds = ["", "ק", "ר", "ש", "ת"];
+    let remaining = value;
+    let result = "";
+    while (remaining >= 400) {
+      result += "ת";
+      remaining -= 400;
+    }
+    if (remaining >= 100) {
+      result += hundreds[Math.floor(remaining / 100)];
+      remaining %= 100;
+    }
+    if (remaining === 15) return withMarks ? "ט״ו" : "טו";
+    if (remaining === 16) return withMarks ? "ט״ז" : "טז";
+    if (remaining >= 10) {
+      result += tens[Math.floor(remaining / 10)];
+      remaining %= 10;
+    }
+    result += ones[remaining];
+    if (!withMarks || result.length < 2) return withMarks && result ? `${result}׳` : result;
+    return `${result.slice(0, -1)}״${result.slice(-1)}`;
+  }
+
+  function normalizeHebrewWord(text) {
+    return String(text || "")
+      .replace(/&nbsp;/g, " ")
+      .replace(/[\u0591-\u05c7]/g, "")
+      .replace(/[׳״'"]/g, "")
+      .replace(/[^\u05d0-\u05ea0-9]/g, "");
+  }
+
+  function visibleText(html) {
+    return String(html || "")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;/g, " ")
+      .replace(/&quot;/g, "\"")
+      .replace(/&#39;/g, "'")
+      .replace(/&amp;/g, "&")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function contextWordsBefore(html, index, count = 5) {
+    const words = visibleText(String(html || "").slice(0, index))
+      .split(/\s+/)
+      .map(normalizeHebrewWord)
+      .filter(Boolean);
+    return words.slice(-count);
+  }
+
+  function normalizeWikiHrefs(html, baseUrl) {
+    return String(html || "")
+      .replace(/\s+class="mw-[^"]*"/g, "")
+      .replace(/\s+style="[^"]*"/g, "")
+      .replace(/\s+id="[^"]*"/g, "")
+      .replace(/\s+title="[^"]*"/g, "")
+      .replace(/href="\/wiki\//g, `href="${baseUrl}/wiki/`)
+      .replace(/href="\/\/he\.wikisource\.org/g, `href="https://he.wikisource.org`);
+  }
+
+  function unwrapLinks(html) {
+    return String(html || "").replace(/<a\b[^>]*>([\s\S]*?)<\/a>/gi, "$1");
+  }
+
+  function sectionByHeading(html, id) {
+    if (typeof DOMParser === "function") {
+      const doc = new DOMParser().parseFromString(String(html || ""), "text/html");
+      const heading = doc.getElementById(id);
+      if (heading) {
+        const start = heading.closest(".mw-heading") || heading;
+        const parts = [];
+        let node = start.nextElementSibling;
+        while (node && !(node.matches && node.matches(".mw-heading"))) {
+          parts.push(node.outerHTML || node.textContent || "");
+          node = node.nextElementSibling;
+        }
+        return parts.join("\n");
+      }
+    }
+
+    const marker = `id="${id}"`;
+    const headingIndex = String(html || "").indexOf(marker);
+    if (headingIndex === -1) return "";
+    const headingEnd = String(html || "").indexOf("</div>", headingIndex);
+    const safeStart = headingEnd === -1 ? headingIndex : headingEnd + "</div>".length;
+    const next = String(html || "").indexOf("<div class=\"mw-heading mw-heading2\"", headingIndex + marker.length);
+    return String(html || "").slice(safeStart, next === -1 ? undefined : next);
+  }
+
+  function wikisourceTitleFromHeRef(heRef, daf, amud) {
+    const parts = String(heRef || "")
+      .replace(/<[^>]+>/g, "")
+      .replace(/[׳״'"]/g, "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+    const amudHebrew = amud === "b" ? "ב" : "א";
+    const dafHebrew = hebrewNumeral(daf, false);
+    if (parts.length >= 3) {
+      const tractate = parts.slice(0, -2).join(" ");
+      return [tractate, normalizeHebrewWord(parts[parts.length - 2]) || dafHebrew, normalizeHebrewWord(parts[parts.length - 1]) || amudHebrew].join("_");
+    }
+    return ["", dafHebrew, amudHebrew].filter(Boolean).join("_");
+  }
+
+  function parseTanakhRef(anchorHtml) {
+    const raw = visibleText(anchorHtml).replace(/^קטגוריה:/, "").replace(/,/g, " ");
+    const normalized = raw.replace(/\s+/g, " ").trim();
+    const book = Object.keys(HEBREW_BOOKS)
+      .sort((a, b) => b.length - a.length)
+      .find(name => normalized === name || normalized.startsWith(`${name} `));
+    if (!book) return null;
+    const rest = normalized.slice(book.length).trim().split(/\s+/).filter(Boolean);
+    const chapter = numberFromHebrew(rest[0]);
+    const verse = numberFromHebrew(rest[1]);
+    if (!chapter || !verse) return null;
+    return {
+      book,
+      ref: `${HEBREW_BOOKS[book]}.${chapter}.${verse}`,
+      heRef: `${book} ${hebrewNumeral(chapter)} ${hebrewNumeral(verse)}`
+    };
+  }
+
+  function extractEinEntries(sectionHtml, baseUrl) {
+    const entries = [];
+    const paragraphPattern = /<p\b[\s\S]*?<\/p>/gi;
+    let match;
+    while ((match = paragraphPattern.exec(String(sectionHtml || "")))) {
+      const paragraph = match[0];
+      const markerMatch = paragraph.match(/fn_([^"_]+)(?:_back)?/) || paragraph.match(/<big>\s*<b>([^<]+)<\/b>\s*<\/big>/);
+      if (!markerMatch) continue;
+      const marker = visibleText(markerMatch[1]);
+      const html = unwrapLinks(normalizeWikiHrefs(paragraph, baseUrl))
+        .replace(/<cite\b[\s\S]*?<\/cite>/gi, "")
+        .replace(/<big>\s*<b>[^<]+<\/b>\s*<\/big>/i, `<b class="daf-side-entry-marker">${marker}</b>`);
+      entries.push({ marker, html });
+    }
+    return entries;
+  }
+
+  function extractInlineAdditions(sectionHtml, kind) {
+    const additions = [];
+    const pattern = kind === "ein"
+      ? /<sup\b[\s\S]*?href="#fn_([^"]+)"[\s\S]*?<\/sup>/gi
+      : /<span\b[^>]*font-size:83%[^>]*>\s*\([^)]*?<a\b[\s\S]*?<\/a>[^)]*?\)\s*<\/span>/gi;
+    let match;
+    while ((match = pattern.exec(String(sectionHtml || "")))) {
+      const addition = {
+        kind,
+        marker: kind === "ein" ? visibleText(match[1]) : "",
+        sourceHtml: match[0],
+        context: contextWordsBefore(sectionHtml, match.index)
+      };
+      if (kind === "torah") {
+        const anchor = match[0].match(/<a\b[\s\S]*?<\/a>/i);
+        addition.tanakh = anchor ? parseTanakhRef(anchor[0]) : null;
+        if (!addition.tanakh) continue;
+      }
+      additions.push(addition);
+    }
+    return additions;
+  }
+
+  async function fetchWikisourceAdditions(tractate, daf, amud, heRef, options) {
+    if (!options.includeWikisourceAdditions) return { inline: { main: [], inner: [], outer: [] }, einEntries: [] };
+    const title = wikisourceTitleFromHeRef(heRef, daf, amud);
+    if (!title) return { inline: { main: [], inner: [], outer: [] }, einEntries: [] };
+    const url = new URL("/w/api.php", options.wikisourceBaseUrl);
+    url.searchParams.set("action", "parse");
+    url.searchParams.set("page", title);
+    url.searchParams.set("prop", "text");
+    url.searchParams.set("format", "json");
+    url.searchParams.set("origin", "*");
+    const data = await getJsonUrl(url.toString(), options).catch(() => null);
+    const html = data && data.parse && data.parse.text ? data.parse.text["*"] : "";
+    if (!html) return { inline: { main: [], inner: [], outer: [] }, einEntries: [] };
+
+    const sections = {
+      main: sectionByHeading(html, "גמרא"),
+      inner: sectionByHeading(html, "רש\"י") || sectionByHeading(html, "רש&quot;י"),
+      outer: sectionByHeading(html, "תוספות")
+    };
+    const einEntries = extractEinEntries(sectionByHeading(html, "עין_משפט_ונר_מצוה"), options.wikisourceBaseUrl);
+    const einMarkers = new Set(einEntries.map(entry => entry.marker));
+    const inline = {
+      main: extractInlineAdditions(sections.main, "ein").concat(extractInlineAdditions(sections.main, "torah")),
+      inner: extractInlineAdditions(sections.inner, "ein").concat(extractInlineAdditions(sections.inner, "torah")),
+      outer: extractInlineAdditions(sections.outer, "ein").concat(extractInlineAdditions(sections.outer, "torah"))
+    };
+    Object.keys(inline).forEach(key => {
+      inline[key] = inline[key].filter(item => item.kind !== "ein" || einMarkers.has(item.marker));
+    });
+
+    return { inline, einEntries };
+  }
+
+  async function fetchVerseText(tanakh, options) {
+    if (!(tanakh && tanakh.ref)) return "";
+    const response = await getOptionalText(tanakh.ref, Object.assign({}, options, { version: options.language }));
+    return flattenText(getVersionText(response)).join(" ");
+  }
+
+  async function buildTorahOrEntries(additions, options) {
+    const torahAdditions = [];
+    ["main", "inner", "outer"].forEach(key => {
+      (additions.inline[key] || []).forEach(item => {
+        if (item.kind === "torah") torahAdditions.push(item);
+      });
+    });
+
+    const entries = [];
+    for (let index = 0; index < torahAdditions.length; index++) {
+      const item = torahAdditions[index];
+      const marker = hebrewNumeral(index + 1, false);
+      item.marker = marker;
+      const verse = await fetchVerseText(item.tanakh, options).catch(() => "");
+      if (!verse) continue;
+      entries.push({ marker, verse, heRef: item.tanakh.heRef });
+    }
+    return entries;
+  }
+
+  async function fetchGilyonHashas(tractate, daf, amud, options) {
+    if (!options.includeGilyonHashas) return [];
+    const ref = `Gilyon_HaShas_on_${tractate}.${daf}${amud}.1-${options.maxCommentarySegments}`;
+    const response = await getOptionalText(ref, Object.assign({}, options, { version: options.commentaryVersion || options.language })).catch(() => null);
+    return flattenText(getVersionText(response)).filter(segment => stripHtml(segment));
   }
 
   function flattenText(text) {
@@ -651,6 +977,82 @@
     return html ? `<span class="daf-inline-tosafot">${html}</span>` : "";
   }
 
+  function wordSpans(html) {
+    const spans = [];
+    const pattern = /<span\b[^>]*\bclass="[^"]*\bword\b[^"]*"[^>]*>[\s\S]*?<\/span>/gi;
+    let match;
+    while ((match = pattern.exec(String(html || "")))) {
+      spans.push({
+        start: match.index,
+        end: match.index + match[0].length,
+        text: normalizeHebrewWord(visibleText(match[0]))
+      });
+    }
+    return spans;
+  }
+
+  function insertAfterContext(html, context, markerHtml) {
+    const words = wordSpans(html);
+    const target = (context || []).map(normalizeHebrewWord).filter(Boolean);
+    if (!words.length || !target.length) return html;
+
+    let best = -1;
+    const minLength = target.length > 1 ? 2 : 1;
+    for (let length = target.length; length >= minLength && best === -1; length--) {
+      const suffix = target.slice(target.length - length);
+      for (let index = 0; index <= words.length - suffix.length; index++) {
+        const matches = suffix.every((word, offset) => words[index + offset].text === word);
+        if (matches) best = index + suffix.length - 1;
+      }
+    }
+
+    if (best === -1) return html;
+    const insertAt = words[best + 1] ? words[best + 1].start : words[best].end;
+    return `${html.slice(0, insertAt)}${markerHtml}${html.slice(insertAt)}`;
+  }
+
+  function inlineMarkerHtml(item) {
+    if (item.kind === "ein") {
+      return `<sup class="daf-ein-marker">${escapeAttribute(item.marker)}</sup>`;
+    }
+    return `<sup class="daf-torah-marker">${escapeAttribute(item.marker)}]</sup>`;
+  }
+
+  function applyInlineAdditions(html, additions) {
+    return (additions || []).reduce((result, item) => {
+      if (!item.marker) return result;
+      return insertAfterContext(result, item.context, inlineMarkerHtml(item));
+    }, html);
+  }
+
+  function sideSection(title, body, className = "") {
+    const content = String(body || "").trim();
+    if (!content) return "";
+    const sectionClass = ["daf-side-section", className].filter(Boolean).join(" ");
+    return `<span class="${sectionClass}"><span class="daf-side-title">${title}</span>${content}</span>`;
+  }
+
+  function formatSideEntries(entries) {
+    if (!Array.isArray(entries) || !entries.length) return "";
+    return entries.map(entry => `<span class="daf-side-entry">${entry.html}</span>`).join(" ");
+  }
+
+  function formatTorahOr(entries) {
+    if (!Array.isArray(entries) || !entries.length) return "";
+    return entries
+      .map(entry => `<span class="daf-side-entry"><b class="daf-side-entry-marker">${entry.marker}]</b> ${entry.verse} <small>(${entry.heRef})</small></span>`)
+      .join(" ");
+  }
+
+  function formatGilyonHashas(entries) {
+    if (!Array.isArray(entries) || !entries.length) return "";
+    return entries.map(entry => `<span class="daf-side-entry">${entry}</span>`).join(" ");
+  }
+
+  function appendSideSection(html, section) {
+    return section ? `${html || ""} ${section}`.trim() : html;
+  }
+
   function splitSegmentByWords(segment) {
     const parts = String(segment || "").split(/(\s+)/);
     const wordParts = parts
@@ -756,6 +1158,17 @@
       getOptionalText(outerRef, Object.assign({}, mergedOptions, { version: mergedOptions.commentaryVersion || mergedOptions.language }))
     ]);
     const outerText = getVersionText(outer);
+    const additions = await fetchWikisourceAdditions(
+      tractate,
+      daf,
+      amud,
+      main.heRef || main.ref,
+      mergedOptions
+    );
+    const [torahOrEntries, gilyonHashas] = await Promise.all([
+      buildTorahOrEntries(additions, mergedOptions),
+      fetchGilyonHashas(tractate, daf, amud, mergedOptions)
+    ]);
     const firstOuterAnchorRef = outer.missing ? null : await getFirstOuterAnchorRef(
       mergedOptions.outerCommentary,
       tractate,
@@ -784,6 +1197,12 @@
         main: getVersionText(main),
         inner: getVersionText(inner),
         outer: outerText
+      },
+      additions: {
+        inline: additions.inline,
+        einEntries: additions.einEntries,
+        torahOrEntries,
+        gilyonHashas
       },
       commentary: {
         inner: innerCommentary,
@@ -815,14 +1234,25 @@
       : {};
 
     formatMain.inlineBySentence = inlineBySentence;
-    const main = formatMain(daf.texts.main);
+    const inlineAdditions = daf.additions && daf.additions.inline
+      ? daf.additions.inline
+      : { main: [], inner: [], outer: [] };
+    const main = applyInlineAdditions(formatMain(daf.texts.main), inlineAdditions.main);
     formatMain.inlineBySentence = {};
+    const torahOrSection = sideSection("תורה אור השלם", formatTorahOr(daf.additions && daf.additions.torahOrEntries), "daf-torah-or-section");
+    const einSection = sideSection("עין משפט נר מצווה", formatSideEntries(daf.additions && daf.additions.einEntries), "daf-ein-section");
+    const gilyonSection = sideSection("גליון הש\"ס", formatGilyonHashas(daf.additions && daf.additions.gilyonHashas), "daf-gilyon-section");
+    const outerAdditions = appendSideSection(einSection, gilyonSection);
+    const sideAdditions = {
+      inner: torahOrSection,
+      outer: outerAdditions
+    };
 
     if (useSplitInner) {
       const [right, left] = splitTextBySegments(daf.texts.inner);
       const rightKey = daf.amud === "b" ? "inner" : "outer";
       const leftKey = daf.amud === "b" ? "outer" : "inner";
-      const formattedRight = formatCommentary(right, "word-rashi-right", "rashi-header");
+      const formattedRight = applyInlineAdditions(formatCommentary(right, "word-rashi-right", "rashi-header"), inlineAdditions.inner);
       const formattedLeft = formatCommentary(left, "word-rashi-left", "rashi-header");
 
       return {
@@ -838,7 +1268,8 @@
           leftKey,
           continuationKeys: [leftKey],
           continuationSourceKey: "inner",
-          inlineOuter: hasOuterText
+          inlineOuter: hasOuterText,
+          sideAdditions
         }
       };
     }
@@ -848,11 +1279,12 @@
       refs: daf.refs,
       titles: daf.titles,
       main,
-      inner: formatCommentary(daf.texts.inner, "word-rashi", "rashi-header"),
-      outer: formatCommentary(daf.texts.outer, "word-tosafot", "tosafot-header"),
+      inner: applyInlineAdditions(formatCommentary(daf.texts.inner, "word-rashi", "rashi-header"), inlineAdditions.inner),
+      outer: applyInlineAdditions(formatCommentary(daf.texts.outer, "word-tosafot", "tosafot-header"), inlineAdditions.outer),
       layout: {
         sideMode: "normal",
-        continuationKeys: ["main", "inner", "outer"]
+        continuationKeys: ["main", "inner", "outer"],
+        sideAdditions
       }
     };
   }
@@ -1268,7 +1700,8 @@
 
   function updateRootHeight(containers) {
     const rootRect = containers.el.getBoundingClientRect();
-    const containerHeight = Math.max(...["main", "inner", "outer"].map(key => {
+    const containerHeight = Math.max(...["main", "inner", "outer", "innerAdditions", "outerAdditions"].map(key => {
+      if (!(containers[key] && containers[key].el)) return 0;
       const rect = containers[key].el.getBoundingClientRect();
       return rect.bottom - rootRect.top;
     }));
@@ -1408,6 +1841,8 @@
     const outerContainer = div(root);
     const innerContainer = div(root);
     const mainContainer = div(root);
+    const outerAdditionsContainer = div(root);
+    const innerAdditionsContainer = div(root);
     const dummy = div(root);
     dummy.id = "dummy";
     const containers = {
@@ -1439,13 +1874,23 @@
           outer: div(mainContainer),
         },
         text: div(mainContainer)
+      },
+      outerAdditions: {
+        el: outerAdditionsContainer,
+        text: div(outerAdditionsContainer)
+      },
+      innerAdditions: {
+        el: innerAdditionsContainer,
+        text: div(innerAdditionsContainer)
       }
     };
 
     const textSpans = {
       main: span(containers.main.text),
       inner: span(containers.inner.text),
-      outer: span(containers.outer.text)
+      outer: span(containers.outer.text),
+      innerAdditions: span(containers.innerAdditions.text),
+      outerAdditions: span(containers.outerAdditions.text)
     };
 
     const clonedOptions = mergeAndClone(options, defaultOptions);
@@ -1483,6 +1928,12 @@
           textSpans.main.innerHTML = withContinuationLead(renderedMain, continuationFor("main"));
           textSpans.inner.innerHTML = withContinuationLead(inner, continuationFor("inner"));
           textSpans.outer.innerHTML = withContinuationLead(outer, continuationFor("outer"));
+          textSpans.innerAdditions.innerHTML = decorations.sideAdditions && decorations.sideAdditions.inner
+            ? decorations.sideAdditions.inner
+            : "";
+          textSpans.outerAdditions.innerHTML = decorations.sideAdditions && decorations.sideAdditions.outer
+            ? decorations.sideAdditions.outer
+            : "";
         };
         const applyLayout = () => {
           styleManager.updateSpacersVars(this.spacerHeights);
@@ -1616,7 +2067,8 @@
           continuations,
           Object.assign({}, renderOptions.decorations, {
             newBookStart,
-            continuationKeys: sefariaDaf.layout && sefariaDaf.layout.continuationKeys
+            continuationKeys: sefariaDaf.layout && sefariaDaf.layout.continuationKeys,
+            sideAdditions: sefariaDaf.layout && sefariaDaf.layout.sideAdditions
           })
         );
         return sefariaDaf;

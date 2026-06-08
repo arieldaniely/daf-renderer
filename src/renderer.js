@@ -189,7 +189,8 @@ function positionContinuationCatchwords(containers) {
 
 function updateRootHeight(containers) {
   const rootRect = containers.el.getBoundingClientRect();
-  const containerHeight = Math.max(...["main", "inner", "outer"].map(key => {
+  const containerHeight = Math.max(...["main", "inner", "outer", "innerAdditions", "outerAdditions"].map(key => {
+    if (!(containers[key] && containers[key].el)) return 0;
     const rect = containers[key].el.getBoundingClientRect();
     return rect.bottom - rootRect.top;
   }));
@@ -329,6 +330,8 @@ function dafRenderer(el, options = defaultOptions) {
   const outerContainer = div(root);
   const innerContainer = div(root);
   const mainContainer = div(root);
+  const outerAdditionsContainer = div(root);
+  const innerAdditionsContainer = div(root);
   const dummy = div(root);
   dummy.id = "dummy";
   const containers = {
@@ -360,13 +363,23 @@ function dafRenderer(el, options = defaultOptions) {
         outer: div(mainContainer),
       },
       text: div(mainContainer)
+    },
+    outerAdditions: {
+      el: outerAdditionsContainer,
+      text: div(outerAdditionsContainer)
+    },
+    innerAdditions: {
+      el: innerAdditionsContainer,
+      text: div(innerAdditionsContainer)
     }
   }
 
   const textSpans = {
     main: span(containers.main.text),
     inner: span(containers.inner.text),
-    outer: span(containers.outer.text)
+    outer: span(containers.outer.text),
+    innerAdditions: span(containers.innerAdditions.text),
+    outerAdditions: span(containers.outerAdditions.text)
   }
 
   const clonedOptions = mergeAndClone(options, defaultOptions);
@@ -404,6 +417,12 @@ function dafRenderer(el, options = defaultOptions) {
         textSpans.main.innerHTML = withContinuationLead(renderedMain, continuationFor("main"));
         textSpans.inner.innerHTML = withContinuationLead(inner, continuationFor("inner"));
         textSpans.outer.innerHTML = withContinuationLead(outer, continuationFor("outer"));
+        textSpans.innerAdditions.innerHTML = decorations.sideAdditions && decorations.sideAdditions.inner
+          ? decorations.sideAdditions.inner
+          : "";
+        textSpans.outerAdditions.innerHTML = decorations.sideAdditions && decorations.sideAdditions.outer
+          ? decorations.sideAdditions.outer
+          : "";
       };
       const applyLayout = () => {
         styleManager.updateSpacersVars(this.spacerHeights);
@@ -537,7 +556,8 @@ function dafRenderer(el, options = defaultOptions) {
         continuations,
         Object.assign({}, renderOptions.decorations, {
           newBookStart,
-          continuationKeys: sefariaDaf.layout && sefariaDaf.layout.continuationKeys
+          continuationKeys: sefariaDaf.layout && sefariaDaf.layout.continuationKeys,
+          sideAdditions: sefariaDaf.layout && sefariaDaf.layout.sideAdditions
         })
       );
       return sefariaDaf;

@@ -167,7 +167,8 @@ function renderFormattedDaf() {
     continuations,
     {
       newBookStart,
-      continuationKeys: activeFormatted.layout && activeFormatted.layout.continuationKeys
+      continuationKeys: activeFormatted.layout && activeFormatted.layout.continuationKeys,
+      sideAdditions: activeFormatted.layout && activeFormatted.layout.sideAdditions
     }
   );
 }

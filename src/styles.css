@@ -23,6 +23,15 @@
 
   --innerFloat: left;
   --outerFloat: right;
+  --sideAdditionsGap: 8px;
+  --sideAdditionsWidth: 90px;
+  --sideAdditionsFontSize: 9.2px;
+  --sideAdditionsLineHeight: 12.8px;
+  --sideAdditionsSlot: calc(var(--sideAdditionsWidth) + var(--sideAdditionsGap));
+  --innerAdditionsLeft: 0;
+  --innerAdditionsRight: auto;
+  --outerAdditionsLeft: auto;
+  --outerAdditionsRight: auto;
 
   --spacerHeights-start: 0px;
   --spacerHeights-outer: 0px;
@@ -45,17 +54,43 @@
 .outer,
 .inner,
 .main {
-  width: var(--contentWidth);
   pointer-events: none;
   box-sizing: content-box;
 }
 
 .dafRoot {
   position: relative;
+  width: calc(var(--contentWidth) + var(--sideAdditionsSlot) + var(--sideAdditionsSlot));
+}
+
+.outer,
+.inner,
+.main {
+  left: var(--sideAdditionsSlot);
+  width: var(--contentWidth);
 }
 
 .outer, .inner, .main {
   position: absolute;
+}
+
+.sideAdditions {
+  position: absolute;
+  top: 0;
+  width: var(--sideAdditionsWidth);
+  box-sizing: border-box;
+  pointer-events: none;
+  color: #000;
+}
+
+.innerAdditions {
+  left: var(--innerAdditionsLeft);
+  right: var(--innerAdditionsRight);
+}
+
+.outerAdditions {
+  left: var(--outerAdditionsLeft);
+  right: var(--outerAdditionsRight);
 }
 
 /*Float changes with amud*/
@@ -241,6 +276,72 @@
   pointer-events: auto;
 }
 
+:global(.daf-ein-marker),
+:global(.daf-torah-marker) {
+  font-family: var(--fontFamily-main);
+  font-size: 0.62em;
+  line-height: 0;
+  vertical-align: super;
+  text-align: start;
+  text-align-last: auto;
+  white-space: nowrap;
+}
+
+:global(.daf-ein-marker) {
+  margin-inline-start: 0.06em;
+}
+
+:global(.daf-torah-marker) {
+  margin-inline-start: 0.04em;
+}
+
+:global(.daf-side-section) {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0.55em;
+  font-family: var(--fontFamily-inner);
+  text-align: justify;
+  text-align-last: justify;
+}
+
+:global(.daf-side-title) {
+  display: block;
+  margin-bottom: 0.24em;
+  font-family: var(--fontFamily-main);
+  font-size: 1.50em;
+  line-height: 1.12;
+  color: #000;
+  text-align: center;
+  text-align-last: center;
+}
+
+:global(.daf-ein-section .daf-side-title) {
+  color: #000;
+}
+
+:global(.daf-side-entry) {
+  display: block;
+  margin-bottom: 0.22em;
+}
+
+:global(.daf-side-entry-marker) {
+  font-family: var(--fontFamily-main);
+  font-weight: 700;
+}
+
+:global(.daf-side-entry small) {
+  font-size: 0.86em;
+}
+
+:global(.daf-gilyon-section) {
+  margin-top: 1.45em;
+  padding-top: 2.05em;
+  background-image: url("assets/gilyon-divider.png");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: 68% auto;
+}
+
 .newBookWord {
   display: flex;
   align-items: center;
@@ -279,4 +380,10 @@
 
 .outer .text {
   font-family: var(--fontFamily-outer);
+}
+
+.sideAdditions .text {
+  font-family: var(--fontFamily-inner);
+  font-size: var(--sideAdditionsFontSize);
+  line-height: var(--sideAdditionsLineHeight);
 }

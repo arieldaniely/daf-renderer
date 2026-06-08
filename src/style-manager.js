@@ -26,6 +26,14 @@ const containerClasses = {
       outer: [classes.spacer, classes.outerMid]
     },
     text: classes.text
+  },
+  innerAdditions: {
+    el: [classes.sideAdditions, classes.innerAdditions],
+    text: classes.text
+  },
+  outerAdditions: {
+    el: [classes.sideAdditions, classes.outerAdditions],
+    text: classes.text
   }
 }
 
@@ -81,7 +89,11 @@ export default {
   updateIsAmudB(amudB) {
     setVars({
       innerFloat: amudB ? "right" : "left",
-      outerFloat: amudB ? "left" : "right"
+      outerFloat: amudB ? "left" : "right",
+      innerAdditionsLeft: amudB ? "auto" : "0",
+      innerAdditionsRight: amudB ? "0" : "auto",
+      outerAdditionsLeft: amudB ? "0" : "auto",
+      outerAdditionsRight: amudB ? "auto" : "0"
     })
   },
   manageExceptions(spacerHeights) {
