@@ -62,6 +62,7 @@ const refs = {
 let renderer;
 let activeResult;
 let activeFormatted;
+let activeContinuationFormatted;
 let activeChapter;
 let showVowels = true;
 const indexCache = new Map();
@@ -150,7 +151,12 @@ function stripNikkud(html) {
 function renderFormattedDaf() {
   if (!activeFormatted) return;
   const main = showVowels ? activeFormatted.main : stripNikkud(activeFormatted.main);
-  renderer.render(main, activeFormatted.inner, activeFormatted.outer, activeFormatted.amud);
+  const continuation = activeContinuationFormatted
+    ? Object.assign({}, activeContinuationFormatted, {
+      main: showVowels ? activeContinuationFormatted.main : stripNikkud(activeContinuationFormatted.main)
+    })
+    : {};
+  renderer.render(main, activeFormatted.inner, activeFormatted.outer, activeFormatted.amud, undefined, undefined, undefined, continuation);
 }
 
 function hebrewNumber(number) {
@@ -263,6 +269,23 @@ function applyParsedRef(parsed) {
   return true;
 }
 
+function hasFormattedWord(html) {
+  return /class="[^"]*\bword\b/.test(html || "");
+}
+
+function hasAnyFormattedWords(formatted) {
+  return formatted && ["main", "inner", "outer"].some(key => hasFormattedWord(formatted[key]));
+}
+
+async function fetchFormattedContinuation(result, attemptsLeft = 2) {
+  const parsed = parseSefariaRef(result && result.refs && result.refs.next);
+  if (!parsed || attemptsLeft <= 0) return null;
+  const nextResult = await dafRenderer.fetchSefariaDaf(parsed.tractate, parsed.daf, parsed.amud);
+  const formatted = dafRenderer.formatSefariaDaf(nextResult);
+  if (hasAnyFormattedWords(formatted) || attemptsLeft === 1) return formatted;
+  return fetchFormattedContinuation(nextResult, attemptsLeft - 1);
+}
+
 async function renderSelected() {
   const tractate = findTractate(refs.tractate.value);
   const daf = Number(refs.daf.value);
@@ -275,6 +298,7 @@ async function renderSelected() {
     await document.fonts.ready;
     activeResult = await dafRenderer.fetchSefariaDaf(tractate.name, daf, amud);
     activeFormatted = dafRenderer.formatSefariaDaf(activeResult);
+    activeContinuationFormatted = await fetchFormattedContinuation(activeResult);
     activeChapter = await getChapterInfo(tractate.name, daf, amud);
     renderFormattedDaf();
     updateDafHeading(tractate.name, daf, amud);

@@ -26,6 +26,29 @@ function span(parent) {
   return el("span", parent);
 }
 
+function continuationLeadHtml(html) {
+  const template = document.createElement("template");
+  template.innerHTML = html || "";
+  const word = template.content.querySelector(".word");
+  if (!word) return "";
+  const glue = word.cloneNode(true);
+  glue.removeAttribute("id");
+  glue.classList.add(classes.continuationGlue);
+  glue.setAttribute("aria-hidden", "true");
+
+  const catchword = word.cloneNode(true);
+  catchword.removeAttribute("id");
+  catchword.classList.add(classes.continuationCatchword);
+  catchword.setAttribute("aria-hidden", "true");
+
+  return `${glue.outerHTML}<br>${catchword.outerHTML}`;
+}
+
+function withContinuationLead(html, continuationHtml) {
+  const lead = continuationLeadHtml(continuationHtml);
+  return lead ? `${html} ${lead}` : html;
+}
+
 
 function dafRenderer(el, options = defaultOptions) {
   const root = (typeof el === "string") ? document.querySelector(el) : el;
@@ -91,7 +114,7 @@ function dafRenderer(el, options = defaultOptions) {
       end: 0
     },
     amud: "a",
-    render(main, inner, outer, amud = "a", linebreak, renderCallback, resizeCallback) {
+    render(main, inner, outer, amud = "a", linebreak, renderCallback, resizeCallback, continuations = {}) {
       if (resizeEvent) {
         window.removeEventListener("resize", resizeEvent);
       }
@@ -181,9 +204,9 @@ function dafRenderer(el, options = defaultOptions) {
       }
       styleManager.updateSpacersVars(this.spacerHeights);
       styleManager.manageExceptions(this.spacerHeights);
-      textSpans.main.innerHTML = main;
-      textSpans.inner.innerHTML = inner;
-      textSpans.outer.innerHTML = outer;
+      textSpans.main.innerHTML = withContinuationLead(main, continuations.main);
+      textSpans.inner.innerHTML = withContinuationLead(inner, continuations.inner);
+      textSpans.outer.innerHTML = withContinuationLead(outer, continuations.outer);
 
       const containerHeight = Math.max(...["main", "inner", "outer"].map(t => containers[t].el.offsetHeight));
       containers.el.style.height = `${containerHeight}px`;
@@ -199,7 +222,8 @@ function dafRenderer(el, options = defaultOptions) {
         sefariaDaf.amud,
         renderOptions.linebreak,
         renderOptions.renderCallback,
-        renderOptions.resizeCallback
+        renderOptions.resizeCallback,
+        renderOptions.continuations
       );
       return sefariaDaf;
     },

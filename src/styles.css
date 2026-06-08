@@ -147,11 +147,28 @@
 .text {
   direction: var(--direction);
   text-align: justify;
-  text-align-last: center;
+  text-align-last: justify;
 }
 
 .text span {
   pointer-events: auto;
+}
+
+.continuationGlue {
+  visibility: hidden;
+}
+
+.continuationCatchword {
+  display: block;
+  margin-top: calc(-0.25 * var(--lineHeight-side));
+  padding-inline-start: 82%;
+  text-align: start;
+  text-align-last: auto;
+  white-space: nowrap;
+}
+
+.main .continuationCatchword {
+  margin-top: calc(-0.2 * var(--lineHeight-main));
 }
 
 .main .text {
