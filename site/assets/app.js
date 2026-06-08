@@ -108,7 +108,7 @@ function setBusy(isBusy) {
   refs.load.disabled = isBusy;
   refs.prev.disabled = isBusy;
   refs.next.disabled = isBusy;
-  refs.toggleVowels.disabled = isBusy && !activeFormatted;
+  refs.toggleVowels.disabled = isBusy;
 }
 
 function populateTractates() {
@@ -144,29 +144,23 @@ function writeSelectionToUrl() {
   window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
 }
 
-function stripNikkud(html) {
-  return html.replace(/[\u0591-\u05bd\u05bf-\u05c7]/g, "");
+function currentSefariaOptions() {
+  return showVowels ? {} : { mainVersion: "hebrew|William Davidson Edition - Aramaic" };
 }
 
 function renderFormattedDaf() {
   if (!activeFormatted) return;
   const tractate = findTractate(refs.tractate.value);
   const newBookStart = Number(refs.daf.value) === tractate.start && refs.amud.value === "a";
-  const main = showVowels ? activeFormatted.main : stripNikkud(activeFormatted.main);
-  const continuation = activeContinuationFormatted
-    ? Object.assign({}, activeContinuationFormatted, {
-      main: showVowels ? activeContinuationFormatted.main : stripNikkud(activeContinuationFormatted.main)
-    })
-    : {};
   renderer.render(
-    main,
+    activeFormatted.main,
     activeFormatted.inner,
     activeFormatted.outer,
     activeFormatted.amud,
     undefined,
     undefined,
     undefined,
-    continuation,
+    activeContinuationFormatted || {},
     { newBookStart }
   );
 }
@@ -292,7 +286,7 @@ function hasAnyFormattedWords(formatted) {
 async function fetchFormattedContinuation(result, attemptsLeft = 2) {
   const parsed = parseSefariaRef(result && result.refs && result.refs.next);
   if (!parsed || attemptsLeft <= 0) return null;
-  const nextResult = await dafRenderer.fetchSefariaDaf(parsed.tractate, parsed.daf, parsed.amud);
+  const nextResult = await dafRenderer.fetchSefariaDaf(parsed.tractate, parsed.daf, parsed.amud, currentSefariaOptions());
   const formatted = dafRenderer.formatSefariaDaf(nextResult);
   if (hasAnyFormattedWords(formatted) || attemptsLeft === 1) return formatted;
   return fetchFormattedContinuation(nextResult, attemptsLeft - 1);
@@ -308,7 +302,7 @@ async function renderSelected() {
 
   try {
     await document.fonts.ready;
-    activeResult = await dafRenderer.fetchSefariaDaf(tractate.name, daf, amud);
+    activeResult = await dafRenderer.fetchSefariaDaf(tractate.name, daf, amud, currentSefariaOptions());
     activeFormatted = dafRenderer.formatSefariaDaf(activeResult);
     activeContinuationFormatted = await fetchFormattedContinuation(activeResult);
     activeChapter = await getChapterInfo(tractate.name, daf, amud);
@@ -333,7 +327,7 @@ function toggleVowels() {
   showVowels = !showVowels;
   refs.toggleVowelsLabel.textContent = showVowels ? "הסתר ניקוד" : "הצג ניקוד";
   refs.toggleVowels.setAttribute("aria-pressed", String(showVowels));
-  renderFormattedDaf();
+  renderSelected();
 }
 
 async function init() {
