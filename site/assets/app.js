@@ -310,7 +310,7 @@ async function init() {
     }
 
     renderer = dafRenderer(dafRoot, {
-      contentWidth: "640px",
+      contentWidth: "540px",
       padding: {
         vertical: "10px",
         horizontal: "16px"
