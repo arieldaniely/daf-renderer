@@ -333,13 +333,19 @@ async function init() {
       throw new Error("Missing #daf-render container");
     }
 
+    const contentWidth = "540px";
     renderer = dafRenderer(dafRoot, {
-      contentWidth: "540px",
+      contentWidth,
       padding: {
         vertical: "10px",
         horizontal: "16px"
       }
     });
+
+    if (refs.dafHeading) {
+      refs.dafHeading.style.maxWidth = contentWidth;
+      refs.dafHeading.style.margin = "0 auto";
+    }
 
     refs.tractate.addEventListener("change", () => {
       populateDafim(findTractate(refs.tractate.value).start);
