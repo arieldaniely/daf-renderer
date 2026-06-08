@@ -328,7 +328,7 @@
     }
   }
 
-  var css_248z = "/*Keep this as the first rule in the file*/\r\n.styles_dafRoot__1QUlM {\r\n  --contentWidth: 0px;\r\n  --padding-horizontal: 0px;\r\n  --padding-vertical: 0px;\r\n  --halfway: 50%;\r\n\r\n  --fontFamily-inner: \"Rashi\";\r\n  --fontFamily-outer: \"Tosafot\";\r\n  --fontFamily-main: \"Vilna\";\r\n  --direction: \"rtl\";\r\n\r\n  --fontSize-main: 0px;\r\n  --fontSize-side: 0px;\r\n\r\n  --lineHeight-main: 0px;\r\n  --lineHeight-side: 0px;\r\n\r\n  --mainWidth: 0%;\r\n  --mainMargin-start: var(--mainWidth);\r\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\r\n  --remainderPercent: calc(100% - var(--sidePercent));\r\n\r\n  --innerFloat: left;\r\n  --outerFloat: right;\r\n\r\n  --spacerHeights-start: 0px;\r\n  --spacerHeights-outer: 0px;\r\n  --spacerHeights-inner: 0px;\r\n  --spacerHeights-end: 0px;\r\n\r\n  /*Edge Cases*/\r\n  --hasInnerStartGap: 0;\r\n  --hasOuterStartGap: 0;\n  --innerStartWidth: 50%;\n  --innerPadding: 0px;\n  --outerStartWidth: 50%;\n  --outerPadding: 0px;\n\n  --newBookFrameImage: url(\"assets/new-book-frame.png\");\n}\n\r\n/*Containers*/\r\n.styles_dafRoot__1QUlM,\n.styles_outer__abXQX,\n.styles_inner__x-amJ,\n.styles_main__BHTRd {\n  width: var(--contentWidth);\n  pointer-events: none;\n  box-sizing: content-box;\n}\n\n.styles_dafRoot__1QUlM {\n  position: relative;\n}\n\r\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\r\n  position: absolute;\r\n}\r\n\r\n/*Float changes with amud*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  float: var(--innerFloat);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  float: var(--outerFloat);\r\n}\r\n\r\n/*Spacer widths determined by options*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_outer__abXQX .styles_spacer__2T7TS {\r\n  width: var(--halfway);\r\n}\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  width: var(--remainderPercent);\r\n}\r\n\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--contentWidth);\r\n}\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  width: var(--sidePercent);\r\n}\r\n\r\n/*Spacer heights determined by algorithm*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY {\r\n  height: var(--spacerHeights-start);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_end__2wr6A {\r\n  height: var(--spacerHeights-end);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  height: var(--spacerHeights-inner);\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  height: var(--spacerHeights-outer);\r\n}\r\n\r\n/*Settings to handle edge Cases*/\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--innerStartWidth);\r\n  margin-left: var(--innerPadding);\r\n  margin-right: var(--innerPadding);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--outerStartWidth);\r\n  margin-left: var(--outerPadding);\r\n  margin-right: var(--outerPadding);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  clear: both;\r\n}\r\n\r\n/*Margins!*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY,\r\n.styles_spacer__2T7TS.styles_end__2wr6A,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-left: calc(0.5 * var(--padding-horizontal));\r\n  margin-right: calc(0.5 * var(--padding-horizontal));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  margin-top: var(--padding-vertical);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-bottom: var(--padding-vertical);\r\n}\r\n\r\n/*Text*/\r\n.styles_text__1_7-z {\n  direction: var(--direction);\n  text-align: justify;\n  text-align-last: justify;\n  text-justify: inter-word;\n  word-break: normal;\n  overflow-wrap: normal;\n  hyphens: none;\n  font-kerning: normal;\n}\n\r\n.styles_text__1_7-z span {\n  pointer-events: auto;\n}\n\n.styles_text__1_7-z > span {\n  display: block;\n  text-align: inherit;\n  text-align-last: inherit;\n}\n\n.styles_balanceBreak__1CAJZ {\n  content: \"\";\n}\n\n.styles_continuationCatchword__xHvSp {\n  display: block;\n  width: max-content;\n  max-width: 100%;\n  margin-top: calc(-0.25 * var(--lineHeight-side));\n  text-align: start;\n  text-align-last: auto;\n  white-space: nowrap;\n  unicode-bidi: isolate;\n}\n\r\n.styles_main__BHTRd .styles_continuationCatchword__xHvSp {\r\n  margin-top: calc(-0.2 * var(--lineHeight-main));\r\n}\r\n\r\n.styles_main__BHTRd .styles_text__1_7-z {\n  font-family: var(--fontFamily-main);\n  font-size: var(--fontSize-main);\n  line-height: var(--lineHeight-main);\n}\n\n.daf-hadran {\n  display: block;\n  margin: 0.85em 0;\n  font-size: 1.22em;\n  line-height: 1.25;\n  text-align: center;\n  text-align-last: center;\n}\n\n.daf-before-hadran {\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_text__1_7-z > .daf-before-hadran {\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_main__BHTRd .daf-chapter-start-word {\n  float: right;\n  margin: -0.08em 0 0 0.18em;\n  font-size: 1.58em;\n  line-height: 0.78;\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_newBookWord__3auqa {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: calc(var(--mainWidth) - var(--padding-horizontal) - var(--padding-horizontal));\n  min-height: 3.1em;\n  max-width: 100%;\n  margin: 0 auto 0.08em;\n  padding: 0.52em 1.12em 0.45em;\n  box-sizing: border-box;\n  background-image: var(--newBookFrameImage);\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: contain;\n  font-size: 2.9em;\n  line-height: 1;\n  text-align: center;\n  text-align-last: center;\n  vertical-align: middle;\n  white-space: nowrap;\n}\n\n.styles_newBookBreak__1mIe7 {\n  display: block;\n}\n\n.styles_inner__x-amJ .styles_text__1_7-z,\n.styles_outer__abXQX .styles_text__1_7-z {\n  font-size: var(--fontSize-side);\n  line-height: var(--lineHeight-side);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n}\r\n\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-outer);\r\n}\r\n";
+  var css_248z = "/*Keep this as the first rule in the file*/\r\n.styles_dafRoot__1QUlM {\r\n  --contentWidth: 0px;\r\n  --padding-horizontal: 0px;\r\n  --padding-vertical: 0px;\r\n  --halfway: 50%;\r\n\r\n  --fontFamily-inner: \"Rashi\";\r\n  --fontFamily-outer: \"Tosafot\";\r\n  --fontFamily-main: \"Vilna\";\r\n  --direction: \"rtl\";\r\n\r\n  --fontSize-main: 0px;\r\n  --fontSize-side: 0px;\r\n\r\n  --lineHeight-main: 0px;\r\n  --lineHeight-side: 0px;\r\n\r\n  --mainWidth: 0%;\r\n  --mainMargin-start: var(--mainWidth);\r\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\r\n  --remainderPercent: calc(100% - var(--sidePercent));\r\n\r\n  --innerFloat: left;\r\n  --outerFloat: right;\r\n\r\n  --spacerHeights-start: 0px;\r\n  --spacerHeights-outer: 0px;\r\n  --spacerHeights-inner: 0px;\r\n  --spacerHeights-end: 0px;\r\n\r\n  /*Edge Cases*/\r\n  --hasInnerStartGap: 0;\r\n  --hasOuterStartGap: 0;\n  --innerStartWidth: 50%;\n  --innerPadding: 0px;\n  --outerStartWidth: 50%;\n  --outerPadding: 0px;\n\n  --newBookFrameImage: url(\"assets/new-book-frame.png\");\n}\n\r\n/*Containers*/\r\n.styles_dafRoot__1QUlM,\n.styles_outer__abXQX,\n.styles_inner__x-amJ,\n.styles_main__BHTRd {\n  width: var(--contentWidth);\n  pointer-events: none;\n  box-sizing: content-box;\n}\n\n.styles_dafRoot__1QUlM {\n  position: relative;\n}\n\r\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\r\n  position: absolute;\r\n}\r\n\r\n/*Float changes with amud*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  float: var(--innerFloat);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  float: var(--outerFloat);\r\n}\r\n\r\n/*Spacer widths determined by options*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_outer__abXQX .styles_spacer__2T7TS {\r\n  width: var(--halfway);\r\n}\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  width: var(--remainderPercent);\r\n}\r\n\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--contentWidth);\r\n}\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  width: var(--sidePercent);\r\n}\r\n\r\n/*Spacer heights determined by algorithm*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY {\r\n  height: var(--spacerHeights-start);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_end__2wr6A {\r\n  height: var(--spacerHeights-end);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  height: var(--spacerHeights-inner);\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  height: var(--spacerHeights-outer);\r\n}\r\n\r\n/*Settings to handle edge Cases*/\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--innerStartWidth);\r\n  margin-left: var(--innerPadding);\r\n  margin-right: var(--innerPadding);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--outerStartWidth);\r\n  margin-left: var(--outerPadding);\r\n  margin-right: var(--outerPadding);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  clear: both;\r\n}\r\n\r\n/*Margins!*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY,\r\n.styles_spacer__2T7TS.styles_end__2wr6A,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-left: calc(0.5 * var(--padding-horizontal));\r\n  margin-right: calc(0.5 * var(--padding-horizontal));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  margin-top: var(--padding-vertical);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-bottom: var(--padding-vertical);\r\n}\r\n\r\n/*Text*/\r\n.styles_text__1_7-z {\n  direction: var(--direction);\n  text-align: justify;\n  text-align-last: justify;\n  text-justify: inter-word;\n  word-break: normal;\n  overflow-wrap: normal;\n  hyphens: none;\n  font-kerning: normal;\n}\n\r\n.styles_text__1_7-z span {\n  pointer-events: auto;\n}\n\n.styles_text__1_7-z > span {\n  display: block;\n  text-align: inherit;\n  text-align-last: inherit;\n}\n\n.styles_balanceBreak__1CAJZ {\n  content: \"\";\n}\n\n.styles_continuationCatchword__xHvSp {\n  display: block;\n  width: max-content;\n  max-width: 100%;\n  margin-top: calc(-0.25 * var(--lineHeight-side));\n  text-align: start;\n  text-align-last: auto;\n  white-space: nowrap;\n  unicode-bidi: isolate;\n}\n\r\n.styles_main__BHTRd .styles_continuationCatchword__xHvSp {\r\n  margin-top: calc(-0.2 * var(--lineHeight-main));\r\n}\r\n\r\n.styles_main__BHTRd .styles_text__1_7-z {\n  font-family: var(--fontFamily-main);\n  font-size: var(--fontSize-main);\n  line-height: var(--lineHeight-main);\n}\n\n.daf-hadran {\n  display: block;\n  margin: 0.85em 0;\n  font-size: 1.22em;\n  line-height: 1.25;\n  text-align: center;\n  text-align-last: center;\n}\n\n.daf-before-hadran {\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_text__1_7-z > .daf-before-hadran {\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_main__BHTRd .daf-chapter-start-word {\n  float: right;\n  margin: -0.08em 0 0 0.18em;\n  font-size: 1.58em;\n  line-height: 0.78;\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_main__BHTRd .daf-inline-tosafot {\n  display: block;\n  float: left;\n  width: 12.8em;\n  max-width: calc(100% - 8px);\n  margin: 0 0 0.25em 0.65em;\n  font-family: var(--fontFamily-outer);\n  font-size: var(--fontSize-side);\n  line-height: var(--lineHeight-side);\n  text-align: justify;\n  text-align-last: justify;\n}\n\n.styles_main__BHTRd .daf-inline-tosafot .word {\n  pointer-events: auto;\n}\n\n.styles_newBookWord__3auqa {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: calc(var(--mainWidth) - var(--padding-horizontal) - var(--padding-horizontal));\n  min-height: 3.1em;\n  max-width: 100%;\n  margin: 0 auto 0.08em;\n  padding: 0.52em 1.12em 0.45em;\n  box-sizing: border-box;\n  background-image: var(--newBookFrameImage);\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: contain;\n  font-size: 2.9em;\n  line-height: 1;\n  text-align: center;\n  text-align-last: center;\n  vertical-align: middle;\n  white-space: nowrap;\n}\n\n.styles_newBookBreak__1mIe7 {\n  display: block;\n}\n\n.styles_inner__x-amJ .styles_text__1_7-z,\n.styles_outer__abXQX .styles_text__1_7-z {\n  font-size: var(--fontSize-side);\n  line-height: var(--lineHeight-side);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n}\r\n\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-outer);\r\n}\r\n";
   var classes = {"dafRoot":"styles_dafRoot__1QUlM","outer":"styles_outer__abXQX","inner":"styles_inner__x-amJ","main":"styles_main__BHTRd","spacer":"styles_spacer__2T7TS","outerMid":"styles_outerMid__2WtcY","innerMid":"styles_innerMid__27MCi","mid":"styles_mid__dcgUr","start":"styles_start__AwkfY","end":"styles_end__2wr6A","text":"styles_text__1_7-z","balanceBreak":"styles_balanceBreak__1CAJZ","continuationCatchword":"styles_continuationCatchword__xHvSp","newBookWord":"styles_newBookWord__3auqa","newBookBreak":"styles_newBookBreak__1mIe7"};
   styleInject(css_248z);
 
@@ -457,6 +457,7 @@
     commentaryVersion: undefined,
     returnFormat: "default",
     maxCommentarySegments: 100,
+    minOuterWordsForSideLayout: 32,
     innerCommentary: undefined,
     outerCommentary: "Tosafot"
   };
@@ -480,6 +481,29 @@
     if (!response.ok) {
       throw new Error(`Sefaria request failed for ${ref}: ${response.status} ${response.statusText}`);
     }
+    return response.json();
+  }
+
+  async function getOptionalText(ref, options) {
+    const response = await normalizeFetch(options.fetcher)(buildTextUrl(ref, options));
+    if (response.status === 404) {
+      return { missing: true, ref, versions: [{ text: [] }] };
+    }
+    if (!response.ok) {
+      throw new Error(`Sefaria request failed for ${ref}: ${response.status} ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  function buildLinksUrl(ref, options) {
+    const url = new URL(`/api/links/${encodeURIComponent(ref)}`, options.baseUrl);
+    url.searchParams.set("with_text", "0");
+    return url.toString();
+  }
+
+  async function getLinks(ref, options) {
+    const response = await normalizeFetch(options.fetcher)(buildLinksUrl(ref, options));
+    if (!response.ok) return [];
     return response.json();
   }
 
@@ -521,6 +545,10 @@
 
   function stripHtml(html) {
     return String(html || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  }
+
+  function wordCount(text) {
+    return stripHtml(flattenText(text).join(" ")).split(/\s+/).filter(Boolean).length;
   }
 
   function isHadranSegment(segment) {
@@ -574,6 +602,7 @@
   function formatMain(text) {
     let wordIndex = 0;
     const segments = flattenText(text).filter(Boolean);
+    const inlineBySentence = formatMain.inlineBySentence || {};
 
     return segments
       .map((segment, index) => {
@@ -595,7 +624,8 @@
         wordIndex += (words.match(/class="word"/g) || []).length;
         const classes = ["sentence"];
         if (previousToHadran) classes.push("daf-before-hadran");
-        return `<span class="${classes.join(" ")}" id="${sentenceId}">${words}</span>`;
+        const inline = inlineBySentence[index] || "";
+        return `${inline}<span class="${classes.join(" ")}" id="${sentenceId}">${words}</span>`;
       })
       .join(" ");
   }
@@ -616,6 +646,48 @@
     return wrapWords(html, prefix);
   }
 
+  function formatInlineCommentary(text) {
+    const html = formatCommentary(text, "word-inline-tosafot", "tosafot-header");
+    return html ? `<span class="daf-inline-tosafot">${html}</span>` : "";
+  }
+
+  function splitSegmentByWords(segment) {
+    const parts = String(segment || "").split(/(\s+)/);
+    const wordParts = parts
+      .map((part, index) => ({ part, index }))
+      .filter(({ part }) => part && !/^\s+$/.test(part));
+    const cutWord = Math.ceil(wordParts.length / 2);
+    const cutIndex = wordParts[cutWord] ? wordParts[cutWord].index : parts.length;
+    return [
+      parts.slice(0, cutIndex).join("").trim(),
+      parts.slice(cutIndex).join("").trim()
+    ].filter(Boolean);
+  }
+
+  function splitTextBySegments(text) {
+    const segments = flattenText(text).filter(Boolean);
+    if (segments.length <= 1) return splitSegmentByWords(segments[0]);
+
+    const total = segments.reduce((sum, segment) => sum + wordCount(segment), 0);
+    const target = Math.ceil(total / 2);
+    let seen = 0;
+    let splitAt = segments.length;
+
+    for (let index = 0; index < segments.length; index++) {
+      seen += wordCount(segments[index]);
+      if (seen >= target) {
+        splitAt = index + 1;
+        break;
+      }
+    }
+
+    if (splitAt >= segments.length && segments.length > 1) {
+      splitAt = Math.ceil(segments.length / 2);
+    }
+
+    return [segments.slice(0, splitAt), segments.slice(splitAt)];
+  }
+
   function getInnerCommentary(tractate, daf, configuredCommentary) {
     if (configuredCommentary) return configuredCommentary;
     return tractate === "Bava Batra" && Number(daf) >= 30 ? "Rashbam" : "Rashi";
@@ -629,6 +701,48 @@
     return `${commentary}_on_${tractate}.${daf}${amud}.1-${maxSegments}`;
   }
 
+  function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  function firstTopLevelTextIndex(text) {
+    const values = Array.isArray(text) ? text : [text];
+    for (let index = 0; index < values.length; index++) {
+      if (flattenText(values[index]).some(value => stripHtml(value))) return index + 1;
+    }
+    return null;
+  }
+
+  function talmudRefPattern(tractate, daf, amud) {
+    return new RegExp(`^${escapeRegExp(tractate)} ${daf}${amud}:(\\d+)`);
+  }
+
+  function parseMainRef(ref) {
+    const match = String(ref || "").match(/^(.+)\s+(\d+)([ab])$/);
+    return match ? { tractate: match[1], daf: match[2], amud: match[3] } : null;
+  }
+
+  async function getFirstOuterAnchorRef(commentary, tractate, daf, amud, outerText, options) {
+    const firstIndex = firstTopLevelTextIndex(outerText);
+    if (!firstIndex) return null;
+
+    const linksRef = `${commentary}_on_${tractate}.${daf}${amud}.${firstIndex}`;
+    const links = await getLinks(linksRef, options);
+    const basePattern = talmudRefPattern(tractate, daf, amud);
+    const baseLink = Array.isArray(links)
+      ? links.find(link => basePattern.test(link.ref || link.sourceRef || ""))
+      : null;
+
+    return baseLink ? (baseLink.ref || baseLink.sourceRef) : null;
+  }
+
+  function sentenceIndexFromBaseRef(ref, mainRef) {
+    const parsed = parseMainRef(mainRef);
+    if (!parsed) return 0;
+    const match = String(ref || "").match(talmudRefPattern(parsed.tractate, parsed.daf, parsed.amud));
+    return match ? Number(match[1]) - 1 : 0;
+  }
+
   async function fetchSefariaDaf(tractate, daf, amud = "a", options = {}) {
     const mergedOptions = Object.assign({}, DEFAULT_SEFARIA_OPTIONS, options);
     const innerCommentary = getInnerCommentary(tractate, daf, mergedOptions.innerCommentary);
@@ -639,8 +753,17 @@
     const [main, inner, outer] = await Promise.all([
       getText(mainRef, Object.assign({}, mergedOptions, { version: mergedOptions.mainVersion || mergedOptions.language })),
       getText(innerRef, Object.assign({}, mergedOptions, { version: mergedOptions.commentaryVersion || mergedOptions.language })),
-      getText(outerRef, Object.assign({}, mergedOptions, { version: mergedOptions.commentaryVersion || mergedOptions.language }))
+      getOptionalText(outerRef, Object.assign({}, mergedOptions, { version: mergedOptions.commentaryVersion || mergedOptions.language }))
     ]);
+    const outerText = getVersionText(outer);
+    const firstOuterAnchorRef = outer.missing ? null : await getFirstOuterAnchorRef(
+      mergedOptions.outerCommentary,
+      tractate,
+      daf,
+      amud,
+      outerText,
+      mergedOptions
+    );
 
     return {
       amud,
@@ -660,20 +783,87 @@
       texts: {
         main: getVersionText(main),
         inner: getVersionText(inner),
-        outer: getVersionText(outer)
+        outer: outerText
+      },
+      commentary: {
+        inner: innerCommentary,
+        outer: mergedOptions.outerCommentary
+      },
+      layout: {
+        outerMissing: !!outer.missing,
+        firstOuterAnchorRef,
+        minOuterWordsForSideLayout: mergedOptions.minOuterWordsForSideLayout,
+        outerWordCount: wordCount(outerText)
       }
     };
   }
 
   function formatSefariaDaf(daf) {
+    const outerMissing = !!(daf.layout && daf.layout.outerMissing);
+    const outerWordCount = daf.layout ? daf.layout.outerWordCount : wordCount(daf.texts.outer);
+    const minOuterWords = daf.layout && daf.layout.minOuterWordsForSideLayout
+      ? daf.layout.minOuterWordsForSideLayout
+      : DEFAULT_SEFARIA_OPTIONS.minOuterWordsForSideLayout;
+    const useSplitInner = outerMissing || outerWordCount < minOuterWords;
+    const hasOuterText = !outerMissing && outerWordCount > 0;
+    const outerAnchorSentence = sentenceIndexFromBaseRef(
+      daf.layout && daf.layout.firstOuterAnchorRef,
+      daf.refs && daf.refs.main
+    );
+    const inlineBySentence = hasOuterText && useSplitInner
+      ? { [outerAnchorSentence]: formatInlineCommentary(daf.texts.outer) }
+      : {};
+
+    formatMain.inlineBySentence = inlineBySentence;
+    const main = formatMain(daf.texts.main);
+    formatMain.inlineBySentence = {};
+
+    if (useSplitInner) {
+      const [right, left] = splitTextBySegments(daf.texts.inner);
+      const rightKey = daf.amud === "b" ? "inner" : "outer";
+      const leftKey = daf.amud === "b" ? "outer" : "inner";
+      const formattedRight = formatCommentary(right, "word-rashi-right", "rashi-header");
+      const formattedLeft = formatCommentary(left, "word-rashi-left", "rashi-header");
+
+      return {
+        amud: daf.amud,
+        refs: daf.refs,
+        titles: daf.titles,
+        main,
+        inner: rightKey === "inner" ? formattedRight : formattedLeft,
+        outer: rightKey === "outer" ? formattedRight : formattedLeft,
+        layout: {
+          sideMode: "splitInner",
+          rightKey,
+          leftKey,
+          continuationKeys: [leftKey],
+          continuationSourceKey: "inner",
+          inlineOuter: hasOuterText
+        }
+      };
+    }
+
     return {
       amud: daf.amud,
       refs: daf.refs,
       titles: daf.titles,
-      main: formatMain(daf.texts.main),
+      main,
       inner: formatCommentary(daf.texts.inner, "word-rashi", "rashi-header"),
-      outer: formatCommentary(daf.texts.outer, "word-tosafot", "tosafot-header")
+      outer: formatCommentary(daf.texts.outer, "word-tosafot", "tosafot-header"),
+      layout: {
+        sideMode: "normal",
+        continuationKeys: ["main", "inner", "outer"]
+      }
     };
+  }
+
+  function continuationsForFormattedDaf(formatted, continuations = {}) {
+    if (!(formatted && formatted.layout && formatted.layout.sideMode === "splitInner")) {
+      return continuations || {};
+    }
+    const targetKey = formatted.layout.leftKey || "inner";
+    const sourceKey = formatted.layout.continuationSourceKey || "inner";
+    return { [targetKey]: continuations ? continuations[sourceKey] : "" };
   }
 
   async function getSefariaDaf(tractate, daf, amud = "a", options = {}) {
@@ -902,6 +1092,9 @@
     return spacerHeights;
   }
 
+  const INLINE_TOSAFOT_CLASS = "daf-inline-tosafot";
+  const INLINE_TOSAFOT_WIDTH_PHRASE = "שהרי בכל יום היה אותו רשע מצוי";
+
   function el(tag, parent) {
     const newEl = document.createElement(tag);
     if (parent) parent.append(newEl);
@@ -975,11 +1168,20 @@
     text.querySelectorAll(`.${classes.balanceBreak}`).forEach(br => br.remove());
   }
 
+  function isInlineTosafotWord(word) {
+    return !!word.closest(`.${INLINE_TOSAFOT_CLASS}`);
+  }
+
+  function layoutWords(text) {
+    return Array.from(text.querySelectorAll(".word"))
+      .filter(word => !word.classList.contains(classes.continuationCatchword))
+      .filter(word => !isInlineTosafotWord(word));
+  }
+
   function balanceFinalLine(text) {
     removeBalanceBreaks(text);
 
-    const words = Array.from(text.querySelectorAll(".word"))
-      .filter(word => !word.classList.contains(classes.continuationCatchword));
+    const words = layoutWords(text);
     const lines = lineGroups(words);
     if (lines.length < 2) return;
 
@@ -1039,8 +1241,7 @@
 
       resetContinuationCatchword(catchword);
 
-      const words = Array.from(text.querySelectorAll(".word"))
-        .filter(word => word !== catchword && !word.classList.contains(classes.continuationCatchword));
+      const words = layoutWords(text).filter(word => word !== catchword);
       if (!words.length) return;
 
       const lastWord = words[words.length - 1];
@@ -1074,16 +1275,62 @@
     containers.el.style.height = `${Math.ceil(containerHeight)}px`;
   }
 
+  function plainHebrew$1(text) {
+    return String(text || "").replace(/[\u0591-\u05c7]/g, "").replace(/[^\u05d0-\u05ea]/g, "");
+  }
+
+  function phraseWords(phrase) {
+    return String(phrase || "").split(/\s+/).map(plainHebrew$1).filter(Boolean);
+  }
+
+  function measurePhraseInMain(containers) {
+    const target = phraseWords(INLINE_TOSAFOT_WIDTH_PHRASE);
+    if (!target.length) return null;
+
+    const words = layoutWords(containers.main.text);
+    for (let index = 0; index <= words.length - target.length; index++) {
+      const candidate = words.slice(index, index + target.length);
+      if (!candidate.every((word, offset) => plainHebrew$1(word.textContent) === target[offset])) continue;
+
+      const rects = candidate.map(word => word.getBoundingClientRect());
+      return Math.max(...rects.map(rect => rect.right)) - Math.min(...rects.map(rect => rect.left));
+    }
+
+    return null;
+  }
+
+  function measurePhraseWithCanvas(containers) {
+    if (!document.createElement("canvas").getContext) return null;
+    const canvas = measurePhraseWithCanvas.canvas || (measurePhraseWithCanvas.canvas = document.createElement("canvas"));
+    const context = canvas.getContext("2d");
+    if (!context) return null;
+
+    const style = getComputedStyle(containers.main.text);
+    context.font = style.font;
+    return context.measureText(INLINE_TOSAFOT_WIDTH_PHRASE).width;
+  }
+
+  function updateInlineTosafotWidth(containers) {
+    const blocks = containers.main.text.querySelectorAll(`.${INLINE_TOSAFOT_CLASS}`);
+    if (!blocks.length) return;
+
+    const mainRect = containers.main.text.getBoundingClientRect();
+    const width = measurePhraseInMain(containers) || measurePhraseWithCanvas(containers) || mainRect.width * 0.62;
+    const boundedWidth = Math.max(40, Math.min(width, mainRect.width - 8));
+    blocks.forEach(block => {
+      block.style.width = `${boundedWidth}px`;
+    });
+  }
+
   function finalizeLayout(containers) {
+    updateInlineTosafotWidth(containers);
     balanceFinalLines(containers);
     positionContinuationCatchwords(containers);
     updateRootHeight(containers);
   }
 
   function wordRects(container) {
-    return Array.from(container.text.querySelectorAll(".word"))
-      .filter(word => !word.classList.contains(classes.continuationCatchword))
-      .map(word => word.getBoundingClientRect());
+    return layoutWords(container.text).map(word => word.getBoundingClientRect());
   }
 
   function rectOverlapHeight(a, b) {
@@ -1227,10 +1474,15 @@
         }
         const renderedMain = decorations.newBookStart ? withNewBookStart(main) : main;
         let calculateCurrentSpacers;
+        const continuationFor = (key) => {
+          const keys = decorations.continuationKeys;
+          if (Array.isArray(keys) && !keys.includes(key)) return "";
+          return continuations[key];
+        };
         const setText = () => {
-          textSpans.main.innerHTML = withContinuationLead(renderedMain, continuations.main);
-          textSpans.inner.innerHTML = withContinuationLead(inner, continuations.inner);
-          textSpans.outer.innerHTML = withContinuationLead(outer, continuations.outer);
+          textSpans.main.innerHTML = withContinuationLead(renderedMain, continuationFor("main"));
+          textSpans.inner.innerHTML = withContinuationLead(inner, continuationFor("inner"));
+          textSpans.outer.innerHTML = withContinuationLead(outer, continuationFor("outer"));
         };
         const applyLayout = () => {
           styleManager.updateSpacersVars(this.spacerHeights);
@@ -1352,6 +1604,7 @@
         const newBookStart = renderOptions.newBookStart !== undefined
           ? renderOptions.newBookStart
           : isFirstSefariaDaf(sefariaDaf, tractate, daf, sefariaDaf.amud);
+        const continuations = continuationsForFormattedDaf(sefariaDaf, renderOptions.continuations || {});
         this.render(
           sefariaDaf.main,
           sefariaDaf.inner,
@@ -1360,8 +1613,11 @@
           renderOptions.linebreak,
           renderOptions.renderCallback,
           renderOptions.resizeCallback,
-          renderOptions.continuations,
-          Object.assign({}, renderOptions.decorations, { newBookStart })
+          continuations,
+          Object.assign({}, renderOptions.decorations, {
+            newBookStart,
+            continuationKeys: sefariaDaf.layout && sefariaDaf.layout.continuationKeys
+          })
         );
         return sefariaDaf;
       },
@@ -1371,6 +1627,7 @@
   dafRenderer.fetchSefariaDaf = fetchSefariaDaf;
   dafRenderer.formatSefariaDaf = formatSefariaDaf;
   dafRenderer.getSefariaDaf = getSefariaDaf;
+  dafRenderer.continuationsForFormattedDaf = continuationsForFormattedDaf;
 
   return dafRenderer;
 

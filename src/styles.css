@@ -224,6 +224,23 @@
   text-align-last: center;
 }
 
+.main :global(.daf-inline-tosafot) {
+  display: block;
+  float: left;
+  width: 12.8em;
+  max-width: calc(100% - 8px);
+  margin: 0 0 0.25em 0.65em;
+  font-family: var(--fontFamily-outer);
+  font-size: var(--fontSize-side);
+  line-height: var(--lineHeight-side);
+  text-align: justify;
+  text-align-last: justify;
+}
+
+.main :global(.daf-inline-tosafot) :global(.word) {
+  pointer-events: auto;
+}
+
 .newBookWord {
   display: flex;
   align-items: center;

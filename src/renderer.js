@@ -2,6 +2,7 @@ import {defaultOptions, mergeAndClone} from "./options";
 import calculateSpacers from "./calculate-spacers";
 import styleManager from "./style-manager";
 import {
+  continuationsForFormattedDaf,
   fetchSefariaDaf,
   formatSefariaDaf,
   getSefariaDaf
@@ -11,6 +12,9 @@ import {
   onlyOneCommentary
 } from "./calculate-spacers-breaks";
 import classes from './styles.css';
+
+const INLINE_TOSAFOT_CLASS = "daf-inline-tosafot";
+const INLINE_TOSAFOT_WIDTH_PHRASE = "שהרי בכל יום היה אותו רשע מצוי";
 
 function el(tag, parent) {
   const newEl = document.createElement(tag);
@@ -85,11 +89,20 @@ function removeBalanceBreaks(text) {
   text.querySelectorAll(`.${classes.balanceBreak}`).forEach(br => br.remove());
 }
 
+function isInlineTosafotWord(word) {
+  return !!word.closest(`.${INLINE_TOSAFOT_CLASS}`);
+}
+
+function layoutWords(text) {
+  return Array.from(text.querySelectorAll(".word"))
+    .filter(word => !word.classList.contains(classes.continuationCatchword))
+    .filter(word => !isInlineTosafotWord(word));
+}
+
 function balanceFinalLine(text) {
   removeBalanceBreaks(text);
 
-  const words = Array.from(text.querySelectorAll(".word"))
-    .filter(word => !word.classList.contains(classes.continuationCatchword));
+  const words = layoutWords(text);
   const lines = lineGroups(words);
   if (lines.length < 2) return;
 
@@ -149,8 +162,7 @@ function positionContinuationCatchwords(containers) {
 
     resetContinuationCatchword(catchword);
 
-    const words = Array.from(text.querySelectorAll(".word"))
-      .filter(word => word !== catchword && !word.classList.contains(classes.continuationCatchword));
+    const words = layoutWords(text).filter(word => word !== catchword);
     if (!words.length) return;
 
     const lastWord = words[words.length - 1];
@@ -184,16 +196,62 @@ function updateRootHeight(containers) {
   containers.el.style.height = `${Math.ceil(containerHeight)}px`;
 }
 
+function plainHebrew(text) {
+  return String(text || "").replace(/[\u0591-\u05c7]/g, "").replace(/[^\u05d0-\u05ea]/g, "");
+}
+
+function phraseWords(phrase) {
+  return String(phrase || "").split(/\s+/).map(plainHebrew).filter(Boolean);
+}
+
+function measurePhraseInMain(containers) {
+  const target = phraseWords(INLINE_TOSAFOT_WIDTH_PHRASE);
+  if (!target.length) return null;
+
+  const words = layoutWords(containers.main.text);
+  for (let index = 0; index <= words.length - target.length; index++) {
+    const candidate = words.slice(index, index + target.length);
+    if (!candidate.every((word, offset) => plainHebrew(word.textContent) === target[offset])) continue;
+
+    const rects = candidate.map(word => word.getBoundingClientRect());
+    return Math.max(...rects.map(rect => rect.right)) - Math.min(...rects.map(rect => rect.left));
+  }
+
+  return null;
+}
+
+function measurePhraseWithCanvas(containers) {
+  if (!document.createElement("canvas").getContext) return null;
+  const canvas = measurePhraseWithCanvas.canvas || (measurePhraseWithCanvas.canvas = document.createElement("canvas"));
+  const context = canvas.getContext("2d");
+  if (!context) return null;
+
+  const style = getComputedStyle(containers.main.text);
+  context.font = style.font;
+  return context.measureText(INLINE_TOSAFOT_WIDTH_PHRASE).width;
+}
+
+function updateInlineTosafotWidth(containers) {
+  const blocks = containers.main.text.querySelectorAll(`.${INLINE_TOSAFOT_CLASS}`);
+  if (!blocks.length) return;
+
+  const mainRect = containers.main.text.getBoundingClientRect();
+  const width = measurePhraseInMain(containers) || measurePhraseWithCanvas(containers) || mainRect.width * 0.62;
+  const boundedWidth = Math.max(40, Math.min(width, mainRect.width - 8));
+  blocks.forEach(block => {
+    block.style.width = `${boundedWidth}px`;
+  });
+}
+
 function finalizeLayout(containers) {
+  updateInlineTosafotWidth(containers);
   balanceFinalLines(containers);
   positionContinuationCatchwords(containers);
   updateRootHeight(containers);
 }
 
 function wordRects(container) {
-  return Array.from(container.text.querySelectorAll(".word"))
-    .filter(word => !word.classList.contains(classes.continuationCatchword))
-    .map(word => word.getBoundingClientRect());
+  return layoutWords(container.text).map(word => word.getBoundingClientRect());
 }
 
 function rectOverlapHeight(a, b) {
@@ -337,10 +395,15 @@ function dafRenderer(el, options = defaultOptions) {
       }
       const renderedMain = decorations.newBookStart ? withNewBookStart(main) : main;
       let calculateCurrentSpacers;
+      const continuationFor = (key) => {
+        const keys = decorations.continuationKeys;
+        if (Array.isArray(keys) && !keys.includes(key)) return "";
+        return continuations[key];
+      };
       const setText = () => {
-        textSpans.main.innerHTML = withContinuationLead(renderedMain, continuations.main);
-        textSpans.inner.innerHTML = withContinuationLead(inner, continuations.inner);
-        textSpans.outer.innerHTML = withContinuationLead(outer, continuations.outer);
+        textSpans.main.innerHTML = withContinuationLead(renderedMain, continuationFor("main"));
+        textSpans.inner.innerHTML = withContinuationLead(inner, continuationFor("inner"));
+        textSpans.outer.innerHTML = withContinuationLead(outer, continuationFor("outer"));
       };
       const applyLayout = () => {
         styleManager.updateSpacersVars(this.spacerHeights);
@@ -462,6 +525,7 @@ function dafRenderer(el, options = defaultOptions) {
       const newBookStart = renderOptions.newBookStart !== undefined
         ? renderOptions.newBookStart
         : isFirstSefariaDaf(sefariaDaf, tractate, daf, sefariaDaf.amud);
+      const continuations = continuationsForFormattedDaf(sefariaDaf, renderOptions.continuations || {});
       this.render(
         sefariaDaf.main,
         sefariaDaf.inner,
@@ -470,8 +534,11 @@ function dafRenderer(el, options = defaultOptions) {
         renderOptions.linebreak,
         renderOptions.renderCallback,
         renderOptions.resizeCallback,
-        renderOptions.continuations,
-        Object.assign({}, renderOptions.decorations, { newBookStart })
+        continuations,
+        Object.assign({}, renderOptions.decorations, {
+          newBookStart,
+          continuationKeys: sefariaDaf.layout && sefariaDaf.layout.continuationKeys
+        })
       );
       return sefariaDaf;
     },
@@ -481,6 +548,7 @@ function dafRenderer(el, options = defaultOptions) {
 dafRenderer.fetchSefariaDaf = fetchSefariaDaf;
 dafRenderer.formatSefariaDaf = formatSefariaDaf;
 dafRenderer.getSefariaDaf = getSefariaDaf;
+dafRenderer.continuationsForFormattedDaf = continuationsForFormattedDaf;
 
 export default dafRenderer;
 

@@ -152,6 +152,10 @@ function renderFormattedDaf() {
   if (!activeFormatted) return;
   const tractate = findTractate(refs.tractate.value);
   const newBookStart = Number(refs.daf.value) === tractate.start && refs.amud.value === "a";
+  const continuations = dafRenderer.continuationsForFormattedDaf(
+    activeFormatted,
+    activeContinuationFormatted || {}
+  );
   renderer.render(
     activeFormatted.main,
     activeFormatted.inner,
@@ -160,8 +164,11 @@ function renderFormattedDaf() {
     undefined,
     undefined,
     undefined,
-    activeContinuationFormatted || {},
-    { newBookStart }
+    continuations,
+    {
+      newBookStart,
+      continuationKeys: activeFormatted.layout && activeFormatted.layout.continuationKeys
+    }
   );
 }
 

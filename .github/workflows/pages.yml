@@ -43,7 +43,6 @@ jobs:
           cp site/assets/* _site/assets/
           cp dist/daf-renderer.esm.js _site/dist/
           cp examples/fonts/*.ttf _site/fonts/
-          cp NEW_BOOK.png _site/NEW_BOOK.png
           touch _site/.nojekyll
 
       - name: Setup Pages
