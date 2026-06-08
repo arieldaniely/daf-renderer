@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>דף גמרא מספריא</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>דף גמרא</h1>
+      <p id="subtitle">טעינה מספריא לתצוגת וילנא בדפדפן</p>
+    </div>
+    <a class="source-link" href="https://www.sefaria.org" target="_blank" rel="noreferrer">Sefaria</a>
+  </header>
+
+  <main>
+    <section class="controls" aria-label="בחירת דף">
+      <label>
+        <span>מסכת</span>
+        <select id="tractate"></select>
+      </label>
+
+      <label>
+        <span>דף</span>
+        <select id="daf-select"></select>
+      </label>
+
+      <label>
+        <span>עמוד</span>
+        <select id="amud">
+          <option value="a">א</option>
+          <option value="b">ב</option>
+        </select>
+      </label>
+
+      <button id="load" type="button">הצג</button>
+    </section>
+
+    <nav class="pager" aria-label="ניווט דפים">
+      <button id="next" type="button">הבא</button>
+      <div id="status" role="status" aria-live="polite">מוכן</div>
+      <button id="prev" type="button">הקודם</button>
+    </nav>
+
+    <section class="daf-shell" aria-label="תצוגת הדף">
+      <div id="daf-container">
+        <div id="daf-render"></div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="assets/app.js"></script>
+</body>
+</html>

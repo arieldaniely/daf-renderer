@@ -849,7 +849,7 @@ function span(parent) {
 
 function dafRenderer(el, options = defaultOptions) {
   const root = (typeof el === "string") ? document.querySelector(el) : el;
-  if (!(root && root instanceof Element && root.tagName.toUpperCase() === "DIV")) {
+  if (!(root && root.nodeType === 1 && root.tagName.toUpperCase() === "DIV")) {
     throw "Argument must be a div element or its selector"
   }
   const outerContainer = div(root);

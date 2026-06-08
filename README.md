@@ -213,4 +213,24 @@ SOFTWARE.
 ## Development
 Local setup, contributions, issues guidelines etc.
 
+### Static GitHub Pages Site
+
+This repository includes a static Sefaria-powered reader in `site/`. It lets users choose a tractate, daf, and amud, then renders the page with `dafRenderer`.
+
+Run it locally after building the renderer:
+
+```bash
+npm install
+npm run build
+```
+
+Then serve these files together from one static root:
+
+- `site/index.html`
+- `site/assets/`
+- `dist/daf-renderer.esm.js` at `dist/daf-renderer.esm.js`
+- `examples/fonts/` at `fonts/`
+
+The GitHub Actions workflow at `.github/workflows/pages.yml` does this automatically on pushes to `main` or `master`, uploads the static artifact, and deploys it to GitHub Pages.
+
 

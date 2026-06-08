@@ -6,7 +6,8 @@
   "module": "dist/daf-renderer.esm.js",
   "browser": "dist/daf-renderer.umd.js",
   "scripts": {
-    "build": "rollup -c -w"
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
   },
   "contributors": [
     {
