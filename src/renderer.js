@@ -190,6 +190,37 @@ function finalizeLayout(containers) {
   updateRootHeight(containers);
 }
 
+function wordRects(container) {
+  return Array.from(container.text.querySelectorAll(".word"))
+    .filter(word => !word.classList.contains(classes.continuationCatchword))
+    .map(word => word.getBoundingClientRect());
+}
+
+function rectOverlapHeight(a, b) {
+  if (a.left >= b.right || a.right <= b.left) return 0;
+  return Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
+}
+
+function maxMainCommentaryOverlap(containers) {
+  const mainRects = wordRects(containers.main);
+  const sideRects = wordRects(containers.inner).concat(wordRects(containers.outer));
+
+  return mainRects.reduce((max, mainRect) => {
+    const rectMax = sideRects.reduce(
+      (sideMax, sideRect) => Math.max(sideMax, rectOverlapHeight(mainRect, sideRect)),
+      0
+    );
+    return Math.max(max, rectMax);
+  }, 0);
+}
+
+function addSpacerAllowance(spacerHeights, amount) {
+  return Object.assign({}, spacerHeights, {
+    inner: typeof spacerHeights.inner === "number" ? spacerHeights.inner + amount : spacerHeights.inner,
+    outer: typeof spacerHeights.outer === "number" ? spacerHeights.outer + amount : spacerHeights.outer
+  });
+}
+
 function scheduleLayoutRefresh(refresh, callback) {
   const run = () => {
     refresh();
@@ -201,6 +232,34 @@ function scheduleLayoutRefresh(refresh, callback) {
   } else {
     setTimeout(run, 0);
   }
+}
+
+function withNewBookStart(html) {
+  const template = document.createElement("template");
+  template.innerHTML = html || "";
+  const word = template.content.querySelector(".word");
+  if (!word) return html;
+
+  word.classList.add(classes.newBookWord);
+  const br = document.createElement("br");
+  br.classList.add(classes.newBookBreak);
+  word.parentNode.insertBefore(br, word.nextSibling);
+
+  return template.innerHTML;
+}
+
+function refBook(ref) {
+  const match = String(ref || "").match(/^(.+?)\s+\d+[ab](?:\b|$)/);
+  return match ? match[1] : "";
+}
+
+function isFirstSefariaDaf(sefariaDaf, tractate, daf, amud) {
+  if (amud !== "a") return false;
+
+  const previousBook = refBook(sefariaDaf && sefariaDaf.refs && sefariaDaf.refs.prev);
+  if (previousBook) return previousBook !== tractate;
+
+  return Number(daf) === 2;
 }
 
 
@@ -268,7 +327,7 @@ function dafRenderer(el, options = defaultOptions) {
       end: 0
     },
     amud: "a",
-    render(main, inner, outer, amud = "a", linebreak, renderCallback, resizeCallback, continuations = {}) {
+    render(main, inner, outer, amud = "a", linebreak, renderCallback, resizeCallback, continuations = {}, decorations = {}) {
       if (resizeEvent) {
         window.removeEventListener("resize", resizeEvent);
       }
@@ -276,22 +335,41 @@ function dafRenderer(el, options = defaultOptions) {
         this.amud = amud;
         styleManager.updateIsAmudB(amud == "b");
       }
+      const renderedMain = decorations.newBookStart ? withNewBookStart(main) : main;
       let calculateCurrentSpacers;
       const setText = () => {
-        textSpans.main.innerHTML = withContinuationLead(main, continuations.main);
+        textSpans.main.innerHTML = withContinuationLead(renderedMain, continuations.main);
         textSpans.inner.innerHTML = withContinuationLead(inner, continuations.inner);
         textSpans.outer.innerHTML = withContinuationLead(outer, continuations.outer);
+      };
+      const applyLayout = () => {
+        styleManager.updateSpacersVars(this.spacerHeights);
+        styleManager.manageExceptions(this.spacerHeights);
+        finalizeLayout(containers);
+
+        if (!decorations.newBookStart) return;
+
+        for (let index = 0; index < 4; index++) {
+          const overlap = maxMainCommentaryOverlap(containers);
+          if (overlap <= 1) return;
+
+          this.spacerHeights = addSpacerAllowance(this.spacerHeights, Math.ceil(overlap) + 4);
+          styleManager.updateSpacersVars(this.spacerHeights);
+          styleManager.manageExceptions(this.spacerHeights);
+          finalizeLayout(containers);
+        }
       };
       const refreshLayout = () => {
         if (!calculateCurrentSpacers) return;
         setText();
         this.spacerHeights = calculateCurrentSpacers();
-        styleManager.updateSpacersVars(this.spacerHeights);
-        styleManager.manageExceptions(this.spacerHeights);
-        finalizeLayout(containers);
+        if (decorations.newBookStart) {
+          this.spacerHeights = addSpacerAllowance(this.spacerHeights, parseFloat(clonedOptions.lineHeight.main) || 0);
+        }
+        applyLayout();
       };
       if (!linebreak) {
-        calculateCurrentSpacers = () => calculateSpacers(main, inner, outer, clonedOptions, containers.dummy);
+        calculateCurrentSpacers = () => calculateSpacers(renderedMain, inner, outer, clonedOptions, containers.dummy);
         this.spacerHeights = calculateCurrentSpacers();
         resizeEvent = () => {
           scheduleLayoutRefresh(refreshLayout, resizeCallback);
@@ -300,7 +378,7 @@ function dafRenderer(el, options = defaultOptions) {
         window.addEventListener("resize", resizeEvent);
       }
       else {
-        let [mainSplit, innerSplit, outerSplit] = [main, inner, outer].map( text => {
+        let [mainSplit, innerSplit, outerSplit] = [renderedMain, inner, outer].map( text => {
           containers.dummy.innerHTML = text;
           const divRanges = Array.from(containers.dummy.querySelectorAll("div")).map(div => {
             const range = document.createRange();
@@ -366,10 +444,11 @@ function dafRenderer(el, options = defaultOptions) {
         }
         window.addEventListener('resize', resizeEvent)
       }
-      styleManager.updateSpacersVars(this.spacerHeights);
-      styleManager.manageExceptions(this.spacerHeights);
+      if (decorations.newBookStart) {
+        this.spacerHeights = addSpacerAllowance(this.spacerHeights, parseFloat(clonedOptions.lineHeight.main) || 0);
+      }
       setText();
-      finalizeLayout(containers);
+      applyLayout();
 
       if (renderCallback)
         renderCallback();
@@ -380,6 +459,9 @@ function dafRenderer(el, options = defaultOptions) {
     },
     async renderSefaria(tractate, daf, amud = "a", sefariaOptions = {}, renderOptions = {}) {
       const sefariaDaf = await getSefariaDaf(tractate, daf, amud, sefariaOptions);
+      const newBookStart = renderOptions.newBookStart !== undefined
+        ? renderOptions.newBookStart
+        : isFirstSefariaDaf(sefariaDaf, tractate, daf, sefariaDaf.amud);
       this.render(
         sefariaDaf.main,
         sefariaDaf.inner,
@@ -388,7 +470,8 @@ function dafRenderer(el, options = defaultOptions) {
         renderOptions.linebreak,
         renderOptions.renderCallback,
         renderOptions.resizeCallback,
-        renderOptions.continuations
+        renderOptions.continuations,
+        Object.assign({}, renderOptions.decorations, { newBookStart })
       );
       return sefariaDaf;
     },

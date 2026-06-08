@@ -322,8 +322,8 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "/*Keep this as the first rule in the file*/\r\n.styles_dafRoot__1QUlM {\r\n  --contentWidth: 0px;\r\n  --padding-horizontal: 0px;\r\n  --padding-vertical: 0px;\r\n  --halfway: 50%;\r\n\r\n  --fontFamily-inner: \"Rashi\";\r\n  --fontFamily-outer: \"Tosafot\";\r\n  --fontFamily-main: \"Vilna\";\r\n  --direction: \"rtl\";\r\n\r\n  --fontSize-main: 0px;\r\n  --fontSize-side: 0px;\r\n\r\n  --lineHeight-main: 0px;\r\n  --lineHeight-side: 0px;\r\n\r\n  --mainWidth: 0%;\r\n  --mainMargin-start: var(--mainWidth);\r\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\r\n  --remainderPercent: calc(100% - var(--sidePercent));\r\n\r\n  --innerFloat: left;\r\n  --outerFloat: right;\r\n\r\n  --spacerHeights-start: 0px;\r\n  --spacerHeights-outer: 0px;\r\n  --spacerHeights-inner: 0px;\r\n  --spacerHeights-end: 0px;\r\n\r\n  /*Edge Cases*/\r\n  --hasInnerStartGap: 0;\r\n  --hasOuterStartGap: 0;\r\n  --innerStartWidth: 50%;\r\n  --innerPadding: 0px;\r\n  --outerStartWidth: 50%;\r\n  --outerPadding: 0px;\r\n}\r\n\r\n/*Containers*/\r\n.styles_dafRoot__1QUlM,\n.styles_outer__abXQX,\n.styles_inner__x-amJ,\n.styles_main__BHTRd {\n  width: var(--contentWidth);\n  pointer-events: none;\n  box-sizing: content-box;\n}\n\n.styles_dafRoot__1QUlM {\n  position: relative;\n}\n\r\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\r\n  position: absolute;\r\n}\r\n\r\n/*Float changes with amud*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  float: var(--innerFloat);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  float: var(--outerFloat);\r\n}\r\n\r\n/*Spacer widths determined by options*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_outer__abXQX .styles_spacer__2T7TS {\r\n  width: var(--halfway);\r\n}\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  width: var(--remainderPercent);\r\n}\r\n\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--contentWidth);\r\n}\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  width: var(--sidePercent);\r\n}\r\n\r\n/*Spacer heights determined by algorithm*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY {\r\n  height: var(--spacerHeights-start);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_end__2wr6A {\r\n  height: var(--spacerHeights-end);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  height: var(--spacerHeights-inner);\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  height: var(--spacerHeights-outer);\r\n}\r\n\r\n/*Settings to handle edge Cases*/\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--innerStartWidth);\r\n  margin-left: var(--innerPadding);\r\n  margin-right: var(--innerPadding);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--outerStartWidth);\r\n  margin-left: var(--outerPadding);\r\n  margin-right: var(--outerPadding);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  clear: both;\r\n}\r\n\r\n/*Margins!*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY,\r\n.styles_spacer__2T7TS.styles_end__2wr6A,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-left: calc(0.5 * var(--padding-horizontal));\r\n  margin-right: calc(0.5 * var(--padding-horizontal));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  margin-top: var(--padding-vertical);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-bottom: var(--padding-vertical);\r\n}\r\n\r\n/*Text*/\r\n.styles_text__1_7-z {\n  direction: var(--direction);\n  text-align: justify;\n  text-align-last: justify;\n  text-justify: inter-word;\n  word-break: normal;\n  overflow-wrap: normal;\n  hyphens: none;\n  font-kerning: normal;\n}\n\r\n.styles_text__1_7-z span {\n  pointer-events: auto;\n}\n\n.styles_text__1_7-z > span {\n  display: block;\n  text-align: inherit;\n  text-align-last: inherit;\n}\n\n.styles_balanceBreak__1CAJZ {\n  content: \"\";\n}\n\n.styles_continuationCatchword__xHvSp {\n  display: block;\n  width: max-content;\n  max-width: 100%;\n  margin-top: calc(-0.25 * var(--lineHeight-side));\n  text-align: start;\n  text-align-last: auto;\n  white-space: nowrap;\n  unicode-bidi: isolate;\n}\n\r\n.styles_main__BHTRd .styles_continuationCatchword__xHvSp {\r\n  margin-top: calc(-0.2 * var(--lineHeight-main));\r\n}\r\n\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-main);\r\n  font-size: var(--fontSize-main);\r\n  line-height: var(--lineHeight-main);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z,\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-size: var(--fontSize-side);\r\n  line-height: var(--lineHeight-side);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n}\r\n\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-outer);\r\n}\r\n";
-var classes = {"dafRoot":"styles_dafRoot__1QUlM","outer":"styles_outer__abXQX","inner":"styles_inner__x-amJ","main":"styles_main__BHTRd","spacer":"styles_spacer__2T7TS","outerMid":"styles_outerMid__2WtcY","innerMid":"styles_innerMid__27MCi","mid":"styles_mid__dcgUr","start":"styles_start__AwkfY","end":"styles_end__2wr6A","text":"styles_text__1_7-z","balanceBreak":"styles_balanceBreak__1CAJZ","continuationCatchword":"styles_continuationCatchword__xHvSp"};
+var css_248z = "/*Keep this as the first rule in the file*/\r\n.styles_dafRoot__1QUlM {\r\n  --contentWidth: 0px;\r\n  --padding-horizontal: 0px;\r\n  --padding-vertical: 0px;\r\n  --halfway: 50%;\r\n\r\n  --fontFamily-inner: \"Rashi\";\r\n  --fontFamily-outer: \"Tosafot\";\r\n  --fontFamily-main: \"Vilna\";\r\n  --direction: \"rtl\";\r\n\r\n  --fontSize-main: 0px;\r\n  --fontSize-side: 0px;\r\n\r\n  --lineHeight-main: 0px;\r\n  --lineHeight-side: 0px;\r\n\r\n  --mainWidth: 0%;\r\n  --mainMargin-start: var(--mainWidth);\r\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\r\n  --remainderPercent: calc(100% - var(--sidePercent));\r\n\r\n  --innerFloat: left;\r\n  --outerFloat: right;\r\n\r\n  --spacerHeights-start: 0px;\r\n  --spacerHeights-outer: 0px;\r\n  --spacerHeights-inner: 0px;\r\n  --spacerHeights-end: 0px;\r\n\r\n  /*Edge Cases*/\r\n  --hasInnerStartGap: 0;\r\n  --hasOuterStartGap: 0;\n  --innerStartWidth: 50%;\n  --innerPadding: 0px;\n  --outerStartWidth: 50%;\n  --outerPadding: 0px;\n\n  --newBookFrameImage: url(\"NEW_BOOK.png\");\n}\n\r\n/*Containers*/\r\n.styles_dafRoot__1QUlM,\n.styles_outer__abXQX,\n.styles_inner__x-amJ,\n.styles_main__BHTRd {\n  width: var(--contentWidth);\n  pointer-events: none;\n  box-sizing: content-box;\n}\n\n.styles_dafRoot__1QUlM {\n  position: relative;\n}\n\r\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\r\n  position: absolute;\r\n}\r\n\r\n/*Float changes with amud*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  float: var(--innerFloat);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  float: var(--outerFloat);\r\n}\r\n\r\n/*Spacer widths determined by options*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_outer__abXQX .styles_spacer__2T7TS {\r\n  width: var(--halfway);\r\n}\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  width: var(--remainderPercent);\r\n}\r\n\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--contentWidth);\r\n}\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  width: var(--sidePercent);\r\n}\r\n\r\n/*Spacer heights determined by algorithm*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY {\r\n  height: var(--spacerHeights-start);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_end__2wr6A {\r\n  height: var(--spacerHeights-end);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  height: var(--spacerHeights-inner);\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  height: var(--spacerHeights-outer);\r\n}\r\n\r\n/*Settings to handle edge Cases*/\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--innerStartWidth);\r\n  margin-left: var(--innerPadding);\r\n  margin-right: var(--innerPadding);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--outerStartWidth);\r\n  margin-left: var(--outerPadding);\r\n  margin-right: var(--outerPadding);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  clear: both;\r\n}\r\n\r\n/*Margins!*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY,\r\n.styles_spacer__2T7TS.styles_end__2wr6A,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-left: calc(0.5 * var(--padding-horizontal));\r\n  margin-right: calc(0.5 * var(--padding-horizontal));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  margin-top: var(--padding-vertical);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-bottom: var(--padding-vertical);\r\n}\r\n\r\n/*Text*/\r\n.styles_text__1_7-z {\n  direction: var(--direction);\n  text-align: justify;\n  text-align-last: justify;\n  text-justify: inter-word;\n  word-break: normal;\n  overflow-wrap: normal;\n  hyphens: none;\n  font-kerning: normal;\n}\n\r\n.styles_text__1_7-z span {\n  pointer-events: auto;\n}\n\n.styles_text__1_7-z > span {\n  display: block;\n  text-align: inherit;\n  text-align-last: inherit;\n}\n\n.styles_balanceBreak__1CAJZ {\n  content: \"\";\n}\n\n.styles_continuationCatchword__xHvSp {\n  display: block;\n  width: max-content;\n  max-width: 100%;\n  margin-top: calc(-0.25 * var(--lineHeight-side));\n  text-align: start;\n  text-align-last: auto;\n  white-space: nowrap;\n  unicode-bidi: isolate;\n}\n\r\n.styles_main__BHTRd .styles_continuationCatchword__xHvSp {\r\n  margin-top: calc(-0.2 * var(--lineHeight-main));\r\n}\r\n\r\n.styles_main__BHTRd .styles_text__1_7-z {\n  font-family: var(--fontFamily-main);\n  font-size: var(--fontSize-main);\n  line-height: var(--lineHeight-main);\n}\n\n.styles_newBookWord__3auqa {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: calc(var(--mainWidth) - var(--padding-horizontal) - var(--padding-horizontal));\n  min-height: 3.1em;\n  max-width: 100%;\n  margin: 0 auto 0.08em;\n  padding: 0.52em 1.12em 0.45em;\n  box-sizing: border-box;\n  background-image: var(--newBookFrameImage);\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: contain;\n  font-size: 2.9em;\n  line-height: 1;\n  text-align: center;\n  text-align-last: center;\n  vertical-align: middle;\n  white-space: nowrap;\n}\n\n.styles_newBookBreak__1mIe7 {\n  display: block;\n}\n\n.styles_inner__x-amJ .styles_text__1_7-z,\n.styles_outer__abXQX .styles_text__1_7-z {\n  font-size: var(--fontSize-side);\n  line-height: var(--lineHeight-side);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n}\r\n\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-outer);\r\n}\r\n";
+var classes = {"dafRoot":"styles_dafRoot__1QUlM","outer":"styles_outer__abXQX","inner":"styles_inner__x-amJ","main":"styles_main__BHTRd","spacer":"styles_spacer__2T7TS","outerMid":"styles_outerMid__2WtcY","innerMid":"styles_innerMid__27MCi","mid":"styles_mid__dcgUr","start":"styles_start__AwkfY","end":"styles_end__2wr6A","text":"styles_text__1_7-z","balanceBreak":"styles_balanceBreak__1CAJZ","continuationCatchword":"styles_continuationCatchword__xHvSp","newBookWord":"styles_newBookWord__3auqa","newBookBreak":"styles_newBookBreak__1mIe7"};
 styleInject(css_248z);
 
 const sideSpacersClasses = {
@@ -1010,6 +1010,37 @@ function finalizeLayout(containers) {
   updateRootHeight(containers);
 }
 
+function wordRects(container) {
+  return Array.from(container.text.querySelectorAll(".word"))
+    .filter(word => !word.classList.contains(classes.continuationCatchword))
+    .map(word => word.getBoundingClientRect());
+}
+
+function rectOverlapHeight(a, b) {
+  if (a.left >= b.right || a.right <= b.left) return 0;
+  return Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
+}
+
+function maxMainCommentaryOverlap(containers) {
+  const mainRects = wordRects(containers.main);
+  const sideRects = wordRects(containers.inner).concat(wordRects(containers.outer));
+
+  return mainRects.reduce((max, mainRect) => {
+    const rectMax = sideRects.reduce(
+      (sideMax, sideRect) => Math.max(sideMax, rectOverlapHeight(mainRect, sideRect)),
+      0
+    );
+    return Math.max(max, rectMax);
+  }, 0);
+}
+
+function addSpacerAllowance(spacerHeights, amount) {
+  return Object.assign({}, spacerHeights, {
+    inner: typeof spacerHeights.inner === "number" ? spacerHeights.inner + amount : spacerHeights.inner,
+    outer: typeof spacerHeights.outer === "number" ? spacerHeights.outer + amount : spacerHeights.outer
+  });
+}
+
 function scheduleLayoutRefresh(refresh, callback) {
   const run = () => {
     refresh();
@@ -1021,6 +1052,34 @@ function scheduleLayoutRefresh(refresh, callback) {
   } else {
     setTimeout(run, 0);
   }
+}
+
+function withNewBookStart(html) {
+  const template = document.createElement("template");
+  template.innerHTML = html || "";
+  const word = template.content.querySelector(".word");
+  if (!word) return html;
+
+  word.classList.add(classes.newBookWord);
+  const br = document.createElement("br");
+  br.classList.add(classes.newBookBreak);
+  word.parentNode.insertBefore(br, word.nextSibling);
+
+  return template.innerHTML;
+}
+
+function refBook(ref) {
+  const match = String(ref || "").match(/^(.+?)\s+\d+[ab](?:\b|$)/);
+  return match ? match[1] : "";
+}
+
+function isFirstSefariaDaf(sefariaDaf, tractate, daf, amud) {
+  if (amud !== "a") return false;
+
+  const previousBook = refBook(sefariaDaf && sefariaDaf.refs && sefariaDaf.refs.prev);
+  if (previousBook) return previousBook !== tractate;
+
+  return Number(daf) === 2;
 }
 
 
@@ -1088,7 +1147,7 @@ function dafRenderer(el, options = defaultOptions) {
       end: 0
     },
     amud: "a",
-    render(main, inner, outer, amud = "a", linebreak, renderCallback, resizeCallback, continuations = {}) {
+    render(main, inner, outer, amud = "a", linebreak, renderCallback, resizeCallback, continuations = {}, decorations = {}) {
       if (resizeEvent) {
         window.removeEventListener("resize", resizeEvent);
       }
@@ -1096,22 +1155,41 @@ function dafRenderer(el, options = defaultOptions) {
         this.amud = amud;
         styleManager.updateIsAmudB(amud == "b");
       }
+      const renderedMain = decorations.newBookStart ? withNewBookStart(main) : main;
       let calculateCurrentSpacers;
       const setText = () => {
-        textSpans.main.innerHTML = withContinuationLead(main, continuations.main);
+        textSpans.main.innerHTML = withContinuationLead(renderedMain, continuations.main);
         textSpans.inner.innerHTML = withContinuationLead(inner, continuations.inner);
         textSpans.outer.innerHTML = withContinuationLead(outer, continuations.outer);
+      };
+      const applyLayout = () => {
+        styleManager.updateSpacersVars(this.spacerHeights);
+        styleManager.manageExceptions(this.spacerHeights);
+        finalizeLayout(containers);
+
+        if (!decorations.newBookStart) return;
+
+        for (let index = 0; index < 4; index++) {
+          const overlap = maxMainCommentaryOverlap(containers);
+          if (overlap <= 1) return;
+
+          this.spacerHeights = addSpacerAllowance(this.spacerHeights, Math.ceil(overlap) + 4);
+          styleManager.updateSpacersVars(this.spacerHeights);
+          styleManager.manageExceptions(this.spacerHeights);
+          finalizeLayout(containers);
+        }
       };
       const refreshLayout = () => {
         if (!calculateCurrentSpacers) return;
         setText();
         this.spacerHeights = calculateCurrentSpacers();
-        styleManager.updateSpacersVars(this.spacerHeights);
-        styleManager.manageExceptions(this.spacerHeights);
-        finalizeLayout(containers);
+        if (decorations.newBookStart) {
+          this.spacerHeights = addSpacerAllowance(this.spacerHeights, parseFloat(clonedOptions.lineHeight.main) || 0);
+        }
+        applyLayout();
       };
       if (!linebreak) {
-        calculateCurrentSpacers = () => calculateSpacers(main, inner, outer, clonedOptions, containers.dummy);
+        calculateCurrentSpacers = () => calculateSpacers(renderedMain, inner, outer, clonedOptions, containers.dummy);
         this.spacerHeights = calculateCurrentSpacers();
         resizeEvent = () => {
           scheduleLayoutRefresh(refreshLayout, resizeCallback);
@@ -1120,7 +1198,7 @@ function dafRenderer(el, options = defaultOptions) {
         window.addEventListener("resize", resizeEvent);
       }
       else {
-        let [mainSplit, innerSplit, outerSplit] = [main, inner, outer].map( text => {
+        let [mainSplit, innerSplit, outerSplit] = [renderedMain, inner, outer].map( text => {
           containers.dummy.innerHTML = text;
           const divRanges = Array.from(containers.dummy.querySelectorAll("div")).map(div => {
             const range = document.createRange();
@@ -1186,10 +1264,11 @@ function dafRenderer(el, options = defaultOptions) {
         };
         window.addEventListener('resize', resizeEvent);
       }
-      styleManager.updateSpacersVars(this.spacerHeights);
-      styleManager.manageExceptions(this.spacerHeights);
+      if (decorations.newBookStart) {
+        this.spacerHeights = addSpacerAllowance(this.spacerHeights, parseFloat(clonedOptions.lineHeight.main) || 0);
+      }
       setText();
-      finalizeLayout(containers);
+      applyLayout();
 
       if (renderCallback)
         renderCallback();
@@ -1200,6 +1279,9 @@ function dafRenderer(el, options = defaultOptions) {
     },
     async renderSefaria(tractate, daf, amud = "a", sefariaOptions = {}, renderOptions = {}) {
       const sefariaDaf = await getSefariaDaf(tractate, daf, amud, sefariaOptions);
+      const newBookStart = renderOptions.newBookStart !== undefined
+        ? renderOptions.newBookStart
+        : isFirstSefariaDaf(sefariaDaf, tractate, daf, sefariaDaf.amud);
       this.render(
         sefariaDaf.main,
         sefariaDaf.inner,
@@ -1208,7 +1290,8 @@ function dafRenderer(el, options = defaultOptions) {
         renderOptions.linebreak,
         renderOptions.renderCallback,
         renderOptions.resizeCallback,
-        renderOptions.continuations
+        renderOptions.continuations,
+        Object.assign({}, renderOptions.decorations, { newBookStart })
       );
       return sefariaDaf;
     },

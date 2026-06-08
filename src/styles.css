@@ -36,6 +36,8 @@
   --innerPadding: 0px;
   --outerStartWidth: 50%;
   --outerPadding: 0px;
+
+  --newBookFrameImage: url("NEW_BOOK.png");
 }
 
 /*Containers*/
@@ -192,6 +194,32 @@
   font-family: var(--fontFamily-main);
   font-size: var(--fontSize-main);
   line-height: var(--lineHeight-main);
+}
+
+.newBookWord {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--mainWidth) - var(--padding-horizontal) - var(--padding-horizontal));
+  min-height: 3.1em;
+  max-width: 100%;
+  margin: 0 auto 0.08em;
+  padding: 0.52em 1.12em 0.45em;
+  box-sizing: border-box;
+  background-image: var(--newBookFrameImage);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  font-size: 2.9em;
+  line-height: 1;
+  text-align: center;
+  text-align-last: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.newBookBreak {
+  display: block;
 }
 
 .inner .text,

@@ -150,13 +150,25 @@ function stripNikkud(html) {
 
 function renderFormattedDaf() {
   if (!activeFormatted) return;
+  const tractate = findTractate(refs.tractate.value);
+  const newBookStart = Number(refs.daf.value) === tractate.start && refs.amud.value === "a";
   const main = showVowels ? activeFormatted.main : stripNikkud(activeFormatted.main);
   const continuation = activeContinuationFormatted
     ? Object.assign({}, activeContinuationFormatted, {
       main: showVowels ? activeContinuationFormatted.main : stripNikkud(activeContinuationFormatted.main)
     })
     : {};
-  renderer.render(main, activeFormatted.inner, activeFormatted.outer, activeFormatted.amud, undefined, undefined, undefined, continuation);
+  renderer.render(
+    main,
+    activeFormatted.inner,
+    activeFormatted.outer,
+    activeFormatted.amud,
+    undefined,
+    undefined,
+    undefined,
+    continuation,
+    { newBookStart }
+  );
 }
 
 function hebrewNumber(number) {
