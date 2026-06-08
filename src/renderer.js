@@ -31,22 +31,176 @@ function continuationLeadHtml(html) {
   template.innerHTML = html || "";
   const word = template.content.querySelector(".word");
   if (!word) return "";
-  const glue = word.cloneNode(true);
-  glue.removeAttribute("id");
-  glue.classList.add(classes.continuationGlue);
-  glue.setAttribute("aria-hidden", "true");
-
   const catchword = word.cloneNode(true);
   catchword.removeAttribute("id");
   catchword.classList.add(classes.continuationCatchword);
   catchword.setAttribute("aria-hidden", "true");
 
-  return `${glue.outerHTML}<br>${catchword.outerHTML}`;
+  return `<br>${catchword.outerHTML}`;
 }
 
 function withContinuationLead(html, continuationHtml) {
   const lead = continuationLeadHtml(continuationHtml);
-  return lead ? `${html} ${lead}` : html;
+  return lead && String(html || "").trim() ? `${html}${lead}` : html;
+}
+
+function resetContinuationCatchword(catchword) {
+  catchword.style.marginLeft = "";
+  catchword.style.marginRight = "";
+}
+
+function isSameLine(a, b) {
+  return Math.abs(a.top - b.top) < 2 && Math.abs(a.bottom - b.bottom) < 2;
+}
+
+function lineGroups(words) {
+  return words.reduce((lines, word) => {
+    const rect = word.getBoundingClientRect();
+    const line = lines.find(item => isSameLine(item.rect, rect));
+    if (line) {
+      line.words.push(word);
+      line.rect = {
+        top: Math.min(line.rect.top, rect.top),
+        bottom: Math.max(line.rect.bottom, rect.bottom),
+        left: Math.min(line.rect.left, rect.left),
+        right: Math.max(line.rect.right, rect.right)
+      };
+    } else {
+      lines.push({rect, words: [word]});
+    }
+    return lines;
+  }, []).sort((a, b) => a.rect.top - b.rect.top);
+}
+
+function naturalLineWidth(line) {
+  return line.rect.right - line.rect.left;
+}
+
+function wordsWidth(words, spaceWidth) {
+  return words.reduce((sum, word) => sum + word.getBoundingClientRect().width, 0)
+    + Math.max(0, words.length - 1) * spaceWidth;
+}
+
+function removeBalanceBreaks(text) {
+  text.querySelectorAll(`.${classes.balanceBreak}`).forEach(br => br.remove());
+}
+
+function balanceFinalLine(text) {
+  removeBalanceBreaks(text);
+
+  const words = Array.from(text.querySelectorAll(".word"))
+    .filter(word => !word.classList.contains(classes.continuationCatchword));
+  const lines = lineGroups(words);
+  if (lines.length < 2) return;
+
+  const last = lines[lines.length - 1];
+  const previous = lines[lines.length - 2];
+  const recentReferenceLines = lines.slice(Math.max(0, lines.length - 5), lines.length - 1);
+  const availableWidth = Math.max(...recentReferenceLines.map(naturalLineWidth));
+  if (last.words.length > 2 && naturalLineWidth(last) / availableWidth > 0.72) return;
+  if (previous.words.length < 3) return;
+
+  const previousWordWidths = previous.words.reduce((sum, word) => sum + word.getBoundingClientRect().width, 0);
+  const previousSpaceWidth = Math.max(0, (naturalLineWidth(previous) - previousWordWidths) / Math.max(1, previous.words.length - 1));
+  const target = 0.72;
+  let best = null;
+
+  for (let index = 1; index < previous.words.length - 1; index++) {
+    const remaining = previous.words.slice(0, index);
+    const moved = previous.words.slice(index).concat(last.words);
+    if (remaining.length < 2 || moved.length < 3) continue;
+
+    const remainingFill = wordsWidth(remaining, previousSpaceWidth) / availableWidth;
+    const movedFill = wordsWidth(moved, previousSpaceWidth) / availableWidth;
+    if (remainingFill < 0.45 || movedFill < 0.45 || movedFill > 1.02) continue;
+
+    const score = Math.abs(target - remainingFill) + Math.abs(target - movedFill);
+    if (!best || score < best.score) {
+      best = {score, word: previous.words[index]};
+    }
+  }
+
+  if (!best) return;
+  const br = document.createElement("br");
+  br.classList.add(classes.balanceBreak);
+  best.word.parentNode.insertBefore(br, best.word);
+}
+
+function balanceFinalLines(containers) {
+  ["main", "inner", "outer"].forEach(key => balanceFinalLine(containers[key].text));
+}
+
+function continuationGap(text) {
+  const style = getComputedStyle(text);
+  const fontSize = parseFloat(style.fontSize) || 12;
+  if (!document.createElement("canvas").getContext) return fontSize;
+  const canvas = continuationGap.canvas || (continuationGap.canvas = document.createElement("canvas"));
+  const context = canvas.getContext("2d");
+  if (!context) return fontSize;
+  context.font = style.font;
+  return context.measureText("\u00a0\u00a0\u00a0").width || fontSize;
+}
+
+function positionContinuationCatchwords(containers) {
+  ["main", "inner", "outer"].forEach(key => {
+    const text = containers[key].text;
+    const catchword = text.querySelector(`.${classes.continuationCatchword}`);
+    if (!catchword) return;
+
+    resetContinuationCatchword(catchword);
+
+    const words = Array.from(text.querySelectorAll(".word"))
+      .filter(word => word !== catchword && !word.classList.contains(classes.continuationCatchword));
+    if (!words.length) return;
+
+    const lastWord = words[words.length - 1];
+    const lastRect = lastWord.getBoundingClientRect();
+    const lineWords = words.filter(word => isSameLine(word.getBoundingClientRect(), lastRect));
+    const lineRects = lineWords.map(word => word.getBoundingClientRect());
+    const textRect = text.getBoundingClientRect();
+    const catchwordRect = catchword.getBoundingClientRect();
+    const direction = getComputedStyle(text).direction;
+    const gap = continuationGap(text);
+
+    if (direction === "ltr") {
+      const lineEnd = Math.max(...lineRects.map(rect => rect.right));
+      catchword.style.marginLeft = `${Math.max(0, lineEnd - textRect.left - catchwordRect.width - gap)}px`;
+      catchword.style.marginRight = "auto";
+    } else {
+      const lineEnd = Math.min(...lineRects.map(rect => rect.left));
+      const maxLeft = Math.max(0, textRect.width - catchwordRect.width);
+      catchword.style.marginLeft = `${Math.min(maxLeft, Math.max(0, lineEnd - textRect.left + gap))}px`;
+      catchword.style.marginRight = "auto";
+    }
+  });
+}
+
+function updateRootHeight(containers) {
+  const rootRect = containers.el.getBoundingClientRect();
+  const containerHeight = Math.max(...["main", "inner", "outer"].map(key => {
+    const rect = containers[key].el.getBoundingClientRect();
+    return rect.bottom - rootRect.top;
+  }));
+  containers.el.style.height = `${Math.ceil(containerHeight)}px`;
+}
+
+function finalizeLayout(containers) {
+  balanceFinalLines(containers);
+  positionContinuationCatchwords(containers);
+  updateRootHeight(containers);
+}
+
+function scheduleLayoutRefresh(refresh, callback) {
+  const run = () => {
+    refresh();
+    if (callback) callback();
+  };
+
+  if (typeof requestAnimationFrame === "function") {
+    requestAnimationFrame(() => requestAnimationFrame(run));
+  } else {
+    setTimeout(run, 0);
+  }
 }
 
 
@@ -122,14 +276,26 @@ function dafRenderer(el, options = defaultOptions) {
         this.amud = amud;
         styleManager.updateIsAmudB(amud == "b");
       }
+      let calculateCurrentSpacers;
+      const setText = () => {
+        textSpans.main.innerHTML = withContinuationLead(main, continuations.main);
+        textSpans.inner.innerHTML = withContinuationLead(inner, continuations.inner);
+        textSpans.outer.innerHTML = withContinuationLead(outer, continuations.outer);
+      };
+      const refreshLayout = () => {
+        if (!calculateCurrentSpacers) return;
+        setText();
+        this.spacerHeights = calculateCurrentSpacers();
+        styleManager.updateSpacersVars(this.spacerHeights);
+        styleManager.manageExceptions(this.spacerHeights);
+        finalizeLayout(containers);
+      };
       if (!linebreak) {
-        this.spacerHeights = calculateSpacers(main, inner, outer, clonedOptions, containers.dummy);
+        calculateCurrentSpacers = () => calculateSpacers(main, inner, outer, clonedOptions, containers.dummy);
+        this.spacerHeights = calculateCurrentSpacers();
         resizeEvent = () => {
-          this.spacerHeights = calculateSpacers(main, inner, outer, clonedOptions, containers.dummy);
-          styleManager.updateSpacersVars(this.spacerHeights);
+          scheduleLayoutRefresh(refreshLayout, resizeCallback);
           console.log("resizing");
-          if (resizeCallback)
-            resizeCallback();
         }
         window.addEventListener("resize", resizeEvent);
       }
@@ -192,26 +358,25 @@ function dafRenderer(el, options = defaultOptions) {
           }
         }
 
-        this.spacerHeights = calculateSpacersBreaks(mainSplit, innerSplit, outerSplit, clonedOptions, containers.dummy);
+        calculateCurrentSpacers = () => calculateSpacersBreaks(mainSplit, innerSplit, outerSplit, clonedOptions, containers.dummy);
+        this.spacerHeights = calculateCurrentSpacers();
         resizeEvent = () => {
-          this.spacerHeights = calculateSpacersBreaks(mainSplit, innerSplit, outerSplit, clonedOptions, containers.dummy);
-          styleManager.updateSpacersVars(this.spacerHeights);
-          if (resizeCallback)
-            resizeCallback();
+          scheduleLayoutRefresh(refreshLayout, resizeCallback);
           console.log("resizing")
         }
         window.addEventListener('resize', resizeEvent)
       }
       styleManager.updateSpacersVars(this.spacerHeights);
       styleManager.manageExceptions(this.spacerHeights);
-      textSpans.main.innerHTML = withContinuationLead(main, continuations.main);
-      textSpans.inner.innerHTML = withContinuationLead(inner, continuations.inner);
-      textSpans.outer.innerHTML = withContinuationLead(outer, continuations.outer);
+      setText();
+      finalizeLayout(containers);
 
-      const containerHeight = Math.max(...["main", "inner", "outer"].map(t => containers[t].el.offsetHeight));
-      containers.el.style.height = `${containerHeight}px`;
       if (renderCallback)
         renderCallback();
+      scheduleLayoutRefresh(refreshLayout);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => scheduleLayoutRefresh(refreshLayout));
+      }
     },
     async renderSefaria(tractate, daf, amud = "a", sefariaOptions = {}, renderOptions = {}) {
       const sefariaDaf = await getSefariaDaf(tractate, daf, amud, sefariaOptions);

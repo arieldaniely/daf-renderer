@@ -48,6 +48,10 @@
   box-sizing: content-box;
 }
 
+.dafRoot {
+  position: relative;
+}
+
 .outer, .inner, .main {
   position: absolute;
 }
@@ -148,23 +152,36 @@
   direction: var(--direction);
   text-align: justify;
   text-align-last: justify;
+  text-justify: inter-word;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  font-kerning: normal;
 }
 
 .text span {
   pointer-events: auto;
 }
 
-.continuationGlue {
-  visibility: hidden;
+.text > span {
+  display: block;
+  text-align: inherit;
+  text-align-last: inherit;
+}
+
+.balanceBreak {
+  content: "";
 }
 
 .continuationCatchword {
   display: block;
+  width: max-content;
+  max-width: 100%;
   margin-top: calc(-0.25 * var(--lineHeight-side));
-  padding-inline-start: 82%;
   text-align: start;
   text-align-last: auto;
   white-space: nowrap;
+  unicode-bidi: isolate;
 }
 
 .main .continuationCatchword {
