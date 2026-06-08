@@ -64,6 +64,7 @@ let activeResult;
 let activeFormatted;
 let activeContinuationFormatted;
 let activeChapter;
+let selectedSentenceId = "";
 let showVowels = true;
 const indexCache = new Map();
 
@@ -148,8 +149,60 @@ function currentSefariaOptions() {
   return showVowels ? {} : { mainVersion: "hebrew|William Davidson Edition - Aramaic" };
 }
 
+function cssEscape(value) {
+  if (window.CSS && typeof window.CSS.escape === "function") return window.CSS.escape(value);
+  return String(value).replace(/["\\]/g, "\\$&");
+}
+
+function clearLinkedHighlights() {
+  document
+    .querySelectorAll(".is-selected-source, .is-linked-highlight")
+    .forEach(element => element.classList.remove("is-selected-source", "is-linked-highlight"));
+}
+
+function applyLinkedHighlights(sentenceId) {
+  clearLinkedHighlights();
+  if (!sentenceId) return;
+
+  const escaped = cssEscape(sentenceId);
+  const source = document.getElementById(sentenceId);
+  if (source) source.classList.add("is-selected-source");
+
+  document
+    .querySelectorAll(`[data-sentence="${escaped}"]`)
+    .forEach(element => {
+      if (element !== source && !(source && source.contains(element))) {
+        element.classList.add("is-linked-highlight");
+      }
+    });
+}
+
+function selectSentence(sentenceId) {
+  selectedSentenceId = selectedSentenceId === sentenceId ? "" : sentenceId;
+  applyLinkedHighlights(selectedSentenceId);
+}
+
+function sentenceIdFromTarget(target) {
+  const element = target && target.closest && target.closest("[data-sentence], .sentence");
+  if (!element) return "";
+  return element.dataset.sentence || element.id || "";
+}
+
+function handleDafClick(event) {
+  const sentenceId = sentenceIdFromTarget(event.target);
+  if (!sentenceId) {
+    selectedSentenceId = "";
+    clearLinkedHighlights();
+    return;
+  }
+
+  selectSentence(sentenceId);
+}
+
 function renderFormattedDaf() {
   if (!activeFormatted) return;
+  selectedSentenceId = "";
+  clearLinkedHighlights();
   const tractate = findTractate(refs.tractate.value);
   const newBookStart = Number(refs.daf.value) === tractate.start && refs.amud.value === "a";
   const continuations = dafRenderer.continuationsForFormattedDaf(
@@ -360,6 +413,8 @@ async function init() {
       refs.dafHeading.style.maxWidth = contentWidth;
       refs.dafHeading.style.margin = "0 auto";
     }
+
+    dafRoot.addEventListener("click", handleDafClick);
 
     refs.tractate.addEventListener("change", () => {
       populateDafim(findTractate(refs.tractate.value).start);

@@ -323,6 +323,29 @@ button:disabled {
   color: var(--accent);
 }
 
+.sentence,
+.word[data-sentence],
+.commentary-segment[data-sentence] {
+  cursor: pointer;
+}
+
+.is-selected-source,
+.is-selected-source .word,
+.is-linked-highlight,
+.is-linked-highlight .word,
+.word.is-linked-highlight {
+  color: var(--accent-strong);
+  background: rgba(184, 144, 53, .25);
+  box-shadow: 0 0 0 2px rgba(184, 144, 53, .12);
+}
+
+.is-linked-highlight,
+.is-linked-highlight .word,
+.word.is-linked-highlight {
+  background: rgba(15, 107, 93, .14);
+  box-shadow: 0 0 0 2px rgba(15, 107, 93, .08);
+}
+
 @media (max-width: 760px) {
   .topbar {
     position: static;

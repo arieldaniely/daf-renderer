@@ -488,20 +488,39 @@ function formatMain(text) {
     .join(" ");
 }
 
+function commentarySegments(text) {
+  if (text && typeof text === "object" && "value" in text) {
+    return [text];
+  }
+
+  if (Array.isArray(text) && text.every(segment => segment && typeof segment === "object" && "value" in segment)) {
+    return text;
+  }
+
+  const values = Array.isArray(text) ? text : [text];
+  return values
+    .map((value, index) => ({
+      value: flattenText(value).filter(Boolean).join(" "),
+      sentenceId: `sentence-main-${index}`
+    }))
+    .filter(segment => stripHtml(segment.value));
+}
+
 function formatCommentary(text, prefix, headerClass) {
-  const html = flattenText(text)
-    .filter(Boolean)
+  return commentarySegments(text)
     .map(segment => {
-      const value = String(segment);
-      if (isHadranSegment(value)) return `<span class="daf-hadran">${cleanHadranSegment(value)}</span>`;
-      return value.replace(/([^\u2013:]+)\s+[\u2013-]\s+([^:]+:)/, `<b class="${headerClass}">$1. </b>$2 `);
+      const sentenceId = segment.sentenceId;
+      const value = String(segment.value);
+      const html = isHadranSegment(value)
+        ? `<span class="daf-hadran">${cleanHadranSegment(value)}</span>`
+        : value.replace(/([^\u2013:]+)\s+[\u2013-]\s+([^:]+:)/, `<b class="${headerClass}">$1. </b>$2 `);
+
+      return `<span class="commentary-segment" data-sentence="${escapeAttribute(sentenceId)}">${wrapWords(html, prefix, 0, sentenceId)}</span>`;
     })
     .join(" ")
     .replace(/,,/g, "")
     .replace(/,:/g, ": ")
     .replace(/:,/g, ": ");
-
-  return wrapWords(html, prefix);
 }
 
 function formatInlineCommentary(text) {
@@ -586,29 +605,33 @@ function appendSideSection(html, section) {
 }
 
 function splitSegmentByWords(segment) {
-  const parts = String(segment || "").split(/(\s+)/);
+  const source = segment && typeof segment === "object" && "value" in segment ? segment.value : segment;
+  const parts = String(source || "").split(/(\s+)/);
   const wordParts = parts
     .map((part, index) => ({ part, index }))
     .filter(({ part }) => part && !/^\s+$/.test(part));
   const cutWord = Math.ceil(wordParts.length / 2);
   const cutIndex = wordParts[cutWord] ? wordParts[cutWord].index : parts.length;
-  return [
+  const values = [
     parts.slice(0, cutIndex).join("").trim(),
     parts.slice(cutIndex).join("").trim()
   ].filter(Boolean);
+
+  if (!(segment && typeof segment === "object" && "value" in segment)) return values;
+  return values.map(value => Object.assign({}, segment, { value }));
 }
 
 function splitTextBySegments(text) {
-  const segments = flattenText(text).filter(Boolean);
+  const segments = commentarySegments(text);
   if (segments.length <= 1) return splitSegmentByWords(segments[0]);
 
-  const total = segments.reduce((sum, segment) => sum + wordCount(segment), 0);
+  const total = segments.reduce((sum, segment) => sum + wordCount(segment.value), 0);
   const target = Math.ceil(total / 2);
   let seen = 0;
   let splitAt = segments.length;
 
   for (let index = 0; index < segments.length; index++) {
-    seen += wordCount(segments[index]);
+    seen += wordCount(segments[index].value);
     if (seen >= target) {
       splitAt = index + 1;
       break;

@@ -365,7 +365,7 @@
 }
 
 .newBookBreak {
-  display: block;
+  display: none;
 }
 
 .inner .text,
