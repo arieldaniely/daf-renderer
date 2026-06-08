@@ -53,6 +53,7 @@ const refs = {
   status: document.querySelector("#status"),
   subtitle: document.querySelector("#subtitle"),
   toggleVowels: document.querySelector("#toggle-vowels"),
+  toggleVowelsLabel: document.querySelector("#toggle-vowels-label"),
   dafHeading: document.querySelector("#daf-heading"),
   dafRefLabel: document.querySelector("#daf-ref-label"),
   chapterLabel: document.querySelector("#chapter-label")
@@ -294,7 +295,7 @@ function move(direction) {
 
 function toggleVowels() {
   showVowels = !showVowels;
-  refs.toggleVowels.textContent = showVowels ? "הסתר ניקוד" : "הצג ניקוד";
+  refs.toggleVowelsLabel.textContent = showVowels ? "הסתר ניקוד" : "הצג ניקוד";
   refs.toggleVowels.setAttribute("aria-pressed", String(showVowels));
   renderFormattedDaf();
 }
