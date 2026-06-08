@@ -37,7 +37,7 @@
   --outerStartWidth: 50%;
   --outerPadding: 0px;
 
-  --newBookFrameImage: url("NEW_BOOK.png");
+  --newBookFrameImage: url("assets/new-book-frame.png");
 }
 
 /*Containers*/
@@ -194,6 +194,34 @@
   font-family: var(--fontFamily-main);
   font-size: var(--fontSize-main);
   line-height: var(--lineHeight-main);
+}
+
+:global(.daf-hadran) {
+  display: block;
+  margin: 0.85em 0;
+  font-size: 1.22em;
+  line-height: 1.25;
+  text-align: center;
+  text-align-last: center;
+}
+
+:global(.daf-before-hadran) {
+  text-align: center;
+  text-align-last: center;
+}
+
+.text > :global(.daf-before-hadran) {
+  text-align: center;
+  text-align-last: center;
+}
+
+.main :global(.daf-chapter-start-word) {
+  float: right;
+  margin: -0.08em 0 0 0.18em;
+  font-size: 1.58em;
+  line-height: 0.78;
+  text-align: center;
+  text-align-last: center;
 }
 
 .newBookWord {

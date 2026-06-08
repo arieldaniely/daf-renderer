@@ -234,7 +234,7 @@ async function getChapterInfo(tractate, daf, amud) {
       return range && target >= range.start && target <= range.end;
     })
   );
-  const match = matchingChapterIndexes[matchingChapterIndexes.length - 1];
+  const match = matchingChapterIndexes[0];
   const chapterIndex = match ? match.index : -1;
   const chapter = chapters[chapterIndex];
   if (!chapter) return null;

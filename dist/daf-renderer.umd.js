@@ -328,7 +328,7 @@
     }
   }
 
-  var css_248z = "/*Keep this as the first rule in the file*/\r\n.styles_dafRoot__1QUlM {\r\n  --contentWidth: 0px;\r\n  --padding-horizontal: 0px;\r\n  --padding-vertical: 0px;\r\n  --halfway: 50%;\r\n\r\n  --fontFamily-inner: \"Rashi\";\r\n  --fontFamily-outer: \"Tosafot\";\r\n  --fontFamily-main: \"Vilna\";\r\n  --direction: \"rtl\";\r\n\r\n  --fontSize-main: 0px;\r\n  --fontSize-side: 0px;\r\n\r\n  --lineHeight-main: 0px;\r\n  --lineHeight-side: 0px;\r\n\r\n  --mainWidth: 0%;\r\n  --mainMargin-start: var(--mainWidth);\r\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\r\n  --remainderPercent: calc(100% - var(--sidePercent));\r\n\r\n  --innerFloat: left;\r\n  --outerFloat: right;\r\n\r\n  --spacerHeights-start: 0px;\r\n  --spacerHeights-outer: 0px;\r\n  --spacerHeights-inner: 0px;\r\n  --spacerHeights-end: 0px;\r\n\r\n  /*Edge Cases*/\r\n  --hasInnerStartGap: 0;\r\n  --hasOuterStartGap: 0;\n  --innerStartWidth: 50%;\n  --innerPadding: 0px;\n  --outerStartWidth: 50%;\n  --outerPadding: 0px;\n\n  --newBookFrameImage: url(\"NEW_BOOK.png\");\n}\n\r\n/*Containers*/\r\n.styles_dafRoot__1QUlM,\n.styles_outer__abXQX,\n.styles_inner__x-amJ,\n.styles_main__BHTRd {\n  width: var(--contentWidth);\n  pointer-events: none;\n  box-sizing: content-box;\n}\n\n.styles_dafRoot__1QUlM {\n  position: relative;\n}\n\r\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\r\n  position: absolute;\r\n}\r\n\r\n/*Float changes with amud*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  float: var(--innerFloat);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  float: var(--outerFloat);\r\n}\r\n\r\n/*Spacer widths determined by options*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_outer__abXQX .styles_spacer__2T7TS {\r\n  width: var(--halfway);\r\n}\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  width: var(--remainderPercent);\r\n}\r\n\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--contentWidth);\r\n}\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  width: var(--sidePercent);\r\n}\r\n\r\n/*Spacer heights determined by algorithm*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY {\r\n  height: var(--spacerHeights-start);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_end__2wr6A {\r\n  height: var(--spacerHeights-end);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  height: var(--spacerHeights-inner);\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  height: var(--spacerHeights-outer);\r\n}\r\n\r\n/*Settings to handle edge Cases*/\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--innerStartWidth);\r\n  margin-left: var(--innerPadding);\r\n  margin-right: var(--innerPadding);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--outerStartWidth);\r\n  margin-left: var(--outerPadding);\r\n  margin-right: var(--outerPadding);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  clear: both;\r\n}\r\n\r\n/*Margins!*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY,\r\n.styles_spacer__2T7TS.styles_end__2wr6A,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-left: calc(0.5 * var(--padding-horizontal));\r\n  margin-right: calc(0.5 * var(--padding-horizontal));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  margin-top: var(--padding-vertical);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-bottom: var(--padding-vertical);\r\n}\r\n\r\n/*Text*/\r\n.styles_text__1_7-z {\n  direction: var(--direction);\n  text-align: justify;\n  text-align-last: justify;\n  text-justify: inter-word;\n  word-break: normal;\n  overflow-wrap: normal;\n  hyphens: none;\n  font-kerning: normal;\n}\n\r\n.styles_text__1_7-z span {\n  pointer-events: auto;\n}\n\n.styles_text__1_7-z > span {\n  display: block;\n  text-align: inherit;\n  text-align-last: inherit;\n}\n\n.styles_balanceBreak__1CAJZ {\n  content: \"\";\n}\n\n.styles_continuationCatchword__xHvSp {\n  display: block;\n  width: max-content;\n  max-width: 100%;\n  margin-top: calc(-0.25 * var(--lineHeight-side));\n  text-align: start;\n  text-align-last: auto;\n  white-space: nowrap;\n  unicode-bidi: isolate;\n}\n\r\n.styles_main__BHTRd .styles_continuationCatchword__xHvSp {\r\n  margin-top: calc(-0.2 * var(--lineHeight-main));\r\n}\r\n\r\n.styles_main__BHTRd .styles_text__1_7-z {\n  font-family: var(--fontFamily-main);\n  font-size: var(--fontSize-main);\n  line-height: var(--lineHeight-main);\n}\n\n.styles_newBookWord__3auqa {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: calc(var(--mainWidth) - var(--padding-horizontal) - var(--padding-horizontal));\n  min-height: 3.1em;\n  max-width: 100%;\n  margin: 0 auto 0.08em;\n  padding: 0.52em 1.12em 0.45em;\n  box-sizing: border-box;\n  background-image: var(--newBookFrameImage);\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: contain;\n  font-size: 2.9em;\n  line-height: 1;\n  text-align: center;\n  text-align-last: center;\n  vertical-align: middle;\n  white-space: nowrap;\n}\n\n.styles_newBookBreak__1mIe7 {\n  display: block;\n}\n\n.styles_inner__x-amJ .styles_text__1_7-z,\n.styles_outer__abXQX .styles_text__1_7-z {\n  font-size: var(--fontSize-side);\n  line-height: var(--lineHeight-side);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n}\r\n\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-outer);\r\n}\r\n";
+  var css_248z = "/*Keep this as the first rule in the file*/\r\n.styles_dafRoot__1QUlM {\r\n  --contentWidth: 0px;\r\n  --padding-horizontal: 0px;\r\n  --padding-vertical: 0px;\r\n  --halfway: 50%;\r\n\r\n  --fontFamily-inner: \"Rashi\";\r\n  --fontFamily-outer: \"Tosafot\";\r\n  --fontFamily-main: \"Vilna\";\r\n  --direction: \"rtl\";\r\n\r\n  --fontSize-main: 0px;\r\n  --fontSize-side: 0px;\r\n\r\n  --lineHeight-main: 0px;\r\n  --lineHeight-side: 0px;\r\n\r\n  --mainWidth: 0%;\r\n  --mainMargin-start: var(--mainWidth);\r\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\r\n  --remainderPercent: calc(100% - var(--sidePercent));\r\n\r\n  --innerFloat: left;\r\n  --outerFloat: right;\r\n\r\n  --spacerHeights-start: 0px;\r\n  --spacerHeights-outer: 0px;\r\n  --spacerHeights-inner: 0px;\r\n  --spacerHeights-end: 0px;\r\n\r\n  /*Edge Cases*/\r\n  --hasInnerStartGap: 0;\r\n  --hasOuterStartGap: 0;\n  --innerStartWidth: 50%;\n  --innerPadding: 0px;\n  --outerStartWidth: 50%;\n  --outerPadding: 0px;\n\n  --newBookFrameImage: url(\"assets/new-book-frame.png\");\n}\n\r\n/*Containers*/\r\n.styles_dafRoot__1QUlM,\n.styles_outer__abXQX,\n.styles_inner__x-amJ,\n.styles_main__BHTRd {\n  width: var(--contentWidth);\n  pointer-events: none;\n  box-sizing: content-box;\n}\n\n.styles_dafRoot__1QUlM {\n  position: relative;\n}\n\r\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\r\n  position: absolute;\r\n}\r\n\r\n/*Float changes with amud*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  float: var(--innerFloat);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  float: var(--outerFloat);\r\n}\r\n\r\n/*Spacer widths determined by options*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_outer__abXQX .styles_spacer__2T7TS {\r\n  width: var(--halfway);\r\n}\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  width: var(--remainderPercent);\r\n}\r\n\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--contentWidth);\r\n}\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  width: var(--sidePercent);\r\n}\r\n\r\n/*Spacer heights determined by algorithm*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY {\r\n  height: var(--spacerHeights-start);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_end__2wr6A {\r\n  height: var(--spacerHeights-end);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  height: var(--spacerHeights-inner);\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  height: var(--spacerHeights-outer);\r\n}\r\n\r\n/*Settings to handle edge Cases*/\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--innerStartWidth);\r\n  margin-left: var(--innerPadding);\r\n  margin-right: var(--innerPadding);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--outerStartWidth);\r\n  margin-left: var(--outerPadding);\r\n  margin-right: var(--outerPadding);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  clear: both;\r\n}\r\n\r\n/*Margins!*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY,\r\n.styles_spacer__2T7TS.styles_end__2wr6A,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-left: calc(0.5 * var(--padding-horizontal));\r\n  margin-right: calc(0.5 * var(--padding-horizontal));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  margin-top: var(--padding-vertical);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-bottom: var(--padding-vertical);\r\n}\r\n\r\n/*Text*/\r\n.styles_text__1_7-z {\n  direction: var(--direction);\n  text-align: justify;\n  text-align-last: justify;\n  text-justify: inter-word;\n  word-break: normal;\n  overflow-wrap: normal;\n  hyphens: none;\n  font-kerning: normal;\n}\n\r\n.styles_text__1_7-z span {\n  pointer-events: auto;\n}\n\n.styles_text__1_7-z > span {\n  display: block;\n  text-align: inherit;\n  text-align-last: inherit;\n}\n\n.styles_balanceBreak__1CAJZ {\n  content: \"\";\n}\n\n.styles_continuationCatchword__xHvSp {\n  display: block;\n  width: max-content;\n  max-width: 100%;\n  margin-top: calc(-0.25 * var(--lineHeight-side));\n  text-align: start;\n  text-align-last: auto;\n  white-space: nowrap;\n  unicode-bidi: isolate;\n}\n\r\n.styles_main__BHTRd .styles_continuationCatchword__xHvSp {\r\n  margin-top: calc(-0.2 * var(--lineHeight-main));\r\n}\r\n\r\n.styles_main__BHTRd .styles_text__1_7-z {\n  font-family: var(--fontFamily-main);\n  font-size: var(--fontSize-main);\n  line-height: var(--lineHeight-main);\n}\n\n.daf-hadran {\n  display: block;\n  margin: 0.85em 0;\n  font-size: 1.22em;\n  line-height: 1.25;\n  text-align: center;\n  text-align-last: center;\n}\n\n.daf-before-hadran {\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_text__1_7-z > .daf-before-hadran {\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_main__BHTRd .daf-chapter-start-word {\n  float: right;\n  margin: -0.08em 0 0 0.18em;\n  font-size: 1.58em;\n  line-height: 0.78;\n  text-align: center;\n  text-align-last: center;\n}\n\n.styles_newBookWord__3auqa {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: calc(var(--mainWidth) - var(--padding-horizontal) - var(--padding-horizontal));\n  min-height: 3.1em;\n  max-width: 100%;\n  margin: 0 auto 0.08em;\n  padding: 0.52em 1.12em 0.45em;\n  box-sizing: border-box;\n  background-image: var(--newBookFrameImage);\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: contain;\n  font-size: 2.9em;\n  line-height: 1;\n  text-align: center;\n  text-align-last: center;\n  vertical-align: middle;\n  white-space: nowrap;\n}\n\n.styles_newBookBreak__1mIe7 {\n  display: block;\n}\n\n.styles_inner__x-amJ .styles_text__1_7-z,\n.styles_outer__abXQX .styles_text__1_7-z {\n  font-size: var(--fontSize-side);\n  line-height: var(--lineHeight-side);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n}\r\n\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-outer);\r\n}\r\n";
   var classes = {"dafRoot":"styles_dafRoot__1QUlM","outer":"styles_outer__abXQX","inner":"styles_inner__x-amJ","main":"styles_main__BHTRd","spacer":"styles_spacer__2T7TS","outerMid":"styles_outerMid__2WtcY","innerMid":"styles_innerMid__27MCi","mid":"styles_mid__dcgUr","start":"styles_start__AwkfY","end":"styles_end__2wr6A","text":"styles_text__1_7-z","balanceBreak":"styles_balanceBreak__1CAJZ","continuationCatchword":"styles_continuationCatchword__xHvSp","newBookWord":"styles_newBookWord__3auqa","newBookBreak":"styles_newBookBreak__1mIe7"};
   styleInject(css_248z);
 
@@ -519,23 +519,83 @@
       .join("");
   }
 
+  function stripHtml(html) {
+    return String(html || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  }
+
+  function isHadranSegment(segment) {
+    return /^הדרן\s+עלך(?:\s|$)/.test(stripHtml(segment));
+  }
+
+  function cleanHadranSegment(segment) {
+    return String(segment || "").replace(/^(?:\s*<br\s*\/?>\s*)+/i, "").replace(/(?:\s*<br\s*\/?>\s*)+$/i, "");
+  }
+
+  function plainHebrew(text) {
+    return String(text || "").replace(/[\u0591-\u05c7]/g, "").replace(/[^\u05d0-\u05ea]/g, "");
+  }
+
+  function addClassToWordSpan(html, wordIndex, className) {
+    const source = String(html || "");
+    const classIndex = source.indexOf('class="word', wordIndex);
+    if (classIndex === -1) return source;
+    return `${source.slice(0, classIndex)}class="word ${className}${source.slice(classIndex + 'class="word'.length)}`;
+  }
+
+  function removeOpeningMishnaMarker(html) {
+    const markerPattern = /^(.*?)(<span\b[^>]*\bclass="[^"]*\bword\b[^"]*"[^>]*>.*?<\/span>)(\s*)(.*)$/;
+    const match = String(html || "").match(markerPattern);
+    if (!match) return html;
+
+    return plainHebrew(stripHtml(match[2])) === "מתני"
+      ? `${match[1]}${match[3]}${match[4]}`
+      : html;
+  }
+
+  function addClassToChapterStartWord(html, className) {
+    const markerWords = new Set(["מתני", "גמ"]);
+    const wordPattern = /<span\b[^>]*\bclass="[^"]*\bword\b[^"]*"[^>]*>.*?<\/span>/g;
+    let match;
+
+    while ((match = wordPattern.exec(String(html || "")))) {
+      const text = plainHebrew(stripHtml(match[0]));
+      if (!text || markerWords.has(text)) continue;
+      return addClassToWordSpan(html, match.index, className);
+    }
+
+    return html;
+  }
+
+  function formatHadran(segment, prefix, startAt = 0, sentenceId) {
+    const words = wrapWords(cleanHadranSegment(segment), prefix, startAt, sentenceId);
+    return `<span class="daf-hadran">${words}</span>`;
+  }
+
   function formatMain(text) {
     let wordIndex = 0;
-    return flattenText(text)
-      .filter(Boolean)
+    const segments = flattenText(text).filter(Boolean);
+
+    return segments
       .map((segment, index) => {
         const sentenceId = `sentence-main-${index}`;
-        const words = wrapWords(
-          String(segment)
-            .replace(/:,/g, ": ")
-            .replace(/<strong>/g, "")
-            .replace(/<\/strong>/g, ""),
-          "word-main",
-          wordIndex,
-          sentenceId
-        );
+        const cleanedSegment = String(segment)
+          .replace(/:,/g, ": ")
+          .replace(/<strong>/g, "")
+          .replace(/<\/strong>/g, "");
+        const hadran = isHadranSegment(cleanedSegment);
+        const previousToHadran = isHadranSegment(segments[index + 1]);
+        const afterHadran = index > 0 && isHadranSegment(segments[index - 1]);
+        let words = hadran
+          ? formatHadran(cleanedSegment, "word-main", wordIndex, sentenceId)
+          : wrapWords(cleanedSegment, "word-main", wordIndex, sentenceId);
+        if (afterHadran) {
+          words = removeOpeningMishnaMarker(words);
+          words = addClassToChapterStartWord(words, "daf-chapter-start-word");
+        }
         wordIndex += (words.match(/class="word"/g) || []).length;
-        return `<span class="sentence" id="${sentenceId}">${words}</span>`;
+        const classes = ["sentence"];
+        if (previousToHadran) classes.push("daf-before-hadran");
+        return `<span class="${classes.join(" ")}" id="${sentenceId}">${words}</span>`;
       })
       .join(" ");
   }
@@ -543,7 +603,11 @@
   function formatCommentary(text, prefix, headerClass) {
     const html = flattenText(text)
       .filter(Boolean)
-      .map(segment => String(segment).replace(/([^\u2013:]+)\s+[\u2013-]\s+([^:]+:)/, `<b class="${headerClass}">$1. </b>$2 `))
+      .map(segment => {
+        const value = String(segment);
+        if (isHadranSegment(value)) return `<span class="daf-hadran">${cleanHadranSegment(value)}</span>`;
+        return value.replace(/([^\u2013:]+)\s+[\u2013-]\s+([^:]+:)/, `<b class="${headerClass}">$1. </b>$2 `);
+      })
       .join(" ")
       .replace(/,,/g, "")
       .replace(/,:/g, ": ")

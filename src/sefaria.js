@@ -67,23 +67,83 @@ function wrapWords(html, prefix, startAt = 0, sentenceId) {
     .join("");
 }
 
+function stripHtml(html) {
+  return String(html || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function isHadranSegment(segment) {
+  return /^הדרן\s+עלך(?:\s|$)/.test(stripHtml(segment));
+}
+
+function cleanHadranSegment(segment) {
+  return String(segment || "").replace(/^(?:\s*<br\s*\/?>\s*)+/i, "").replace(/(?:\s*<br\s*\/?>\s*)+$/i, "");
+}
+
+function plainHebrew(text) {
+  return String(text || "").replace(/[\u0591-\u05c7]/g, "").replace(/[^\u05d0-\u05ea]/g, "");
+}
+
+function addClassToWordSpan(html, wordIndex, className) {
+  const source = String(html || "");
+  const classIndex = source.indexOf('class="word', wordIndex);
+  if (classIndex === -1) return source;
+  return `${source.slice(0, classIndex)}class="word ${className}${source.slice(classIndex + 'class="word'.length)}`;
+}
+
+function removeOpeningMishnaMarker(html) {
+  const markerPattern = /^(.*?)(<span\b[^>]*\bclass="[^"]*\bword\b[^"]*"[^>]*>.*?<\/span>)(\s*)(.*)$/;
+  const match = String(html || "").match(markerPattern);
+  if (!match) return html;
+
+  return plainHebrew(stripHtml(match[2])) === "מתני"
+    ? `${match[1]}${match[3]}${match[4]}`
+    : html;
+}
+
+function addClassToChapterStartWord(html, className) {
+  const markerWords = new Set(["מתני", "גמ"]);
+  const wordPattern = /<span\b[^>]*\bclass="[^"]*\bword\b[^"]*"[^>]*>.*?<\/span>/g;
+  let match;
+
+  while ((match = wordPattern.exec(String(html || "")))) {
+    const text = plainHebrew(stripHtml(match[0]));
+    if (!text || markerWords.has(text)) continue;
+    return addClassToWordSpan(html, match.index, className);
+  }
+
+  return html;
+}
+
+function formatHadran(segment, prefix, startAt = 0, sentenceId) {
+  const words = wrapWords(cleanHadranSegment(segment), prefix, startAt, sentenceId);
+  return `<span class="daf-hadran">${words}</span>`;
+}
+
 function formatMain(text) {
   let wordIndex = 0;
-  return flattenText(text)
-    .filter(Boolean)
+  const segments = flattenText(text).filter(Boolean);
+
+  return segments
     .map((segment, index) => {
       const sentenceId = `sentence-main-${index}`;
-      const words = wrapWords(
-        String(segment)
-          .replace(/:,/g, ": ")
-          .replace(/<strong>/g, "")
-          .replace(/<\/strong>/g, ""),
-        "word-main",
-        wordIndex,
-        sentenceId
-      );
+      const cleanedSegment = String(segment)
+        .replace(/:,/g, ": ")
+        .replace(/<strong>/g, "")
+        .replace(/<\/strong>/g, "");
+      const hadran = isHadranSegment(cleanedSegment);
+      const previousToHadran = isHadranSegment(segments[index + 1]);
+      const afterHadran = index > 0 && isHadranSegment(segments[index - 1]);
+      let words = hadran
+        ? formatHadran(cleanedSegment, "word-main", wordIndex, sentenceId)
+        : wrapWords(cleanedSegment, "word-main", wordIndex, sentenceId);
+      if (afterHadran) {
+        words = removeOpeningMishnaMarker(words);
+        words = addClassToChapterStartWord(words, "daf-chapter-start-word");
+      }
       wordIndex += (words.match(/class="word"/g) || []).length;
-      return `<span class="sentence" id="${sentenceId}">${words}</span>`;
+      const classes = ["sentence"];
+      if (previousToHadran) classes.push("daf-before-hadran");
+      return `<span class="${classes.join(" ")}" id="${sentenceId}">${words}</span>`;
     })
     .join(" ");
 }
@@ -91,7 +151,11 @@ function formatMain(text) {
 function formatCommentary(text, prefix, headerClass) {
   const html = flattenText(text)
     .filter(Boolean)
-    .map(segment => String(segment).replace(/([^\u2013:]+)\s+[\u2013-]\s+([^:]+:)/, `<b class="${headerClass}">$1. </b>$2 `))
+    .map(segment => {
+      const value = String(segment);
+      if (isHadranSegment(value)) return `<span class="daf-hadran">${cleanHadranSegment(value)}</span>`;
+      return value.replace(/([^\u2013:]+)\s+[\u2013-]\s+([^:]+:)/, `<b class="${headerClass}">$1. </b>$2 `);
+    })
     .join(" ")
     .replace(/,,/g, "")
     .replace(/,:/g, ": ")
