@@ -44,7 +44,15 @@
       <button id="prev" type="button">הקודם</button>
     </nav>
 
+    <section class="display-options" aria-label="אפשרויות תצוגה">
+      <button id="toggle-vowels" type="button" aria-pressed="true">הסתר ניקוד</button>
+    </section>
+
     <section class="daf-shell" aria-label="תצוגת הדף">
+      <div id="daf-heading" class="daf-heading" data-amud="a">
+        <div id="daf-ref-label" class="daf-ref-label"></div>
+        <div id="chapter-label" class="chapter-label"></div>
+      </div>
       <div id="daf-container">
         <div id="daf-render"></div>
       </div>

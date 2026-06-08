@@ -51,11 +51,47 @@ const refs = {
   prev: document.querySelector("#prev"),
   next: document.querySelector("#next"),
   status: document.querySelector("#status"),
-  subtitle: document.querySelector("#subtitle")
+  subtitle: document.querySelector("#subtitle"),
+  toggleVowels: document.querySelector("#toggle-vowels"),
+  dafHeading: document.querySelector("#daf-heading"),
+  dafRefLabel: document.querySelector("#daf-ref-label"),
+  chapterLabel: document.querySelector("#chapter-label")
 };
 
 let renderer;
 let activeResult;
+let activeFormatted;
+let activeChapter;
+let showVowels = true;
+const indexCache = new Map();
+
+const HEBREW_CHAPTERS = [
+  "",
+  "ראשון",
+  "שני",
+  "שלישי",
+  "רביעי",
+  "חמישי",
+  "שישי",
+  "שביעי",
+  "שמיני",
+  "תשיעי",
+  "עשירי",
+  "אחד עשר",
+  "שנים עשר",
+  "שלושה עשר",
+  "ארבעה עשר",
+  "חמישה עשר",
+  "שישה עשר",
+  "שבעה עשר",
+  "שמונה עשר",
+  "תשעה עשר",
+  "עשרים",
+  "אחד ועשרים",
+  "שניים ועשרים",
+  "שלושה ועשרים",
+  "עשרים וארבעה"
+];
 
 function findTractate(name) {
   return TRACTATES.find(tractate => tractate.name === name) || TRACTATES[0];
@@ -70,6 +106,7 @@ function setBusy(isBusy) {
   refs.load.disabled = isBusy;
   refs.prev.disabled = isBusy;
   refs.next.disabled = isBusy;
+  refs.toggleVowels.disabled = isBusy && !activeFormatted;
 }
 
 function populateTractates() {
@@ -105,6 +142,107 @@ function writeSelectionToUrl() {
   window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
 }
 
+function stripNikkud(html) {
+  return html.replace(/[\u0591-\u05bd\u05bf-\u05c7]/g, "");
+}
+
+function renderFormattedDaf() {
+  if (!activeFormatted) return;
+  const main = showVowels ? activeFormatted.main : stripNikkud(activeFormatted.main);
+  renderer.render(main, activeFormatted.inner, activeFormatted.outer, activeFormatted.amud);
+}
+
+function hebrewNumber(number) {
+  return HEBREW_CHAPTERS[Number(number)] || number;
+}
+
+function hebrewDafNumber(number) {
+  const value = Number(number);
+  const letters = [
+    [400, "ת"], [300, "ש"], [200, "ר"], [100, "ק"],
+    [90, "צ"], [80, "פ"], [70, "ע"], [60, "ס"], [50, "נ"], [40, "מ"], [30, "ל"], [20, "כ"],
+    [10, "י"], [9, "ט"], [8, "ח"], [7, "ז"], [6, "ו"], [5, "ה"], [4, "ד"], [3, "ג"], [2, "ב"], [1, "א"]
+  ];
+  let remaining = value;
+  let output = "";
+  for (const [amount, letter] of letters) {
+    while (remaining >= amount) {
+      output += letter;
+      remaining -= amount;
+    }
+  }
+  return output.replace("יה", "טו").replace("יו", "טז");
+}
+
+function dafSortValue(daf, amud = "a") {
+  return Number(daf) * 2 + (amud === "b" ? 1 : 0);
+}
+
+function parseTalmudLocation(ref) {
+  const match = ref && ref.match(/(\d+)([ab])/);
+  if (!match) return null;
+  return { daf: Number(match[1]), amud: match[2] };
+}
+
+function refRange(ref) {
+  const parts = ref.split("-");
+  const start = parseTalmudLocation(parts[0]);
+  const end = parseTalmudLocation(parts[1] || "") || start;
+  if (!start || !end) return null;
+  return {
+    start: dafSortValue(start.daf, start.amud),
+    end: dafSortValue(end.daf, end.amud)
+  };
+}
+
+async function getTractateIndex(tractate) {
+  if (!indexCache.has(tractate)) {
+    indexCache.set(
+      tractate,
+      fetch(`https://www.sefaria.org/api/index/${encodeURIComponent(tractate)}`).then(response => {
+        if (!response.ok) throw new Error(`Sefaria index request failed: ${response.status}`);
+        return response.json();
+      })
+    );
+  }
+  return indexCache.get(tractate);
+}
+
+async function getChapterInfo(tractate, daf, amud) {
+  const index = await getTractateIndex(tractate);
+  const chapterStructs = ((index || {}).alt_structs || (index || {}).alts || {});
+  const chapters = (chapterStructs.Chapters || {}).nodes || [];
+  const target = dafSortValue(daf, amud);
+  const matchingChapterIndexes = chapters
+    .map((chapter, index) => ({ chapter, index }))
+    .filter(({ chapter }) =>
+    (chapter.refs || []).some(ref => {
+      const range = refRange(ref);
+      return range && target >= range.start && target <= range.end;
+    })
+  );
+  const match = matchingChapterIndexes[matchingChapterIndexes.length - 1];
+  const chapterIndex = match ? match.index : -1;
+  const chapter = chapters[chapterIndex];
+  if (!chapter) return null;
+  return {
+    number: chapterIndex + 1,
+    name: chapter.heTitle || chapter.title || "",
+    tractate: index.heTitle || findTractate(tractate).he
+  };
+}
+
+function updateDafHeading(tractate, daf, amud) {
+  const amudMark = amud === "b" ? ":" : ".";
+  refs.dafHeading.dataset.amud = amud;
+  refs.dafRefLabel.textContent = `${hebrewDafNumber(daf)}${amudMark}`;
+  if (activeChapter) {
+    refs.chapterLabel.textContent = `${activeChapter.name}\tפרק ${hebrewNumber(activeChapter.number)}\t${activeChapter.tractate}`;
+  } else {
+    refs.chapterLabel.textContent = findTractate(tractate).he;
+  }
+}
+
 function parseSefariaRef(ref) {
   const match = ref && ref.match(/^(.+)\s+(\d+)([ab])$/);
   if (!match) return null;
@@ -134,7 +272,11 @@ async function renderSelected() {
 
   try {
     await document.fonts.ready;
-    activeResult = await renderer.renderSefaria(tractate.name, daf, amud);
+    activeResult = await dafRenderer.fetchSefariaDaf(tractate.name, daf, amud);
+    activeFormatted = dafRenderer.formatSefariaDaf(activeResult);
+    activeChapter = await getChapterInfo(tractate.name, daf, amud);
+    renderFormattedDaf();
+    updateDafHeading(tractate.name, daf, amud);
     refs.subtitle.textContent = activeResult.titles.main || `${tractate.he} ${daf}`;
     setStatus("הדף נטען");
     writeSelectionToUrl();
@@ -148,6 +290,13 @@ async function renderSelected() {
 function move(direction) {
   const parsed = parseSefariaRef(activeResult && activeResult.refs && activeResult.refs[direction]);
   if (applyParsedRef(parsed)) renderSelected();
+}
+
+function toggleVowels() {
+  showVowels = !showVowels;
+  refs.toggleVowels.textContent = showVowels ? "הסתר ניקוד" : "הצג ניקוד";
+  refs.toggleVowels.setAttribute("aria-pressed", String(showVowels));
+  renderFormattedDaf();
 }
 
 async function init() {
@@ -173,6 +322,7 @@ async function init() {
     refs.load.addEventListener("click", renderSelected);
     refs.prev.addEventListener("click", () => move("prev"));
     refs.next.addEventListener("click", () => move("next"));
+    refs.toggleVowels.addEventListener("click", toggleVowels);
 
     await renderSelected();
   } catch (error) {

@@ -82,6 +82,12 @@ main {
   margin-top: 12px;
 }
 
+.display-options {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
 label {
   color: var(--muted);
   display: grid;
@@ -140,6 +146,41 @@ button:disabled {
   padding-top: 22px;
 }
 
+#daf-heading {
+  direction: ltr;
+  display: grid;
+  font-family: Vilna, serif;
+  grid-template-columns: 1fr 2fr 1fr;
+  margin: 0 auto 8px;
+  min-width: 660px;
+  width: 660px;
+}
+
+.daf-ref-label,
+.chapter-label {
+  color: var(--ink);
+  direction: rtl;
+  font-size: 42px;
+  line-height: 1.15;
+  min-height: 50px;
+  white-space: nowrap;
+}
+
+.chapter-label {
+  grid-column: 2;
+  text-align: center;
+}
+
+.daf-ref-label {
+  grid-column: 1;
+  text-align: left;
+}
+
+#daf-heading[data-amud="b"] .daf-ref-label {
+  grid-column: 3;
+  text-align: right;
+}
+
 #daf-container {
   margin: 0 auto;
   min-width: 660px;
@@ -172,6 +213,10 @@ button:disabled {
 
   .pager {
     grid-template-columns: 1fr 1fr;
+  }
+
+  #daf-heading {
+    width: 660px;
   }
 
   #status {
