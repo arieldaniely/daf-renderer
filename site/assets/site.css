@@ -270,10 +270,9 @@ button:disabled {
 #daf-heading {
   direction: ltr;
   position: relative;
-  width: 660px;
-  min-width: 660px;
-  margin: 0 auto 10px;
-  padding: 0 10px;
+  width: 100%;
+  margin: 0 auto 12px;
+  padding: 0;
   font-family: Vilna, serif;
   min-height: 44px;
 }
@@ -295,12 +294,12 @@ button:disabled {
 .daf-ref-label {
   position: absolute;
   top: 0;
-  left: 10px;
+  left: 0;
   text-align: left;
 }
 
 #daf-heading[data-amud="b"] .daf-ref-label {
-  right: 10px;
+  right: 0;
   left: auto;
   text-align: right;
 }
