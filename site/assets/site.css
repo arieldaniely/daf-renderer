@@ -269,20 +269,17 @@ button:disabled {
 
 #daf-heading {
   direction: ltr;
-  display: grid;
-  grid-template-columns: minmax(72px, 1fr) minmax(0, 3.4fr) minmax(72px, 1fr);
-  align-items: baseline;
-  column-gap: 12px;
+  position: relative;
   width: 660px;
   min-width: 660px;
   margin: 0 auto 10px;
   padding: 0 10px;
   font-family: Vilna, serif;
+  min-height: 44px;
 }
 
 .daf-ref-label,
 .chapter-label {
-  min-width: 0;
   color: var(--ink);
   direction: rtl;
   font-size: 40px;
@@ -291,20 +288,20 @@ button:disabled {
 }
 
 .chapter-label {
-  grid-column: 2;
-  overflow: hidden;
+  padding: 0 82px;
   text-align: center;
-  text-overflow: ellipsis;
 }
 
 .daf-ref-label {
-  grid-column: 1;
-  min-width: max-content;
+  position: absolute;
+  top: 0;
+  left: 10px;
   text-align: left;
 }
 
 #daf-heading[data-amud="b"] .daf-ref-label {
-  grid-column: 3;
+  right: 10px;
+  left: auto;
   text-align: right;
 }
 
