@@ -452,6 +452,25 @@ function addClassToChapterStartWord(html, className) {
   return html;
 }
 
+function addClassToMainSectionMarkers(html, className) {
+  const markerWords = new Set(["מתני", "גמ"]);
+  const wordPattern = /<span\b[^>]*\bclass="[^"]*\bword\b[^"]*"[^>]*>.*?<\/span>/g;
+  let result = String(html || "");
+  const matches = [];
+  let match;
+
+  while ((match = wordPattern.exec(result))) {
+    const text = plainHebrew(stripHtml(match[0]));
+    if (markerWords.has(text)) matches.push(match.index);
+  }
+
+  for (let index = matches.length - 1; index >= 0; index--) {
+    result = addClassToWordSpan(result, matches[index], className);
+  }
+
+  return result;
+}
+
 function formatHadran(segment, prefix, startAt = 0, sentenceId) {
   const words = wrapWords(cleanHadranSegment(segment), prefix, startAt, sentenceId);
   return `<span class="daf-hadran">${words}</span>`;
@@ -475,6 +494,9 @@ function formatMain(text) {
       let words = hadran
         ? formatHadran(cleanedSegment, "word-main", wordIndex, sentenceId)
         : wrapWords(cleanedSegment, "word-main", wordIndex, sentenceId);
+      if (!hadran) {
+        words = addClassToMainSectionMarkers(words, "daf-main-section-marker");
+      }
       if (afterHadran) {
         words = removeOpeningMishnaMarker(words);
         words = addClassToChapterStartWord(words, "daf-chapter-start-word");

@@ -259,6 +259,11 @@
   text-align-last: center;
 }
 
+.main :global(.daf-main-section-marker) {
+  font-size: 1.08em;
+  font-weight: 700;
+}
+
 .main :global(.daf-inline-tosafot) {
   display: block;
   float: left;
