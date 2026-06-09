@@ -281,6 +281,29 @@
   pointer-events: auto;
 }
 
+:global(.rashi-header),
+:global(.tosafot-header) {
+  font-family: var(--fontFamily-main);
+  font-size: 1.22em;
+  font-weight: 700;
+  font-synthesis: weight;
+  text-shadow: 0.018em 0 0 currentColor, -0.018em 0 0 currentColor;
+}
+
+.outer :global(.tosafot-segment:not(.daf-tosafot-continuation))::before {
+  content: "";
+  display: block;
+}
+
+.outer :global(.tosafot-segment:not(.daf-tosafot-continuation) .daf-tosafot-start-word) {
+  float: right;
+  margin: -0.08em 0 0 0.18em;
+  font-size: 1.58em;
+  line-height: 0.78;
+  text-align: center;
+  text-align-last: center;
+}
+
 :global(.daf-ein-marker),
 :global(.daf-torah-marker) {
   font-family: var(--fontFamily-main);
