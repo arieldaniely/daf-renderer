@@ -77,6 +77,25 @@
       </nav>
 
       <div class="display-options">
+        <div class="zoom-control" aria-label="גודל תצוגת הדף">
+          <button id="zoom-out" class="icon-button" type="button" aria-label="הקטן תצוגה">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M5 12h14"></path>
+            </svg>
+          </button>
+          <label class="zoom-slider-label">
+            <span>גודל</span>
+            <input id="zoom-range" type="range" min="70" max="140" step="5" value="100">
+          </label>
+          <button id="zoom-in" class="icon-button" type="button" aria-label="הגדל תצוגה">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 5v14"></path>
+              <path d="M5 12h14"></path>
+            </svg>
+          </button>
+          <span id="zoom-value" class="zoom-value" aria-live="polite">100%</span>
+        </div>
+
         <button id="toggle-vowels" class="secondary-action" type="button" aria-pressed="true">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
@@ -88,12 +107,14 @@
     </section>
 
     <section class="daf-shell" aria-label="תצוגת הדף">
-      <div id="daf-container">
-        <div id="daf-heading" class="daf-heading" data-amud="a">
-          <div id="daf-ref-label" class="daf-ref-label"></div>
-          <div id="chapter-label" class="chapter-label"></div>
+      <div id="daf-stage" class="daf-stage">
+        <div id="daf-container">
+          <div id="daf-heading" class="daf-heading" data-amud="a">
+            <div id="daf-ref-label" class="daf-ref-label"></div>
+            <div id="chapter-label" class="chapter-label"></div>
+          </div>
+          <div id="daf-render"></div>
         </div>
-        <div id="daf-render"></div>
       </div>
     </section>
   </main>

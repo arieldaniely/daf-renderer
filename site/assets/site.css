@@ -44,7 +44,8 @@ body {
 }
 
 button,
-select {
+select,
+input {
   font: inherit;
 }
 
@@ -174,6 +175,7 @@ select {
 }
 
 select:focus-visible,
+input:focus-visible,
 button:focus-visible,
 a:focus-visible {
   outline: 3px solid rgba(15, 107, 93, .22);
@@ -221,6 +223,51 @@ button:disabled {
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+.display-options {
+  flex-wrap: wrap;
+}
+
+.zoom-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 8px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.zoom-control .icon-button {
+  width: 36px;
+  min-height: 36px;
+  padding: 0;
+}
+
+.zoom-slider-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 178px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.zoom-slider-label input {
+  width: 118px;
+  accent-color: var(--accent);
+}
+
+.zoom-value {
+  min-width: 48px;
+  color: var(--accent-strong);
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
 }
 
 .icon-button,
@@ -305,16 +352,28 @@ button:disabled {
 }
 
 #daf-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
   width: max-content;
   min-width: 660px;
-  margin: 0 auto;
+  margin: 0;
   padding: 18px 10px 14px;
   background: var(--paper-warm);
   border: 1px solid rgba(199, 189, 168, .72);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .68);
+  transform: translateX(-50%) scale(var(--daf-zoom, 1));
+  transform-origin: top center;
 }
 
 #daf-render {
+  margin: 0 auto;
+}
+
+.daf-stage {
+  --daf-zoom: 1;
+  position: relative;
+  width: max-content;
   margin: 0 auto;
 }
 
@@ -386,7 +445,17 @@ button:disabled {
     justify-content: stretch;
   }
 
+  .zoom-control,
   .secondary-action {
+    width: 100%;
+  }
+
+  .zoom-slider-label {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .zoom-slider-label input {
     width: 100%;
   }
 }

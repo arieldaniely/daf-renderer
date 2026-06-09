@@ -1590,12 +1590,20 @@ function continuationLeadHtml(html) {
   catchword.classList.add(classes.continuationCatchword);
   catchword.setAttribute("aria-hidden", "true");
 
-  return `<br>${catchword.outerHTML}`;
+  return catchword.outerHTML;
 }
 
 function withContinuationLead(html, continuationHtml) {
   const lead = continuationLeadHtml(continuationHtml);
   return lead && String(html || "").trim() ? `${html}${lead}` : html;
+}
+
+function withContinuationLeadOnLastFragment(fragments, continuationHtml) {
+  const lead = continuationLeadHtml(continuationHtml);
+  if (!(lead && fragments.length)) return fragments;
+  const next = fragments.slice();
+  next[next.length - 1] = `${next[next.length - 1]}${lead}`;
+  return next;
 }
 
 function resetContinuationCatchword(catchword) {
@@ -1646,6 +1654,11 @@ function isInlineTosafotWord(word) {
 function layoutWords(text) {
   return Array.from(text.querySelectorAll(".word"))
     .filter(word => !word.classList.contains(classes.continuationCatchword))
+    .filter(word => !isInlineTosafotWord(word));
+}
+
+function collisionWords(text) {
+  return Array.from(text.querySelectorAll(".word"))
     .filter(word => !isInlineTosafotWord(word));
 }
 
@@ -1802,7 +1815,7 @@ function finalizeLayout(containers) {
 }
 
 function wordRects(container) {
-  return layoutWords(container.text).map(word => word.getBoundingClientRect());
+  return collisionWords(container.text).map(word => word.getBoundingClientRect());
 }
 
 function rectOverlapHeight(a, b) {
@@ -1827,6 +1840,13 @@ function addSpacerAllowance(spacerHeights, amount) {
   return Object.assign({}, spacerHeights, {
     inner: typeof spacerHeights.inner === "number" ? spacerHeights.inner + amount : spacerHeights.inner,
     outer: typeof spacerHeights.outer === "number" ? spacerHeights.outer + amount : spacerHeights.outer
+  });
+}
+
+function subtractSpacerAllowance(spacerHeights, key, amount) {
+  if (typeof spacerHeights[key] !== "number") return spacerHeights;
+  return Object.assign({}, spacerHeights, {
+    [key]: Math.max(0, spacerHeights[key] - amount)
   });
 }
 
@@ -1974,22 +1994,59 @@ function dafRenderer(el, options = defaultOptions) {
           ? decorations.sideAdditions.outer
           : "";
       };
-      const applyLayout = () => {
+      const layoutText = (key, html) => withContinuationLead(html, continuationFor(key));
+      const updateCurrentLayout = () => {
         styleManager.updateSpacersVars(this.spacerHeights);
         styleManager.manageExceptions(this.spacerHeights);
         finalizeLayout(containers);
-
-        if (!decorations.newBookStart) return;
-
-        for (let index = 0; index < 4; index++) {
+      };
+      const resolveOverlaps = () => {
+        for (let index = 0; index < 12; index++) {
           const overlap = maxMainCommentaryOverlap(containers);
           if (overlap <= 1) return;
 
           this.spacerHeights = addSpacerAllowance(this.spacerHeights, Math.ceil(overlap) + 4);
-          styleManager.updateSpacersVars(this.spacerHeights);
-          styleManager.manageExceptions(this.spacerHeights);
-          finalizeLayout(containers);
+          updateCurrentLayout();
         }
+      };
+      const tightenContinuationSpacers = () => {
+        const maxTighten = (parseFloat(clonedOptions.lineHeight.side) || 0)
+          + (parseFloat(clonedOptions.padding.vertical) || 0)
+          + 6;
+        if (!maxTighten) return;
+
+        ["inner", "outer"].forEach(key => {
+          if (!continuationFor(key) || typeof this.spacerHeights[key] !== "number") return;
+
+          const original = this.spacerHeights;
+          let best = 0;
+          let low = 0;
+          let high = Math.min(maxTighten, original[key]);
+
+          for (let index = 0; index < 8; index++) {
+            const attempt = (low + high) / 2;
+            this.spacerHeights = subtractSpacerAllowance(original, key, attempt);
+            updateCurrentLayout();
+
+            if (maxMainCommentaryOverlap(containers) <= 1) {
+              best = attempt;
+              low = attempt;
+            } else {
+              high = attempt;
+            }
+          }
+
+          this.spacerHeights = best
+            ? subtractSpacerAllowance(original, key, best)
+            : original;
+          updateCurrentLayout();
+        });
+      };
+      const applyLayout = () => {
+        updateCurrentLayout();
+        resolveOverlaps();
+        tightenContinuationSpacers();
+        resolveOverlaps();
       };
       const refreshLayout = () => {
         if (!calculateCurrentSpacers) return;
@@ -2001,7 +2058,13 @@ function dafRenderer(el, options = defaultOptions) {
         applyLayout();
       };
       if (!linebreak) {
-        calculateCurrentSpacers = () => calculateSpacers(renderedMain, inner, outer, clonedOptions, containers.dummy);
+        calculateCurrentSpacers = () => calculateSpacers(
+          layoutText("main", renderedMain),
+          layoutText("inner", inner),
+          layoutText("outer", outer),
+          clonedOptions,
+          containers.dummy
+        );
         this.spacerHeights = calculateCurrentSpacers();
         resizeEvent = () => {
           scheduleLayoutRefresh(refreshLayout, resizeCallback);
@@ -2010,7 +2073,7 @@ function dafRenderer(el, options = defaultOptions) {
         window.addEventListener("resize", resizeEvent);
       }
       else {
-        let [mainSplit, innerSplit, outerSplit] = [renderedMain, inner, outer].map( text => {
+        const splitAtBreaks = text => {
           containers.dummy.innerHTML = text;
           const divRanges = Array.from(containers.dummy.querySelectorAll("div")).map(div => {
             const range = document.createRange();
@@ -2045,7 +2108,9 @@ function dafRenderer(el, options = defaultOptions) {
             el.append(fragment);
             return el.innerHTML;
           })
-        });
+        };
+
+        let [mainSplit, innerSplit, outerSplit] = [renderedMain, inner, outer].map(splitAtBreaks);
 
         containers.dummy.innerHTML = "";
 
@@ -2068,7 +2133,13 @@ function dafRenderer(el, options = defaultOptions) {
           }
         }
 
-        calculateCurrentSpacers = () => calculateSpacersBreaks(mainSplit, innerSplit, outerSplit, clonedOptions, containers.dummy);
+        calculateCurrentSpacers = () => calculateSpacersBreaks(
+          withContinuationLeadOnLastFragment(mainSplit, continuationFor("main")),
+          withContinuationLeadOnLastFragment(innerSplit, continuationFor("inner")),
+          withContinuationLeadOnLastFragment(outerSplit, continuationFor("outer")),
+          clonedOptions,
+          containers.dummy
+        );
         this.spacerHeights = calculateCurrentSpacers();
         resizeEvent = () => {
           scheduleLayoutRefresh(refreshLayout, resizeCallback);

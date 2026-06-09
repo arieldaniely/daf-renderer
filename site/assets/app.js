@@ -54,6 +54,12 @@ const refs = {
   subtitle: document.querySelector("#subtitle"),
   toggleVowels: document.querySelector("#toggle-vowels"),
   toggleVowelsLabel: document.querySelector("#toggle-vowels-label"),
+  zoomOut: document.querySelector("#zoom-out"),
+  zoomIn: document.querySelector("#zoom-in"),
+  zoomRange: document.querySelector("#zoom-range"),
+  zoomValue: document.querySelector("#zoom-value"),
+  dafStage: document.querySelector("#daf-stage"),
+  dafContainer: document.querySelector("#daf-container"),
   dafHeading: document.querySelector("#daf-heading"),
   dafRefLabel: document.querySelector("#daf-ref-label"),
   chapterLabel: document.querySelector("#chapter-label")
@@ -66,7 +72,13 @@ let activeContinuationFormatted;
 let activeChapter;
 let selectedSentenceId = "";
 let showVowels = true;
+let dafZoom = 1;
 const indexCache = new Map();
+
+const ZOOM_MIN = 0.7;
+const ZOOM_MAX = 1.4;
+const ZOOM_STEP = 0.05;
+const ZOOM_STORAGE_KEY = "daf-renderer.zoom";
 
 const HEBREW_CHAPTERS = [
   "",
@@ -110,6 +122,53 @@ function setBusy(isBusy) {
   refs.prev.disabled = isBusy;
   refs.next.disabled = isBusy;
   refs.toggleVowels.disabled = isBusy;
+}
+
+function clampZoom(value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return 1;
+  return Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, numeric));
+}
+
+function readStoredZoom() {
+  try {
+    return clampZoom(Number(window.localStorage.getItem(ZOOM_STORAGE_KEY)) || 1);
+  } catch (error) {
+    return 1;
+  }
+}
+
+function updateZoomFrame() {
+  if (!(refs.dafStage && refs.dafContainer)) return;
+  const zoom = clampZoom(dafZoom);
+  refs.dafStage.style.setProperty("--daf-zoom", String(zoom));
+  refs.dafStage.style.width = `${Math.ceil(refs.dafContainer.offsetWidth * zoom)}px`;
+  refs.dafStage.style.height = `${Math.ceil(refs.dafContainer.offsetHeight * zoom)}px`;
+}
+
+function applyDafZoom(value, options = {}) {
+  const { persist = true, updateControls = true } = options;
+  dafZoom = clampZoom(value);
+
+  if (updateControls) {
+    const percent = Math.round(dafZoom * 100);
+    if (refs.zoomRange) refs.zoomRange.value = String(percent);
+    if (refs.zoomValue) refs.zoomValue.textContent = `${percent}%`;
+  }
+
+  updateZoomFrame();
+
+  if (persist) {
+    try {
+      window.localStorage.setItem(ZOOM_STORAGE_KEY, String(dafZoom));
+    } catch (error) {
+      // Browsers can block localStorage in private or embedded contexts.
+    }
+  }
+}
+
+function changeDafZoom(delta) {
+  applyDafZoom(dafZoom + delta);
 }
 
 function populateTractates() {
@@ -201,6 +260,8 @@ function handleDafClick(event) {
 
 function renderFormattedDaf() {
   if (!activeFormatted) return;
+  const requestedZoom = dafZoom;
+  applyDafZoom(1, { persist: false, updateControls: false });
   selectedSentenceId = "";
   clearLinkedHighlights();
   const tractate = findTractate(refs.tractate.value);
@@ -224,6 +285,7 @@ function renderFormattedDaf() {
       sideAdditions: activeFormatted.layout && activeFormatted.layout.sideAdditions
     }
   );
+  requestAnimationFrame(() => applyDafZoom(requestedZoom, { persist: false }));
 }
 
 function hebrewNumber(number) {
@@ -415,6 +477,7 @@ async function init() {
     }
 
     dafRoot.addEventListener("click", handleDafClick);
+    applyDafZoom(readStoredZoom(), { persist: false });
 
     refs.tractate.addEventListener("change", () => {
       populateDafim(findTractate(refs.tractate.value).start);
@@ -423,6 +486,10 @@ async function init() {
     refs.prev.addEventListener("click", () => move("prev"));
     refs.next.addEventListener("click", () => move("next"));
     refs.toggleVowels.addEventListener("click", toggleVowels);
+    refs.zoomOut.addEventListener("click", () => changeDafZoom(-ZOOM_STEP));
+    refs.zoomIn.addEventListener("click", () => changeDafZoom(ZOOM_STEP));
+    refs.zoomRange.addEventListener("input", event => applyDafZoom(Number(event.target.value) / 100));
+    window.addEventListener("resize", updateZoomFrame);
 
     await renderSelected();
   } catch (error) {
