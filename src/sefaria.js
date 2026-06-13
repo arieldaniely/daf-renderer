@@ -528,7 +528,7 @@ function commentarySegments(text) {
     .filter(segment => stripHtml(segment.value));
 }
 
-function formatCommentary(text, prefix, headerClass) {
+function formatCommentary(text, prefix, headerClass, options = {}) {
   return commentarySegments(text)
     .map(segment => {
       const sentenceId = segment.sentenceId;
@@ -536,8 +536,14 @@ function formatCommentary(text, prefix, headerClass) {
       const html = isHadranSegment(value)
         ? `<span class="daf-hadran">${cleanHadranSegment(value)}</span>`
         : value.replace(/([^\u2013:]+)\s+[\u2013-]\s+([^:]+:)/, `<b class="${headerClass}">$1. </b>$2 `);
+      let words = wrapWords(html, prefix, 0, sentenceId);
+      if (options.startWordClass) {
+        words = addClassToWordSpan(words, 0, options.startWordClass);
+      }
+      const segmentClasses = ["commentary-segment"];
+      if (options.segmentClass) segmentClasses.push(options.segmentClass);
 
-      return `<span class="commentary-segment" data-sentence="${escapeAttribute(sentenceId)}">${wrapWords(html, prefix, 0, sentenceId)}</span>`;
+      return `<span class="${segmentClasses.join(" ")}" data-sentence="${escapeAttribute(sentenceId)}">${words}</span>`;
     })
     .join(" ")
     .replace(/,,/g, "")
@@ -546,7 +552,10 @@ function formatCommentary(text, prefix, headerClass) {
 }
 
 function formatInlineCommentary(text) {
-  const html = formatCommentary(text, "word-inline-tosafot", "tosafot-header");
+  const html = formatCommentary(text, "word-inline-tosafot", "tosafot-header", {
+    segmentClass: "tosafot-segment",
+    startWordClass: "daf-tosafot-start-word"
+  });
   return html ? `<span class="daf-inline-tosafot">${html}</span>` : "";
 }
 
@@ -857,7 +866,10 @@ export function formatSefariaDaf(daf) {
     titles: daf.titles,
     main,
     inner: applyInlineAdditions(formatCommentary(daf.texts.inner, "word-rashi", "rashi-header"), inlineAdditions.inner),
-    outer: applyInlineAdditions(formatCommentary(daf.texts.outer, "word-tosafot", "tosafot-header"), inlineAdditions.outer),
+    outer: applyInlineAdditions(formatCommentary(daf.texts.outer, "word-tosafot", "tosafot-header", {
+      segmentClass: "tosafot-segment",
+      startWordClass: "daf-tosafot-start-word"
+    }), inlineAdditions.outer),
     layout: {
       sideMode: "normal",
       continuationKeys: ["main", "inner", "outer"],
