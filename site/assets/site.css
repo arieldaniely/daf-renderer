@@ -345,6 +345,31 @@ button:disabled {
   text-align: left;
 }
 
+.commentary-label {
+  display: none;
+  position: absolute;
+  top: 13px;
+  width: 25%;
+  direction: rtl;
+  font-family: Vilna, serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}
+
+.has-commentary-labels .commentary-label {
+  display: block;
+}
+
+.commentary-label-left {
+  left: 0;
+}
+
+.commentary-label-right {
+  right: 0;
+}
+
 #daf-heading[data-amud="b"] .daf-ref-label {
   right: 0;
   left: auto;

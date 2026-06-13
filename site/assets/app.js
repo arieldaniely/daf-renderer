@@ -62,7 +62,9 @@ const refs = {
   dafContainer: document.querySelector("#daf-container"),
   dafHeading: document.querySelector("#daf-heading"),
   dafRefLabel: document.querySelector("#daf-ref-label"),
-  chapterLabel: document.querySelector("#chapter-label")
+  chapterLabel: document.querySelector("#chapter-label"),
+  leftCommentaryLabel: document.querySelector("#left-commentary-label"),
+  rightCommentaryLabel: document.querySelector("#right-commentary-label")
 };
 
 let renderer;
@@ -372,6 +374,16 @@ function updateDafHeading(tractate, daf, amud) {
   const amudMark = amud === "b" ? ":" : ".";
   refs.dafHeading.dataset.amud = amud;
   refs.dafRefLabel.textContent = `${hebrewDafNumber(daf)}${amudMark}`;
+  const isNedarim = tractate === "Nedarim";
+  const innerLabel = "\u05e8\u05e9\u0022\u05d9";
+  const outerLabel = "\u05e8\u0022\u05df";
+  refs.leftCommentaryLabel.textContent = isNedarim
+    ? (amud === "b" ? innerLabel : outerLabel)
+    : "";
+  refs.rightCommentaryLabel.textContent = isNedarim
+    ? (amud === "b" ? outerLabel : innerLabel)
+    : "";
+  refs.dafHeading.classList.toggle("has-commentary-labels", isNedarim);
   if (activeChapter) {
     refs.chapterLabel.textContent = `${activeChapter.name}\tפרק ${hebrewNumber(activeChapter.number)}\t${activeChapter.tractate}`;
   } else {

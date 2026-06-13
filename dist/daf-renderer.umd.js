@@ -332,7 +332,7 @@
     }
   }
 
-  var css_248z = "/*Keep this as the first rule in the file*/\r\n.styles_dafRoot__1QUlM {\r\n  --contentWidth: 0px;\r\n  --padding-horizontal: 0px;\r\n  --padding-vertical: 0px;\r\n  --halfway: 50%;\r\n\r\n  --fontFamily-inner: \"Rashi\";\r\n  --fontFamily-outer: \"Tosafot\";\r\n  --fontFamily-main: \"Vilna\";\r\n  --direction: \"rtl\";\r\n\r\n  --fontSize-main: 0px;\r\n  --fontSize-side: 0px;\r\n\r\n  --lineHeight-main: 0px;\r\n  --lineHeight-side: 0px;\r\n\r\n  --mainWidth: 0%;\r\n  --mainMargin-start: var(--mainWidth);\r\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\r\n  --remainderPercent: calc(100% - var(--sidePercent));\r\n\r\n  --innerFloat: left;\r\n  --outerFloat: right;\r\n  --sideAdditionsGap: 8px;\r\n  --sideAdditionsWidth: 90px;\r\n  --sideAdditionsFontSize: 9.2px;\r\n  --sideAdditionsLineHeight: 12.8px;\r\n  --sideAdditionsSlot: calc(var(--sideAdditionsWidth) + var(--sideAdditionsGap));\r\n  --innerAdditionsLeft: 0;\r\n  --innerAdditionsRight: auto;\r\n  --outerAdditionsLeft: auto;\r\n  --outerAdditionsRight: auto;\r\n\r\n  --spacerHeights-start: 0px;\r\n  --spacerHeights-outer: 0px;\r\n  --spacerHeights-inner: 0px;\r\n  --spacerHeights-end: 0px;\r\n\r\n  /*Edge Cases*/\r\n  --hasInnerStartGap: 0;\r\n  --hasOuterStartGap: 0;\r\n  --innerStartWidth: 50%;\r\n  --innerPadding: 0px;\r\n  --outerStartWidth: 50%;\r\n  --outerPadding: 0px;\r\n\r\n  --newBookFrameImage: url(\"assets/new-book-frame.png\");\r\n}\r\n\r\n/*Containers*/\r\n.styles_dafRoot__1QUlM,\r\n.styles_outer__abXQX,\r\n.styles_inner__x-amJ,\r\n.styles_main__BHTRd {\r\n  pointer-events: none;\r\n  box-sizing: content-box;\r\n}\r\n\r\n.styles_dafRoot__1QUlM {\r\n  position: relative;\r\n  width: calc(var(--contentWidth) + var(--sideAdditionsSlot) + var(--sideAdditionsSlot));\r\n}\r\n\r\n.styles_outer__abXQX,\r\n.styles_inner__x-amJ,\r\n.styles_main__BHTRd {\r\n  left: var(--sideAdditionsSlot);\r\n  width: var(--contentWidth);\r\n}\r\n\r\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\r\n  position: absolute;\r\n}\r\n\r\n.styles_sideAdditions__3mxbs {\r\n  position: absolute;\r\n  top: 0;\r\n  width: var(--sideAdditionsWidth);\r\n  box-sizing: border-box;\r\n  pointer-events: none;\r\n  color: #000;\r\n}\r\n\r\n.styles_innerAdditions__oYnaG {\r\n  left: var(--innerAdditionsLeft);\r\n  right: var(--innerAdditionsRight);\r\n}\r\n\r\n.styles_outerAdditions__2Ol5M {\r\n  left: var(--outerAdditionsLeft);\r\n  right: var(--outerAdditionsRight);\r\n}\r\n\r\n/*Float changes with amud*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  float: var(--innerFloat);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  float: var(--outerFloat);\r\n}\r\n\r\n/*Spacer widths determined by options*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_outer__abXQX .styles_spacer__2T7TS {\r\n  width: var(--halfway);\r\n}\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  width: var(--remainderPercent);\r\n}\r\n\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--contentWidth);\r\n}\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  width: var(--sidePercent);\r\n}\r\n\r\n/*Spacer heights determined by algorithm*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY {\r\n  height: var(--spacerHeights-start);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_end__2wr6A {\r\n  height: var(--spacerHeights-end);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  height: var(--spacerHeights-inner);\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  height: var(--spacerHeights-outer);\r\n}\r\n\r\n/*Settings to handle edge Cases*/\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--innerStartWidth);\r\n  margin-left: var(--innerPadding);\r\n  margin-right: var(--innerPadding);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--outerStartWidth);\r\n  margin-left: var(--outerPadding);\r\n  margin-right: var(--outerPadding);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  clear: both;\r\n}\r\n\r\n/*Margins!*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY,\r\n.styles_spacer__2T7TS.styles_end__2wr6A,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-left: calc(0.5 * var(--padding-horizontal));\r\n  margin-right: calc(0.5 * var(--padding-horizontal));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  margin-top: var(--padding-vertical);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-bottom: var(--padding-vertical);\r\n}\r\n\r\n/*Text*/\r\n.styles_text__1_7-z {\r\n  direction: var(--direction);\r\n  text-align: justify;\r\n  text-align-last: justify;\r\n  text-justify: inter-word;\r\n  word-break: normal;\r\n  overflow-wrap: normal;\r\n  hyphens: none;\r\n  font-kerning: normal;\r\n}\r\n\r\n.styles_text__1_7-z span {\r\n  pointer-events: auto;\r\n}\r\n\r\n.styles_text__1_7-z > span {\r\n  display: block;\r\n  text-align: inherit;\r\n  text-align-last: inherit;\r\n}\r\n\r\n.styles_balanceBreak__1CAJZ {\r\n  content: \"\";\r\n}\r\n\r\n.styles_continuationCatchword__xHvSp {\r\n  display: block;\r\n  width: max-content;\r\n  max-width: 100%;\r\n  margin-top: calc(-0.25 * var(--lineHeight-side));\r\n  text-align: start;\r\n  text-align-last: auto;\r\n  white-space: nowrap;\r\n  unicode-bidi: isolate;\r\n}\r\n\r\n.styles_main__BHTRd .styles_continuationCatchword__xHvSp {\r\n  margin-top: calc(-0.2 * var(--lineHeight-main));\r\n}\r\n\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-main);\r\n  font-size: var(--fontSize-main);\r\n  line-height: var(--lineHeight-main);\r\n}\r\n\r\n.daf-hadran {\r\n  display: block;\r\n  margin: 0.85em 0;\r\n  font-size: 1.22em;\r\n  line-height: 1.25;\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.daf-before-hadran {\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.styles_text__1_7-z > .daf-before-hadran {\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.styles_main__BHTRd .daf-chapter-start-word {\r\n  float: right;\r\n  margin: -0.08em 0 0 0.18em;\r\n  font-size: 1.58em;\r\n  line-height: 0.78;\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.styles_main__BHTRd .daf-main-section-marker {\r\n  font-size: 1.08em;\r\n  font-weight: 700;\r\n}\r\n\r\n.styles_main__BHTRd .daf-inline-tosafot {\r\n  display: block;\r\n  float: left;\r\n  width: 12.8em;\r\n  max-width: calc(100% - 8px);\r\n  margin: 0 0 0.25em 0.65em;\r\n  font-family: var(--fontFamily-outer);\r\n  font-size: var(--fontSize-side);\r\n  line-height: var(--lineHeight-side);\r\n  text-align: justify;\r\n  text-align-last: justify;\r\n}\r\n\r\n.styles_main__BHTRd .daf-inline-tosafot .word {\r\n  pointer-events: auto;\r\n}\r\n\r\n.rashi-header,\n.tosafot-header {\n  font-family: var(--fontFamily-main);\n  font-weight: 700;\n  font-synthesis: weight;\n  text-shadow: 0.018em 0 0 currentColor, -0.018em 0 0 currentColor;\n}\n\n.rashi-header {\n  font-size: 1.22em;\n}\n\n.tosafot-header {\n  font-size: 1.22em;\n}\n\n.tosafot-segment:not(.daf-tosafot-continuation) .daf-tosafot-start-word {\n  display: inline-block;\n  margin-inline-end: 0.12em;\n  font-size: calc(var(--fontSize-side) * 1.58);\n  line-height: 1;\n  vertical-align: -0.08em;\n  text-align: center;\n  text-align-last: center;\n}\n\r\n.daf-ein-marker,\r\n.daf-torah-marker {\r\n  font-family: var(--fontFamily-main);\r\n  font-size: 0.62em;\r\n  line-height: 0;\r\n  vertical-align: super;\r\n  text-align: start;\r\n  text-align-last: auto;\r\n  white-space: nowrap;\r\n}\r\n\r\n.daf-ein-marker {\r\n  margin-inline-start: 0.06em;\r\n}\r\n\r\n.daf-torah-marker {\r\n  margin-inline-start: 0.04em;\r\n}\r\n\r\n.daf-side-section {\r\n  display: block;\r\n  margin-top: 0;\r\n  margin-bottom: 0.55em;\r\n  font-family: var(--fontFamily-inner);\r\n  text-align: justify;\r\n  text-align-last: justify;\r\n}\r\n\r\n.daf-side-title {\r\n  display: block;\r\n  margin-bottom: 0.24em;\r\n  font-family: var(--fontFamily-main);\r\n  font-size: 1.50em;\r\n  line-height: 1.12;\r\n  color: #000;\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.daf-ein-section .daf-side-title {\r\n  color: #000;\r\n}\r\n\r\n.daf-side-entry {\r\n  display: block;\r\n  margin-bottom: 0.22em;\r\n}\r\n\r\n.daf-side-entry-marker {\r\n  font-family: var(--fontFamily-main);\r\n  font-weight: 700;\r\n}\r\n\r\n.daf-side-entry small {\r\n  font-size: 0.86em;\r\n}\r\n\r\n.daf-gilyon-section {\r\n  margin-top: 1.45em;\r\n  padding-top: 2.05em;\r\n  background-image: url(\"assets/gilyon-divider.png\");\r\n  background-position: top center;\r\n  background-repeat: no-repeat;\r\n  background-size: 68% auto;\r\n}\r\n\r\n.styles_newBookWord__3auqa {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: calc(var(--mainWidth) - var(--padding-horizontal) - var(--padding-horizontal));\r\n  min-height: 3.1em;\r\n  max-width: 100%;\r\n  margin: 0 auto 0.08em;\r\n  padding: 0.52em 1.12em 0.45em;\r\n  box-sizing: border-box;\r\n  background-image: var(--newBookFrameImage);\r\n  background-position: center;\r\n  background-repeat: no-repeat;\r\n  background-size: contain;\r\n  font-size: 2.9em;\r\n  line-height: 1;\r\n  text-align: center;\r\n  text-align-last: center;\r\n  vertical-align: middle;\r\n  white-space: nowrap;\r\n}\r\n\r\n.styles_newBookBreak__1mIe7 {\r\n  display: none;\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z,\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-size: var(--fontSize-side);\r\n  line-height: var(--lineHeight-side);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n}\r\n\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-outer);\r\n}\r\n\r\n.styles_sideAdditions__3mxbs .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n  font-size: var(--sideAdditionsFontSize);\r\n  line-height: var(--sideAdditionsLineHeight);\r\n}\r\n";
+  var css_248z = "/*Keep this as the first rule in the file*/\r\n.styles_dafRoot__1QUlM {\r\n  --contentWidth: 0px;\r\n  --padding-horizontal: 0px;\r\n  --padding-vertical: 0px;\r\n  --halfway: 50%;\r\n\r\n  --fontFamily-inner: \"Rashi\";\r\n  --fontFamily-outer: \"Tosafot\";\r\n  --fontFamily-main: \"Vilna\";\r\n  --direction: \"rtl\";\r\n\r\n  --fontSize-main: 0px;\r\n  --fontSize-side: 0px;\r\n\r\n  --lineHeight-main: 0px;\r\n  --lineHeight-side: 0px;\r\n\r\n  --mainWidth: 0%;\r\n  --mainMargin-start: var(--mainWidth);\r\n  --sidePercent: calc(calc(100% - var(--mainMargin-start)) / 2);\r\n  --remainderPercent: calc(100% - var(--sidePercent));\r\n\r\n  --innerFloat: left;\r\n  --outerFloat: right;\r\n  --sideAdditionsGap: 8px;\r\n  --sideAdditionsWidth: 90px;\r\n  --sideAdditionsFontSize: 9.2px;\r\n  --sideAdditionsLineHeight: 12.8px;\r\n  --sideAdditionsSlot: calc(var(--sideAdditionsWidth) + var(--sideAdditionsGap));\r\n  --innerAdditionsLeft: 0;\r\n  --innerAdditionsRight: auto;\r\n  --outerAdditionsLeft: auto;\r\n  --outerAdditionsRight: auto;\r\n\r\n  --spacerHeights-start: 0px;\r\n  --spacerHeights-outer: 0px;\r\n  --spacerHeights-inner: 0px;\r\n  --spacerHeights-end: 0px;\r\n\r\n  /*Edge Cases*/\r\n  --hasInnerStartGap: 0;\r\n  --hasOuterStartGap: 0;\r\n  --innerStartWidth: 50%;\r\n  --innerPadding: 0px;\r\n  --outerStartWidth: 50%;\r\n  --outerPadding: 0px;\r\n\r\n  --newBookFrameImage: url(\"assets/new-book-frame.png\");\r\n}\r\n\r\n/*Containers*/\r\n.styles_dafRoot__1QUlM,\r\n.styles_outer__abXQX,\r\n.styles_inner__x-amJ,\r\n.styles_main__BHTRd {\r\n  pointer-events: none;\r\n  box-sizing: content-box;\r\n}\r\n\r\n.styles_dafRoot__1QUlM {\r\n  position: relative;\r\n  width: calc(var(--contentWidth) + var(--sideAdditionsSlot) + var(--sideAdditionsSlot));\r\n}\r\n\r\n.styles_outer__abXQX,\r\n.styles_inner__x-amJ,\r\n.styles_main__BHTRd {\r\n  left: var(--sideAdditionsSlot);\r\n  width: var(--contentWidth);\r\n}\r\n\r\n.styles_outer__abXQX, .styles_inner__x-amJ, .styles_main__BHTRd {\r\n  position: absolute;\r\n}\r\n\r\n.styles_sideAdditions__3mxbs {\r\n  position: absolute;\r\n  top: 0;\r\n  width: var(--sideAdditionsWidth);\r\n  box-sizing: border-box;\r\n  pointer-events: none;\r\n  color: #000;\r\n}\r\n\r\n.styles_innerAdditions__oYnaG {\r\n  left: var(--innerAdditionsLeft);\r\n  right: var(--innerAdditionsRight);\r\n}\r\n\r\n.styles_outerAdditions__2Ol5M {\r\n  left: var(--outerAdditionsLeft);\r\n  right: var(--outerAdditionsRight);\r\n}\r\n\r\n/*Float changes with amud*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  float: var(--innerFloat);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  float: var(--outerFloat);\r\n}\r\n\r\n/*Spacer widths determined by options*/\r\n.styles_inner__x-amJ .styles_spacer__2T7TS,\r\n.styles_outer__abXQX .styles_spacer__2T7TS {\r\n  width: var(--halfway);\r\n}\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  width: var(--remainderPercent);\r\n}\r\n\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--contentWidth);\r\n}\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  width: var(--sidePercent);\r\n}\r\n\r\n/*Spacer heights determined by algorithm*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY {\r\n  height: var(--spacerHeights-start);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_end__2wr6A {\r\n  height: var(--spacerHeights-end);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi {\r\n  height: var(--spacerHeights-inner);\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  height: var(--spacerHeights-outer);\r\n}\r\n\r\n/*Settings to handle edge Cases*/\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--innerStartWidth);\r\n  margin-left: var(--innerPadding);\r\n  margin-right: var(--innerPadding);\r\n}\r\n\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  width: var(--outerStartWidth);\r\n  margin-left: var(--outerPadding);\r\n  margin-right: var(--outerPadding);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_spacer__2T7TS.styles_start__AwkfY{\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasInnerStartGap));\r\n}\r\n.styles_outer__abXQX .styles_spacer__2T7TS.styles_start__AwkfY {\r\n  margin-bottom: calc(var(--padding-vertical) * var(--hasOuterStartGap));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr {\r\n  clear: both;\r\n}\r\n\r\n/*Margins!*/\r\n.styles_spacer__2T7TS.styles_start__AwkfY,\r\n.styles_spacer__2T7TS.styles_end__2wr6A,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-left: calc(0.5 * var(--padding-horizontal));\r\n  margin-right: calc(0.5 * var(--padding-horizontal));\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  margin-top: var(--padding-vertical);\r\n}\r\n\r\n.styles_spacer__2T7TS.styles_mid__dcgUr,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_innerMid__27MCi,\r\n.styles_main__BHTRd .styles_spacer__2T7TS.styles_outerMid__2WtcY {\r\n  margin-bottom: var(--padding-vertical);\r\n}\r\n\r\n/*Text*/\r\n.styles_text__1_7-z {\r\n  direction: var(--direction);\r\n  text-align: justify;\r\n  text-align-last: justify;\r\n  text-justify: inter-word;\r\n  word-break: normal;\r\n  overflow-wrap: normal;\r\n  hyphens: none;\r\n  font-kerning: normal;\r\n}\r\n\r\n.styles_text__1_7-z span {\r\n  pointer-events: auto;\r\n}\r\n\r\n.styles_text__1_7-z > span {\r\n  display: block;\r\n  text-align: inherit;\r\n  text-align-last: inherit;\r\n}\r\n\r\n.styles_balanceBreak__1CAJZ {\r\n  content: \"\";\r\n}\r\n\r\n.styles_continuationCatchword__xHvSp {\r\n  display: block;\r\n  width: max-content;\r\n  max-width: 100%;\r\n  margin-top: calc(-0.25 * var(--lineHeight-side));\r\n  text-align: start;\r\n  text-align-last: auto;\r\n  white-space: nowrap;\r\n  unicode-bidi: isolate;\r\n}\r\n\r\n.styles_main__BHTRd .styles_continuationCatchword__xHvSp {\r\n  margin-top: calc(-0.2 * var(--lineHeight-main));\r\n}\r\n\r\n.styles_main__BHTRd .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-main);\r\n  font-size: var(--fontSize-main);\r\n  line-height: var(--lineHeight-main);\r\n}\r\n\r\n.daf-hadran {\r\n  display: block;\r\n  margin: 0.85em 0;\r\n  font-size: 1.22em;\r\n  line-height: 1.25;\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.daf-before-hadran {\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.styles_text__1_7-z > .daf-before-hadran {\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.styles_main__BHTRd .daf-chapter-start-word {\r\n  float: right;\r\n  margin: -0.08em 0 0 0.18em;\r\n  font-size: 1.58em;\r\n  line-height: 0.78;\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.styles_main__BHTRd .daf-main-section-marker {\r\n  font-size: 1.08em;\r\n  font-weight: 700;\r\n}\r\n\r\n.styles_main__BHTRd .daf-inline-tosafot {\r\n  display: block;\r\n  float: left;\r\n  width: 12.8em;\r\n  max-width: calc(100% - 8px);\r\n  margin: 0 0 0.25em 0.65em;\r\n  font-family: var(--fontFamily-outer);\r\n  font-size: var(--fontSize-side);\r\n  line-height: var(--lineHeight-side);\r\n  text-align: justify;\r\n  text-align-last: justify;\r\n}\r\n\r\n.styles_main__BHTRd .daf-inline-tosafot .word {\r\n  pointer-events: auto;\r\n}\r\n\r\n.rashi-header,\n.ran-header,\n.tosafot-header {\n  font-family: var(--fontFamily-main);\n  font-weight: 700;\n  font-synthesis: weight;\n  text-shadow: 0.018em 0 0 currentColor, -0.018em 0 0 currentColor;\n}\n\n.rashi-header {\n  font-size: 1.22em;\n}\n\n.ran-header {\n  font-size: 1.22em;\n}\n\n.tosafot-header {\n  font-size: 1.22em;\n}\n\n.tosafot-segment:not(.daf-tosafot-continuation) .daf-tosafot-start-word {\n  display: inline-block;\n  margin-inline-end: 0.12em;\n  font-size: calc(var(--fontSize-side) * 1.58);\n  line-height: 1;\n  vertical-align: -0.08em;\n  text-align: center;\n  text-align-last: center;\n}\n\r\n.daf-ein-marker,\r\n.daf-torah-marker {\r\n  font-family: var(--fontFamily-main);\r\n  font-size: 0.62em;\r\n  line-height: 0;\r\n  vertical-align: super;\r\n  text-align: start;\r\n  text-align-last: auto;\r\n  white-space: nowrap;\r\n}\r\n\r\n.daf-ein-marker {\r\n  margin-inline-start: 0.06em;\r\n}\r\n\r\n.daf-torah-marker {\r\n  margin-inline-start: 0.04em;\r\n}\r\n\r\n.daf-side-section {\r\n  display: block;\r\n  margin-top: 0;\r\n  margin-bottom: 0.55em;\r\n  font-family: var(--fontFamily-inner);\r\n  text-align: justify;\r\n  text-align-last: justify;\r\n}\r\n\r\n.daf-side-title {\r\n  display: block;\r\n  margin-bottom: 0.24em;\r\n  font-family: var(--fontFamily-main);\r\n  font-size: 1.50em;\r\n  line-height: 1.12;\r\n  color: #000;\r\n  text-align: center;\r\n  text-align-last: center;\r\n}\r\n\r\n.daf-ein-section .daf-side-title {\r\n  color: #000;\r\n}\r\n\r\n.daf-side-entry {\r\n  display: block;\r\n  margin-bottom: 0.22em;\r\n}\r\n\r\n.daf-side-entry-marker {\r\n  font-family: var(--fontFamily-main);\r\n  font-weight: 700;\r\n}\r\n\r\n.daf-side-entry small {\r\n  font-size: 0.86em;\r\n}\r\n\r\n.daf-gilyon-section {\r\n  margin-top: 1.45em;\r\n  padding-top: 2.05em;\r\n  background-image: url(\"assets/gilyon-divider.png\");\r\n  background-position: top center;\r\n  background-repeat: no-repeat;\r\n  background-size: 68% auto;\r\n}\r\n\r\n.styles_newBookWord__3auqa {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: calc(var(--mainWidth) - var(--padding-horizontal) - var(--padding-horizontal));\r\n  min-height: 3.1em;\r\n  max-width: 100%;\r\n  margin: 0 auto 0.08em;\r\n  padding: 0.52em 1.12em 0.45em;\r\n  box-sizing: border-box;\r\n  background-image: var(--newBookFrameImage);\r\n  background-position: center;\r\n  background-repeat: no-repeat;\r\n  background-size: contain;\r\n  font-size: 2.9em;\r\n  line-height: 1;\r\n  text-align: center;\r\n  text-align-last: center;\r\n  vertical-align: middle;\r\n  white-space: nowrap;\r\n}\r\n\r\n.styles_newBookBreak__1mIe7 {\r\n  display: none;\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z,\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-size: var(--fontSize-side);\r\n  line-height: var(--lineHeight-side);\r\n}\r\n\r\n.styles_inner__x-amJ .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n}\r\n\r\n.styles_outer__abXQX .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-outer);\r\n}\r\n\r\n.styles_sideAdditions__3mxbs .styles_text__1_7-z {\r\n  font-family: var(--fontFamily-inner);\r\n  font-size: var(--sideAdditionsFontSize);\r\n  line-height: var(--sideAdditionsLineHeight);\r\n}\r\n";
   var classes = {"dafRoot":"styles_dafRoot__1QUlM","outer":"styles_outer__abXQX","inner":"styles_inner__x-amJ","main":"styles_main__BHTRd","sideAdditions":"styles_sideAdditions__3mxbs","innerAdditions":"styles_innerAdditions__oYnaG","outerAdditions":"styles_outerAdditions__2Ol5M","spacer":"styles_spacer__2T7TS","outerMid":"styles_outerMid__2WtcY","innerMid":"styles_innerMid__27MCi","mid":"styles_mid__dcgUr","start":"styles_start__AwkfY","end":"styles_end__2wr6A","text":"styles_text__1_7-z","balanceBreak":"styles_balanceBreak__1CAJZ","continuationCatchword":"styles_continuationCatchword__xHvSp","newBookWord":"styles_newBookWord__3auqa","newBookBreak":"styles_newBookBreak__1mIe7"};
   styleInject(css_248z);
 
@@ -1149,6 +1149,33 @@
     return tractate === "Bava Batra" && Number(daf) >= 30 ? "Rashbam" : "Rashi";
   }
 
+  function getOuterCommentary(tractate, configuredCommentary, wasConfigured) {
+    if (wasConfigured) return configuredCommentary;
+    return tractate === "Nedarim" ? "Ran" : configuredCommentary;
+  }
+
+  function commentaryFormatOptions(commentary) {
+    if (commentary === "Tosafot") {
+      return {
+        headerClass: "tosafot-header",
+        segmentClass: "tosafot-segment",
+        startWordClass: "daf-tosafot-start-word"
+      };
+    }
+
+    return {
+      headerClass: commentary === "Ran" ? "ran-header" : "rashi-header"
+    };
+  }
+
+  function formatNamedCommentary(text, prefix, commentary) {
+    const format = commentaryFormatOptions(commentary);
+    return formatCommentary(text, prefix, format.headerClass, {
+      segmentClass: format.segmentClass,
+      startWordClass: format.startWordClass
+    });
+  }
+
   function dafRef(tractate, daf, amud) {
     return `${tractate}.${daf}${amud}`;
   }
@@ -1202,9 +1229,14 @@
   async function fetchSefariaDaf(tractate, daf, amud = "a", options = {}) {
     const mergedOptions = Object.assign({}, DEFAULT_SEFARIA_OPTIONS, options);
     const innerCommentary = getInnerCommentary(tractate, daf, mergedOptions.innerCommentary);
+    const outerCommentary = getOuterCommentary(
+      tractate,
+      mergedOptions.outerCommentary,
+      Object.prototype.hasOwnProperty.call(options, "outerCommentary")
+    );
     const mainRef = dafRef(tractate, daf, amud);
     const innerRef = commentaryRef(innerCommentary, tractate, daf, amud, mergedOptions.maxCommentarySegments);
-    const outerRef = commentaryRef(mergedOptions.outerCommentary, tractate, daf, amud, mergedOptions.maxCommentarySegments);
+    const outerRef = commentaryRef(outerCommentary, tractate, daf, amud, mergedOptions.maxCommentarySegments);
 
     const [main, inner, outer] = await Promise.all([
       getText(mainRef, Object.assign({}, mergedOptions, { version: mergedOptions.mainVersion || mergedOptions.language })),
@@ -1224,7 +1256,7 @@
       fetchGilyonHashas(tractate, daf, amud, mergedOptions)
     ]);
     const firstOuterAnchorRef = outer.missing ? null : await getFirstOuterAnchorRef(
-      mergedOptions.outerCommentary,
+      outerCommentary,
       tractate,
       daf,
       amud,
@@ -1260,9 +1292,10 @@
       },
       commentary: {
         inner: innerCommentary,
-        outer: mergedOptions.outerCommentary
+        outer: outerCommentary
       },
       layout: {
+        tractate,
         outerMissing: !!outer.missing,
         firstOuterAnchorRef,
         minOuterWordsForSideLayout: mergedOptions.minOuterWordsForSideLayout,
@@ -1277,7 +1310,8 @@
     const minOuterWords = daf.layout && daf.layout.minOuterWordsForSideLayout
       ? daf.layout.minOuterWordsForSideLayout
       : DEFAULT_SEFARIA_OPTIONS.minOuterWordsForSideLayout;
-    const useSplitInner = outerMissing || outerWordCount < minOuterWords;
+    const isNedarim = daf.layout && daf.layout.tractate === "Nedarim";
+    const useSplitInner = !isNedarim && (outerMissing || outerWordCount < minOuterWords);
     const hasOuterText = !outerMissing && outerWordCount > 0;
     const outerAnchorSentence = sentenceIndexFromBaseRef(
       daf.layout && daf.layout.firstOuterAnchorRef,
@@ -1301,13 +1335,22 @@
       inner: torahOrSection,
       outer: outerAdditions
     };
+    const innerCommentary = daf.commentary && daf.commentary.inner
+      ? daf.commentary.inner
+      : "Rashi";
+    const outerCommentary = daf.commentary && daf.commentary.outer
+      ? daf.commentary.outer
+      : "Tosafot";
 
     if (useSplitInner) {
       const [right, left] = splitTextBySegments(daf.texts.inner);
       const rightKey = daf.amud === "b" ? "inner" : "outer";
       const leftKey = daf.amud === "b" ? "outer" : "inner";
-      const formattedRight = applyInlineAdditions(formatCommentary(right, "word-rashi-right", "rashi-header"), inlineAdditions.inner);
-      const formattedLeft = formatCommentary(left, "word-rashi-left", "rashi-header");
+      const formattedRight = applyInlineAdditions(
+        formatNamedCommentary(right, "word-inner-right", innerCommentary),
+        inlineAdditions.inner
+      );
+      const formattedLeft = formatNamedCommentary(left, "word-inner-left", innerCommentary);
 
       return {
         amud: daf.amud,
@@ -1317,6 +1360,7 @@
         inner: rightKey === "inner" ? formattedRight : formattedLeft,
         outer: rightKey === "outer" ? formattedRight : formattedLeft,
         layout: {
+          tractate: daf.layout && daf.layout.tractate,
           sideMode: "splitInner",
           rightKey,
           leftKey,
@@ -1333,12 +1377,16 @@
       refs: daf.refs,
       titles: daf.titles,
       main,
-      inner: applyInlineAdditions(formatCommentary(daf.texts.inner, "word-rashi", "rashi-header"), inlineAdditions.inner),
-      outer: applyInlineAdditions(formatCommentary(daf.texts.outer, "word-tosafot", "tosafot-header", {
-        segmentClass: "tosafot-segment",
-        startWordClass: "daf-tosafot-start-word"
-      }), inlineAdditions.outer),
+      inner: applyInlineAdditions(
+        formatNamedCommentary(daf.texts.inner, "word-inner", innerCommentary),
+        inlineAdditions.inner
+      ),
+      outer: applyInlineAdditions(
+        formatNamedCommentary(daf.texts.outer, "word-outer", outerCommentary),
+        inlineAdditions.outer
+      ),
       layout: {
+        tractate: daf.layout && daf.layout.tractate,
         sideMode: "normal",
         continuationKeys: ["main", "inner", "outer"],
         sideAdditions

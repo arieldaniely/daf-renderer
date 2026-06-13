@@ -681,6 +681,33 @@ function getInnerCommentary(tractate, daf, configuredCommentary) {
   return tractate === "Bava Batra" && Number(daf) >= 30 ? "Rashbam" : "Rashi";
 }
 
+function getOuterCommentary(tractate, configuredCommentary, wasConfigured) {
+  if (wasConfigured) return configuredCommentary;
+  return tractate === "Nedarim" ? "Ran" : configuredCommentary;
+}
+
+function commentaryFormatOptions(commentary) {
+  if (commentary === "Tosafot") {
+    return {
+      headerClass: "tosafot-header",
+      segmentClass: "tosafot-segment",
+      startWordClass: "daf-tosafot-start-word"
+    };
+  }
+
+  return {
+    headerClass: commentary === "Ran" ? "ran-header" : "rashi-header"
+  };
+}
+
+function formatNamedCommentary(text, prefix, commentary) {
+  const format = commentaryFormatOptions(commentary);
+  return formatCommentary(text, prefix, format.headerClass, {
+    segmentClass: format.segmentClass,
+    startWordClass: format.startWordClass
+  });
+}
+
 function dafRef(tractate, daf, amud) {
   return `${tractate}.${daf}${amud}`;
 }
@@ -734,9 +761,14 @@ function sentenceIndexFromBaseRef(ref, mainRef) {
 export async function fetchSefariaDaf(tractate, daf, amud = "a", options = {}) {
   const mergedOptions = Object.assign({}, DEFAULT_SEFARIA_OPTIONS, options);
   const innerCommentary = getInnerCommentary(tractate, daf, mergedOptions.innerCommentary);
+  const outerCommentary = getOuterCommentary(
+    tractate,
+    mergedOptions.outerCommentary,
+    Object.prototype.hasOwnProperty.call(options, "outerCommentary")
+  );
   const mainRef = dafRef(tractate, daf, amud);
   const innerRef = commentaryRef(innerCommentary, tractate, daf, amud, mergedOptions.maxCommentarySegments);
-  const outerRef = commentaryRef(mergedOptions.outerCommentary, tractate, daf, amud, mergedOptions.maxCommentarySegments);
+  const outerRef = commentaryRef(outerCommentary, tractate, daf, amud, mergedOptions.maxCommentarySegments);
 
   const [main, inner, outer] = await Promise.all([
     getText(mainRef, Object.assign({}, mergedOptions, { version: mergedOptions.mainVersion || mergedOptions.language })),
@@ -756,7 +788,7 @@ export async function fetchSefariaDaf(tractate, daf, amud = "a", options = {}) {
     fetchGilyonHashas(tractate, daf, amud, mergedOptions)
   ]);
   const firstOuterAnchorRef = outer.missing ? null : await getFirstOuterAnchorRef(
-    mergedOptions.outerCommentary,
+    outerCommentary,
     tractate,
     daf,
     amud,
@@ -792,9 +824,10 @@ export async function fetchSefariaDaf(tractate, daf, amud = "a", options = {}) {
     },
     commentary: {
       inner: innerCommentary,
-      outer: mergedOptions.outerCommentary
+      outer: outerCommentary
     },
     layout: {
+      tractate,
       outerMissing: !!outer.missing,
       firstOuterAnchorRef,
       minOuterWordsForSideLayout: mergedOptions.minOuterWordsForSideLayout,
@@ -809,7 +842,8 @@ export function formatSefariaDaf(daf) {
   const minOuterWords = daf.layout && daf.layout.minOuterWordsForSideLayout
     ? daf.layout.minOuterWordsForSideLayout
     : DEFAULT_SEFARIA_OPTIONS.minOuterWordsForSideLayout;
-  const useSplitInner = outerMissing || outerWordCount < minOuterWords;
+  const isNedarim = daf.layout && daf.layout.tractate === "Nedarim";
+  const useSplitInner = !isNedarim && (outerMissing || outerWordCount < minOuterWords);
   const hasOuterText = !outerMissing && outerWordCount > 0;
   const outerAnchorSentence = sentenceIndexFromBaseRef(
     daf.layout && daf.layout.firstOuterAnchorRef,
@@ -833,13 +867,22 @@ export function formatSefariaDaf(daf) {
     inner: torahOrSection,
     outer: outerAdditions
   };
+  const innerCommentary = daf.commentary && daf.commentary.inner
+    ? daf.commentary.inner
+    : "Rashi";
+  const outerCommentary = daf.commentary && daf.commentary.outer
+    ? daf.commentary.outer
+    : "Tosafot";
 
   if (useSplitInner) {
     const [right, left] = splitTextBySegments(daf.texts.inner);
     const rightKey = daf.amud === "b" ? "inner" : "outer";
     const leftKey = daf.amud === "b" ? "outer" : "inner";
-    const formattedRight = applyInlineAdditions(formatCommentary(right, "word-rashi-right", "rashi-header"), inlineAdditions.inner);
-    const formattedLeft = formatCommentary(left, "word-rashi-left", "rashi-header");
+    const formattedRight = applyInlineAdditions(
+      formatNamedCommentary(right, "word-inner-right", innerCommentary),
+      inlineAdditions.inner
+    );
+    const formattedLeft = formatNamedCommentary(left, "word-inner-left", innerCommentary);
 
     return {
       amud: daf.amud,
@@ -849,6 +892,7 @@ export function formatSefariaDaf(daf) {
       inner: rightKey === "inner" ? formattedRight : formattedLeft,
       outer: rightKey === "outer" ? formattedRight : formattedLeft,
       layout: {
+        tractate: daf.layout && daf.layout.tractate,
         sideMode: "splitInner",
         rightKey,
         leftKey,
@@ -865,12 +909,16 @@ export function formatSefariaDaf(daf) {
     refs: daf.refs,
     titles: daf.titles,
     main,
-    inner: applyInlineAdditions(formatCommentary(daf.texts.inner, "word-rashi", "rashi-header"), inlineAdditions.inner),
-    outer: applyInlineAdditions(formatCommentary(daf.texts.outer, "word-tosafot", "tosafot-header", {
-      segmentClass: "tosafot-segment",
-      startWordClass: "daf-tosafot-start-word"
-    }), inlineAdditions.outer),
+    inner: applyInlineAdditions(
+      formatNamedCommentary(daf.texts.inner, "word-inner", innerCommentary),
+      inlineAdditions.inner
+    ),
+    outer: applyInlineAdditions(
+      formatNamedCommentary(daf.texts.outer, "word-outer", outerCommentary),
+      inlineAdditions.outer
+    ),
     layout: {
+      tractate: daf.layout && daf.layout.tractate,
       sideMode: "normal",
       continuationKeys: ["main", "inner", "outer"],
       sideAdditions

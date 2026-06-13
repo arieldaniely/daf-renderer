@@ -282,6 +282,7 @@
 }
 
 :global(.rashi-header),
+:global(.ran-header),
 :global(.tosafot-header) {
   font-family: var(--fontFamily-main);
   font-weight: 700;
@@ -290,6 +291,10 @@
 }
 
 :global(.rashi-header) {
+  font-size: 1.22em;
+}
+
+:global(.ran-header) {
   font-size: 1.22em;
 }
 
