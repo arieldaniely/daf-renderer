@@ -293,10 +293,14 @@
   font-size: 1.22em;
 }
 
+:global(.tosafot-header) {
+  font-size: 1.22em;
+}
+
 :global(.tosafot-segment:not(.daf-tosafot-continuation) .daf-tosafot-start-word) {
   display: inline-block;
   margin-inline-end: 0.12em;
-  font-size: 1.58em;
+  font-size: calc(var(--fontSize-side) * 1.58);
   line-height: 1;
   vertical-align: -0.08em;
   text-align: center;
